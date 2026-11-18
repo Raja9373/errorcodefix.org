@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <script>
     (function () {
       try {
-        var currentFetch = window.fetch;
-        var desc = Object.getOwnPropertyDescriptor(window, "fetch") || Object.getOwnPropertyDescriptor(Window.prototype, "fetch");
-        if (!desc || desc.configurable !== false) {
+        if (!Object.getOwnPropertyDescriptor(window, "fetch")) {
+          var originalFetch = window.fetch;
           Object.defineProperty(window, "fetch", {
             configurable: true,
             enumerable: true,
-            get: function () { return currentFetch; },
-            set: function (fn) { if (typeof fn === "function") currentFetch = fn; }
+            get: function () { return originalFetch; },
+            set: function (fn) { if (typeof fn === "function") originalFetch = fn; }
           });
         }
       } catch (_) {}
+
       window.addEventListener("error", function (e) {
         if (
           (e && e.filename && String(e.filename).indexOf("chrome-extension://") === 0) ||
@@ -26,1139 +26,335 @@
           e.preventDefault();
         }
       }, true);
+
+      window.addEventListener("unhandledrejection", function (e) {
+        if (e && e.reason && String(e.reason).indexOf("Cannot set property fetch") !== -1) {
+          e.stopImmediatePropagation();
+          e.preventDefault();
+        }
+      }, true);
     })();
   </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>errorcodefix.org — Fix Any Error Code in 3 Steps (Brand + Model Verified)</title>
   <meta name="description" content="Paste your error code and get a Brand + Model specific verified fix in 3 simple steps. 16 Departments, 154 Product Groups, and Official Manual Verified Database." />
-  <meta name="keywords" content="error code fix, washing machine error E1, Samsung 4C error, LG CH05 error, treadmill E1 error, BP machine E1, iPhone error 4013, Play Store error 495, brand model verified error database" />
-  <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://errorcodefix.org/" />
-  <link rel="alternate" hreflang="x-default" href="https://errorcodefix.org/" />
-  <link rel="alternate" hreflang="en" href="https://errorcodefix.org/?lang=en" />
-  <link rel="alternate" hreflang="hi" href="https://errorcodefix.org/?lang=hi" />
-  <link rel="alternate" hreflang="ja" href="https://errorcodefix.org/?lang=ja" />
-  <link rel="alternate" hreflang="es" href="https://errorcodefix.org/?lang=es" />
-  <link rel="alternate" hreflang="fr" href="https://errorcodefix.org/?lang=fr" />
-  <link rel="alternate" hreflang="de" href="https://errorcodefix.org/?lang=de" />
-  <link rel="alternate" hreflang="it" href="https://errorcodefix.org/?lang=it" />
-  <link rel="alternate" hreflang="pt" href="https://errorcodefix.org/?lang=pt" />
-  <link rel="alternate" hreflang="ru" href="https://errorcodefix.org/?lang=ru" />
-  <link rel="alternate" hreflang="ko" href="https://errorcodefix.org/?lang=ko" />
-  <link rel="alternate" hreflang="zh" href="https://errorcodefix.org/?lang=zh" />
-  <link rel="alternate" hreflang="tr" href="https://errorcodefix.org/?lang=tr" />
-  <link rel="alternate" hreflang="nl" href="https://errorcodefix.org/?lang=nl" />
-  <link rel="alternate" hreflang="pl" href="https://errorcodefix.org/?lang=pl" />
-  <link rel="alternate" hreflang="id" href="https://errorcodefix.org/?lang=id" />
-  <link rel="alternate" hreflang="th" href="https://errorcodefix.org/?lang=th" />
-  <link rel="alternate" hreflang="vi" href="https://errorcodefix.org/?lang=vi" />
-  <link rel="alternate" hreflang="ar" href="https://errorcodefix.org/?lang=ar" />
-
-  <!-- OpenGraph / Social Cards -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="errorcodefix.org" />
-  <meta property="og:title" content="errorcodefix.org — Fix Any Error Code in 3 Steps" />
-  <meta property="og:description" content="Paste your error code. Get Brand + Model specific fix in 3 steps. 154 Groups covered with Official Manual verification." />
-  <meta property="og:url" content="https://errorcodefix.org/" />
-
-  <!-- Twitter Cards -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="errorcodefix.org — Fix Any Error Code in 3 Steps" />
-  <meta name="twitter:description" content="Paste your error code. Get Brand + Model specific fix in 3 steps. No long articles. No guesswork." />
-
-  <!-- Google Fonts: Playfair Display (Royal Serif), Plus Jakarta Sans / Poppins (Clean Body), JetBrains Mono (Error Codes) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Schema.org Structured Data (JSON-LD) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "name": "errorcodefix.org",
-        "alternateName": "Error Code Fix — Brand + Model Verified Database",
-        "url": "https://errorcodefix.org/",
-        "description": "Paste your error code. Get Brand + Model specific fix in 3 steps across 16 departments and 154 product groups.",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://errorcodefix.org/?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Why does the same error code mean different things in different brands?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Every manufacturer programmes its own firmware lookup table. For example, E1 on a washing machine may indicate a water inlet timeout on one brand and a drain sensor issue on another. Always verify by exact Brand and Model number."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Where do I find my appliance or device model number?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The model number is located on the back sticker, rating plate, under the battery compartment, inside the door rim, or in Settings > About Device."
-            }
-          }
-        ]
-      }
-    ]
-  }
-  </script>
-
   <style>
     :root {
       --navy-deep: #0A1633;
-      --navy-darker: #060E23;
+      --navy-darker: #070F24;
       --navy-card: #0F2048;
-      --navy-soft: #162B5B;
       --gold: #C9A227;
-      --gold-light: #E5C453;
-      --gold-dark: #9F7C14;
-      --gold-pale: #FBF6E8;
-      --gold-border: rgba(201, 162, 39, 0.35);
-      --gold-glow: rgba(201, 162, 39, 0.28);
-      --ivory: #FAF8F3;
-      --ivory-alt: #F3EFE6;
+      --gold-light: #EAD06B;
+      --gold-dark: #9A7B18;
+      --gold-pale: #FBF7E9;
       --white: #FFFFFF;
-      --text-main: #0F172A;
-      --text-muted: #475569;
-      --text-light: #E2E8F0;
+      --ivory: #F8F9FA;
+      --text-main: #1E293B;
+      --text-muted: #64748B;
       --code-red: #DC2626;
-      --code-red-bg: #FEF2F2;
-      --code-red-border: #FECACA;
-      --verified-green: #15803D;
+      --verified-green: #059669;
       --verified-green-bg: #ECFDF5;
-      --verified-green-border: #A7F3D0;
       --pending-orange: #D97706;
       --pending-orange-bg: #FFFBEB;
-      --pending-orange-border: #FDE68A;
-      --shadow-royal: 0 10px 30px -5px rgba(10, 22, 51, 0.08), 0 4px 12px -2px rgba(201, 162, 39, 0.08);
-      --shadow-royal-hover: 0 18px 36px -6px rgba(10, 22, 51, 0.14), 0 0 20px 0 rgba(201, 162, 39, 0.22);
-      --radius-lg: 14px;
-      --radius-md: 10px;
-      --radius-sm: 6px;
-      --font-serif: 'Playfair Display', Georgia, serif;
-      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-royal: 0 10px 30px rgba(10, 22, 51, 0.08);
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-serif: 'Playfair Display', serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
       font-family: var(--font-sans);
       background-color: var(--ivory);
       color: var(--text-main);
       line-height: 1.6;
+      font-size: 1.125rem;
     }
 
-    body {
-      background-color: var(--ivory);
-      color: var(--text-main);
-      overflow-x: hidden;
-    }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-    /* Typography & Helpers */
-    h1, h2, .serif-heading {
-      font-family: var(--font-serif);
-      letter-spacing: -0.01em;
-    }
-
-    .tabular-nums {
-      font-variant-numeric: tabular-nums;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* Royal Gold Thin Divider */
-    .gold-divider {
-      height: 1px;
-      width: 100%;
-      background: linear-gradient(90deg, transparent 0%, rgba(201, 162, 39, 0.65) 50%, transparent 100%);
-      margin: 0 auto;
-    }
-
-    /* All Buttons: Gold Gradient with Dark Navy Text */
-    .btn-gold {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: linear-gradient(135deg, #EAD06B 0%, #C9A227 55%, #AE8817 100%);
-      color: var(--navy-deep);
-      font-family: var(--font-sans);
-      font-weight: 700;
-      font-size: 0.92rem;
-      padding: 10px 20px;
-      border-radius: var(--radius-md);
-      border: 1px solid #E5C453;
-      cursor: pointer;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.16s ease;
-      box-shadow: 0 3px 12px rgba(201, 162, 39, 0.28);
-    }
-
-    .btn-gold:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(201, 162, 39, 0.45);
-      background: linear-gradient(135deg, #F0D97A 0%, #D4AE32 55%, #B8911B 100%);
-    }
-
-    .btn-gold:active {
-      transform: translateY(0);
-    }
-
-    .btn-gold-sm {
-      padding: 7px 14px;
-      font-size: 0.82rem;
-      border-radius: var(--radius-sm);
-    }
-
-    /* Error Codes in RED */
-    .error-code-tag {
-      display: inline-flex;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-weight: 700;
-      font-size: 0.88rem;
-      color: var(--code-red);
-      background: var(--code-red-bg);
-      border: 1px solid var(--code-red-border);
-      padding: 2px 9px;
-      border-radius: var(--radius-sm);
-      letter-spacing: 0.02em;
-      white-space: nowrap;
-    }
-
-    /* Verified Badge in GREEN with Gold Tick */
-    .badge-verified {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: #FFFFFF;
-      background: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
-      border: 1px solid #C9A227;
-      padding: 3px 10px;
-      border-radius: var(--radius-sm);
-      white-space: nowrap;
-      letter-spacing: 0.01em;
-    }
-
-    .badge-verified svg {
-      color: #FACC15;
-      stroke: #FACC15;
-      flex-shrink: 0;
-    }
-
-    /* Pending Badge in ORANGE */
-    .badge-pending {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: #FFFFFF;
-      background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-      border: 1px solid #FDE68A;
-      padding: 3px 10px;
-      border-radius: var(--radius-sm);
-      white-space: nowrap;
-    }
-
-    /* New Auto-Detected Badge */
-    .badge-auto-new {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.73rem;
-      font-weight: 700;
-      color: var(--navy-deep);
-      background: linear-gradient(135deg, #F7E396 0%, #C9A227 100%);
-      padding: 3px 9px;
-      border-radius: var(--radius-sm);
-      white-space: nowrap;
-    }
-
-    /* Planned Fixes Label */
-    .planned-meta {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--gold-dark);
-      background: var(--gold-pale);
-      border: 1px solid rgba(201, 162, 39, 0.35);
-      padding: 2px 8px;
-      border-radius: var(--radius-sm);
-      white-space: nowrap;
-    }
-
-    /* Sticky Header + Gold Announcement Bar */
+    /* ROYAL HEADER */
     .site-header-wrapper {
+      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-darker) 100%);
+      border-bottom: 2px solid var(--gold);
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: var(--navy-deep);
-      box-shadow: 0 4px 20px rgba(6, 14, 35, 0.35);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
-
     .site-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
-      height: 64px;
-      border-bottom: 1px solid rgba(201, 162, 39, 0.3);
+      height: 72px;
     }
-
     .brand-logo {
       display: inline-flex;
       align-items: center;
       gap: 10px;
       text-decoration: none;
-      color: var(--white);
       font-family: var(--font-serif);
-      font-size: 1.38rem;
-      font-weight: 700;
-      white-space: nowrap;
-      flex-shrink: 0;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--white);
     }
-
     .brand-logo-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, rgba(201, 162, 39, 0.25), rgba(201, 162, 39, 0.08));
-      border: 1px solid var(--gold);
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #EAD06B, #C9A227);
+      border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: var(--gold-light);
-    }
-
-    .brand-logo .gold-org {
-      color: var(--gold-light);
-    }
-
-    .main-nav {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-
-    .main-nav::-webkit-scrollbar {
-      display: none;
-    }
-
-    .main-nav a {
-      color: rgba(255, 255, 255, 0.88);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      white-space: nowrap;
-      padding: 6px 2px;
-      border-bottom: 2px solid transparent;
-      transition: color 0.15s ease, border-color 0.15s ease;
-    }
-
-    .main-nav a:hover {
-      color: var(--gold-light);
-      border-bottom-color: var(--gold);
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .Announcement-bar {
-      background: linear-gradient(90deg, #B89018 0%, #DFB93B 50%, #B89018 100%);
       color: var(--navy-deep);
-      text-align: center;
-      padding: 6px 12px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      border-bottom: 1px solid #9A7711;
     }
-
-    /* Hero Section */
-    .hero-section {
-      position: relative;
-      background: radial-gradient(circle at 50% 18%, rgba(201, 162, 39, 0.18) 0%, rgba(15, 32, 72, 0.95) 52%, #060E23 100%);
-      color: var(--white);
-      padding: 56px 0 64px;
-      border-bottom: 2px solid var(--gold);
-    }
-
-    .hero-inner {
-      max-width: 980px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .hero-kicker {
-      display: inline-block;
-      color: var(--gold-light);
-      font-size: 0.84rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      margin-bottom: 14px;
-      border-bottom: 1px solid rgba(201, 162, 39, 0.45);
-      padding-bottom: 4px;
-    }
-
-    .hero-title {
-      font-size: clamp(2.25rem, 4.5vw, 3.75rem);
-      line-height: 1.12;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 16px;
-      text-wrap: balance;
-    }
-
-    .hero-title span {
-      color: var(--gold-light);
-    }
-
-    .hero-subtext {
-      font-size: clamp(1rem, 1.8vw, 1.18rem);
-      color: #CBD5E1;
-      max-width: 700px;
-      margin: 0 auto 28px;
-    }
-
-    /* Royal Search Bar with Gold Border + Glow */
-    .royal-search-box {
-      background: rgba(10, 22, 51, 0.9);
-      border: 2px solid var(--gold);
-      border-radius: var(--radius-lg);
-      padding: 8px;
-      box-shadow: 0 0 32px rgba(201, 162, 39, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-      display: flex;
+    .gold-org { color: var(--gold-light); }
+    .header-actions { display: flex; align-items: center; gap: 14px; }
+    .header-contact-btn {
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      max-width: 820px;
-      margin: 0 auto 18px;
-      transition: box-shadow 0.2s ease;
-    }
-
-    .royal-search-box:focus-within {
-      box-shadow: 0 0 42px rgba(201, 162, 39, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      border-color: var(--gold-light);
-    }
-
-    .search-icon-prefix {
-      padding-left: 12px;
+      background: rgba(201,162,39,0.15);
+      border: 1px solid var(--gold);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      font-weight: 700;
       color: var(--gold-light);
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .header-contact-btn:hover { background: rgba(201,162,39,0.25); border-color: var(--gold-light); }
+
+    /* HERO SEARCH SECTION */
+    .hero-section {
+      background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-darker) 100%);
+      color: var(--white);
+      padding: 70px 0 80px;
+      text-align: center;
+      border-bottom: 3px solid var(--gold);
+    }
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      font-weight: 800;
+      color: var(--gold-light);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .hero-subtext {
+      font-size: 1.25rem;
+      color: #CBD5E1;
+      margin-bottom: 36px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .royal-search-box {
+      max-width: 780px;
+      margin: 0 auto 36px;
+      background: var(--white);
+      border: 3px solid var(--gold);
+      border-radius: var(--radius-lg);
+      padding: 10px;
       display: flex;
       align-items: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
     }
-
     .royal-search-input {
       flex: 1;
-      background: transparent;
       border: none;
-      color: var(--white);
-      font-size: 1.04rem;
-      font-family: var(--font-sans);
-      padding: 12px 8px;
       outline: none;
-      min-width: 0;
+      font-size: 1.35rem;
+      font-family: var(--font-sans);
+      padding: 12px 18px;
+      color: var(--text-main);
+      background: transparent;
+      height: 60px;
     }
-
-    .royal-search-input::placeholder {
-      color: #94A3B8;
-    }
-
-    /* 4 Search Tabs */
-    .search-tabs-wrap {
-      max-width: 820px;
-      margin: 0 auto 24px;
-    }
-
-    .search-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .search-tab-btn {
-      background: rgba(255, 255, 255, 0.06);
-      color: #E2E8F0;
-      border: 1px solid rgba(201, 162, 39, 0.4);
-      padding: 9px 16px;
-      border-radius: var(--radius-md);
-      font-size: 0.86rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.15s ease;
-    }
-
-    .search-tab-btn:hover {
-      border-color: var(--gold-light);
-      color: var(--gold-light);
-    }
-
-    .search-tab-btn.active {
-      background: linear-gradient(135deg, #EAD06B 0%, #C9A227 55%, #AE8817 100%);
+    .btn-gold {
+      background: linear-gradient(135deg, #EAD06B 0%, #C9A227 100%);
       color: var(--navy-deep);
-      border-color: var(--gold-light);
-      font-weight: 700;
-      box-shadow: 0 3px 14px rgba(201, 162, 39, 0.32);
-    }
-
-    .tab-examples-bar {
-      display: flex;
-      flex-wrap: wrap;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 14px 28px;
+      font-family: var(--font-sans);
+      font-weight: 800;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      font-size: 0.82rem;
-      color: #CBD5E1;
+      gap: 10px;
+      min-height: 54px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 4px 15px rgba(201,162,39,0.4);
+      white-space: nowrap;
     }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,162,39,0.6); }
 
-    .example-quick-btn {
-      background: rgba(15, 32, 72, 0.85);
-      border: 1px solid rgba(201, 162, 39, 0.38);
-      color: var(--gold-light);
-      padding: 4px 11px;
-      border-radius: var(--radius-sm);
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .example-quick-btn:hover {
-      background: rgba(201, 162, 39, 0.2);
-      border-color: var(--gold-light);
-    }
-
-    /* Live Hero Search Results Drawer */
+    /* LIVE SEARCH RESULTS DRAWER */
     .hero-search-results {
-      max-width: 860px;
-      margin: 0 auto 28px;
+      max-width: 820px;
+      margin: 0 auto;
       background: var(--white);
       color: var(--text-main);
       border: 2px solid var(--gold);
       border-radius: var(--radius-lg);
       padding: 20px;
       text-align: left;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.35);
       display: none;
     }
+    .hero-search-results.visible { display: block; }
 
-    .hero-search-results.visible {
-      display: block;
-    }
-
-    .search-results-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid rgba(201, 162, 39, 0.3);
-      padding-bottom: 10px;
-      margin-bottom: 14px;
-    }
-
-    /* 4 Stat Boxes in Royal Cards */
-    .hero-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-top: 30px;
-      margin-bottom: 26px;
-    }
-
-    .royal-stat-card {
-      background: linear-gradient(180deg, rgba(15, 32, 72, 0.9) 0%, rgba(10, 22, 51, 0.95) 100%);
-      border: 1px solid rgba(201, 162, 39, 0.45);
-      border-radius: var(--radius-md);
-      padding: 18px 14px;
-      text-align: center;
-      transition: transform 0.16s ease, border-color 0.16s ease;
-    }
-
-    .royal-stat-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--gold-light);
-    }
-
-    .royal-stat-value {
-      font-family: var(--font-serif);
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: var(--gold-light);
-      line-height: 1.2;
-      margin-bottom: 4px;
-    }
-
-    .royal-stat-label {
-      font-size: 0.84rem;
-      color: #E2E8F0;
-      font-weight: 500;
-    }
-
-    /* 3 Steps Royal Boxes */
+    /* 3 EASY STEPS */
     .hero-steps-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      gap: 20px;
+      margin-top: 50px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
     }
-
     .hero-step-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(201, 162, 39, 0.35);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,162,39,0.35);
       border-radius: var(--radius-md);
-      padding: 18px 20px;
+      padding: 22px;
       text-align: left;
       display: flex;
       align-items: flex-start;
       gap: 14px;
     }
-
     .step-num-circle {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       background: linear-gradient(135deg, #EAD06B, #C9A227);
       color: var(--navy-deep);
       font-weight: 800;
-      font-size: 0.92rem;
+      font-size: 1rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
+    .hero-step-card h3 { font-size: 1.05rem; color: var(--gold-light); margin-bottom: 4px; }
+    .hero-step-card p { font-size: 0.9rem; color: #CBD5E1; }
 
-    .hero-step-card h3 {
-      font-size: 0.98rem;
-      color: var(--gold-light);
-      margin-bottom: 4px;
-    }
+    /* CATEGORIES SECTION */
+    .section-block { padding: 70px 0; border-bottom: 1px solid rgba(201,162,39,0.25); }
+    .section-block.bg-alt { background-color: var(--ivory); }
+    .section-header { text-align: center; max-width: 800px; margin: 0 auto 40px; }
+    .section-title { font-family: var(--font-serif); font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--navy-deep); margin-bottom: 10px; }
+    .section-subtitle { font-size: 1.1rem; color: var(--text-muted); }
 
-    .hero-step-card p {
-      font-size: 0.83rem;
-      color: #CBD5E1;
-    }
-
-    /* Section Standard Layout */
-    .section-block {
-      padding: 64px 0;
-      border-bottom: 1px solid rgba(201, 162, 39, 0.25);
-    }
-
-    .section-block.bg-alt {
-      background-color: var(--ivory-alt);
-    }
-
-    .section-block.bg-navy {
-      background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-darker) 100%);
-      color: var(--white);
-    }
-
-    .section-header {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto 40px;
-    }
-
-    .section-eyebrow {
-      color: var(--gold-dark);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      margin-bottom: 8px;
-    }
-
-    .bg-navy .section-eyebrow {
-      color: var(--gold-light);
-    }
-
-    .section-title {
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
-      color: var(--navy-deep);
-      margin-bottom: 10px;
-      text-wrap: balance;
-    }
-
-    .bg-navy .section-title {
-      color: var(--white);
-    }
-
-    .section-subtitle {
-      font-size: 1rem;
-      color: var(--text-muted);
-    }
-
-    .bg-navy .section-subtitle {
-      color: #CBD5E1;
-    }
-
-    /* Royal Cards */
-    .royal-card {
-      background: var(--white);
-      border: 1px solid rgba(201, 162, 39, 0.32);
-      border-radius: var(--radius-lg);
-      padding: 22px;
-      box-shadow: var(--shadow-royal);
-      transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.16s ease, box-shadow 0.16s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .royal-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--gold);
-      box-shadow: var(--shadow-royal-hover);
-    }
-
-    /* Grids */
-    .grid-4 {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .grid-2 {
+    .categories-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-
-    /* Trending & Newly Added Cards */
-    .trending-card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    .trending-card-title {
-      font-size: 1.06rem;
-      font-weight: 700;
-      color: var(--navy-deep);
-      margin-bottom: 6px;
-    }
-
-    .trending-card-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
-
-    .trending-card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 12px;
-      border-top: 1px solid rgba(201, 162, 39, 0.2);
-      gap: 8px;
-    }
-
-    /* Brand Registry Styles */
-    .brand-dept-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
-
-    .brand-dept-box {
-      background: var(--white);
-      border: 1px solid rgba(201, 162, 39, 0.35);
-      border-radius: var(--radius-lg);
-      padding: 20px;
-      box-shadow: var(--shadow-royal);
+    @media (max-width: 768px) {
+      .categories-grid { grid-template-columns: 1fr; }
+      .hero-steps-grid { grid-template-columns: 1fr; }
     }
-
-    .brand-dept-title {
-      font-family: var(--font-serif);
-      font-size: 1.15rem;
-      color: var(--navy-deep);
-      padding-bottom: 10px;
-      margin-bottom: 14px;
-      border-bottom: 1px solid rgba(201, 162, 39, 0.3);
+    .category-card {
+      background: var(--white);
+      border: 1px solid rgba(201,162,39,0.35);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-    }
-
-    .brand-chips-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
-
-    .brand-chip-btn {
-      background: var(--ivory);
-      border: 1px solid rgba(10, 22, 51, 0.16);
-      color: var(--navy-deep);
-      padding: 5px 11px;
-      border-radius: var(--radius-sm);
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.14s ease;
-    }
-
-    .brand-chip-btn:hover,
-    .brand-chip-btn.active {
-      background: var(--navy-deep);
-      color: var(--gold-light);
-      border-color: var(--gold);
-    }
-
-    /* All 154 Groups Filter Bar */
-    .groups-controls-panel {
-      background: var(--navy-deep);
-      color: var(--white);
-      border: 1px solid var(--gold);
-      border-radius: var(--radius-lg);
-      padding: 22px;
-      margin-bottom: 30px;
+      gap: 16px;
       box-shadow: var(--shadow-royal);
+      transition: transform 0.15s ease, border-color 0.15s ease;
     }
-
-    .dept-filter-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 18px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid rgba(201, 162, 39, 0.25);
-    }
-
-    .dept-btn {
-      background: rgba(255, 255, 255, 0.07);
-      color: #E2E8F0;
-      border: 1px solid rgba(201, 162, 39, 0.32);
-      padding: 7px 13px;
-      border-radius: var(--radius-sm);
-      font-size: 0.81rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.14s ease;
-    }
-
-    .dept-btn:hover {
-      border-color: var(--gold-light);
-      color: var(--gold-light);
-    }
-
-    .dept-btn.active {
-      background: linear-gradient(135deg, #EAD06B 0%, #C9A227 100%);
-      color: var(--navy-deep);
-      border-color: var(--gold-light);
-      font-weight: 700;
-    }
-
-    .groups-search-row {
-      display: grid;
-      grid-template-columns: 1fr 260px auto;
-      gap: 14px;
-      align-items: center;
-    }
-
-    .input-royal {
-      width: 100%;
-      padding: 11px 14px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--gold);
-      background: var(--white);
-      color: var(--text-main);
-      font-family: var(--font-sans);
-      font-size: 0.92rem;
-      outline: none;
-    }
-
-    .input-royal:focus {
-      box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.25);
-    }
-
-    .dept-section-block {
-      margin-bottom: 36px;
-    }
-
-    .dept-section-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: linear-gradient(90deg, var(--navy-deep) 0%, var(--navy-card) 100%);
-      color: var(--white);
-      padding: 14px 20px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--gold);
-      margin-bottom: 18px;
-    }
-
-    .dept-section-heading h3 {
-      font-family: var(--font-serif);
-      font-size: 1.25rem;
-      color: var(--gold-light);
-    }
-
-    .group-card-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
+    .category-card:hover { transform: translateY(-2px); border-color: var(--gold); }
+    .category-info { display: flex; align-items: center; gap: 16px; }
+    .category-icon {
+      width: 50px;
+      height: 50px;
       background: var(--gold-pale);
-      border: 1px solid rgba(201, 162, 39, 0.4);
-      color: var(--navy-deep);
+      border: 1px solid var(--gold);
+      border-radius: var(--radius-md);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
+      font-size: 1.5rem;
       flex-shrink: 0;
     }
+    .category-name { font-size: 1.2rem; font-weight: 700; color: var(--navy-deep); }
 
-    .group-brand-line {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin: 10px 0 14px;
-    }
-
-    .group-brand-line strong {
-      color: var(--navy-deep);
-    }
-
-    /* Tables */
-    .table-responsive {
-      width: 100%;
-      overflow-x: auto;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--gold);
-      box-shadow: var(--shadow-royal);
-      background: var(--white);
-    }
-
-    .royal-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.9rem;
-    }
-
-    .royal-table th {
-      background: var(--navy-deep);
-      color: var(--gold-light);
-      font-weight: 700;
-      padding: 14px 16px;
-      border-bottom: 2px solid var(--gold);
-      white-space: nowrap;
-    }
-
-    .royal-table td {
-      padding: 14px 16px;
-      border-bottom: 1px solid rgba(201, 162, 39, 0.22);
-      color: var(--text-main);
-      vertical-align: middle;
-    }
-
-    .royal-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .royal-table tbody tr:hover {
-      background: var(--gold-pale);
-    }
-
-    /* Formula Display */
-    .formula-banner {
-      background: var(--navy-darker);
-      border: 1px solid var(--gold);
-      border-radius: var(--radius-md);
-      padding: 14px 18px;
-      font-family: var(--font-mono);
-      font-size: 0.9rem;
-      color: var(--gold-light);
-      margin: 12px 0;
-      text-align: center;
-    }
-
-    /* Architecture & Single Error Page Preview */
-    .error-page-showcase {
-      background: var(--white);
+    /* HELP BOX AT BOTTOM */
+    .help-box {
+      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-darker) 100%);
       border: 2px solid var(--gold);
       border-radius: var(--radius-lg);
-      padding: 28px;
-      box-shadow: var(--shadow-royal);
+      padding: 40px;
+      text-align: center;
+      color: var(--white);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      margin: 50px 0;
     }
+    .help-box h3 { font-family: var(--font-serif); font-size: 2rem; color: var(--gold-light); margin-bottom: 12px; }
+    .help-box p { font-size: 1.1rem; color: #CBD5E1; margin-bottom: 24px; }
 
-    .medical-disclaimer-box {
-      background: #FEF2F2;
-      border: 1px solid #DC2626;
-      color: #991B1B;
-      padding: 12px 16px;
-      border-radius: var(--radius-md);
-      font-weight: 700;
-      font-size: 0.9rem;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .rule-callout-box {
-      background: var(--gold-pale);
-      border: 1px solid var(--gold);
-      color: var(--navy-deep);
-      padding: 14px 18px;
-      border-radius: var(--radius-md);
-      font-weight: 600;
-      font-size: 0.92rem;
-      margin-top: 20px;
+    /* FOOTER */
+    .royal-footer {
+      background: var(--navy-darker);
+      color: #CBD5E1;
+      border-top: 2px solid var(--gold);
+      padding: 40px 0;
       text-align: center;
     }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 0.95rem;
+    }
+    .footer-links { display: flex; gap: 20px; align-items: center; }
+    .footer-links a { color: var(--white); text-decoration: none; font-weight: 600; }
+    .footer-links a:hover { color: var(--gold-light); }
 
-    /* Modal System */
+    /* MODAL */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(6, 14, 35, 0.78);
-      backdrop-filter: blur(4px);
+      background: rgba(10, 22, 51, 0.75);
+      backdrop-filter: blur(5px);
       z-index: 2000;
       display: none;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      overflow-y: auto;
     }
-
-    .modal-backdrop.open {
-      display: flex;
-    }
-
+    .modal-backdrop.open { display: flex; }
     .royal-modal {
       background: var(--white);
-      border: 2px solid var(--gold);
-      border-radius: var(--radius-lg);
-      max-width: 860px;
       width: 100%;
+      max-width: 900px;
       max-height: 90vh;
+      border-radius: var(--radius-lg);
       overflow-y: auto;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-      animation: modalFadeIn 0.16s ease-out;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+      border: 2px solid var(--gold);
+      text-align: left;
     }
-
-    /* Full-Page Modal View for Phase 1 Error Pages */
-    .modal-backdrop.fullpage-mode {
-      padding: 0;
-      background: var(--ivory);
-      align-items: stretch;
-    }
-
-    .royal-modal.fullpage-modal {
-      max-width: 100%;
-      width: 100%;
-      min-height: 100vh;
-      max-height: 100vh;
-      border-radius: 0;
-      border: none;
-      background: var(--ivory);
-    }
-
-    .royal-modal.fullpage-modal .royal-modal-body {
-      max-width: 1220px;
-      margin: 0 auto;
-      padding: 32px 20px 64px;
-    }
-
-    .warnings-red-box {
-      background: #FEF2F2;
-      border: 2px solid #DC2626;
-      color: #991B1B;
-      border-radius: var(--radius-md);
-      padding: 16px 20px;
-      margin-bottom: 22px;
-    }
-
-    .warnings-red-box h4 {
-      color: #B91C1C;
-      font-size: 1rem;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .step-item-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(201, 162, 39, 0.35);
-      border-radius: var(--radius-sm);
-      padding: 12px 14px;
-    }
-
-    .sitemap-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .sitemap-link-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      background: var(--white);
-      border: 1px solid rgba(201, 162, 39, 0.35);
-      border-radius: var(--radius-sm);
-      padding: 9px 12px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--navy-deep);
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .sitemap-link-item:hover {
-      background: var(--gold-pale);
-      border-color: var(--gold);
-    }
-
-    @keyframes modalFadeIn {
-      from { opacity: 0; transform: scale(0.97); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
+    .royal-modal.fullpage-modal { max-width: 1200px; height: 95vh; }
     .royal-modal-header {
       background: var(--navy-deep);
       color: var(--white);
@@ -1167,20 +363,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
       position: sticky;
       top: 0;
       z-index: 10;
     }
-
-    .royal-modal-header h3 {
-      font-family: var(--font-serif);
-      font-size: 1.35rem;
-      color: var(--gold-light);
-    }
-
+    .royal-modal-header h3 { font-family: var(--font-serif); font-size: 1.35rem; color: var(--gold-light); }
     .modal-close-btn {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255,255,255,0.1);
       color: var(--white);
       border: 1px solid var(--gold);
       width: 34px;
@@ -1192,103 +381,11 @@
       align-items: center;
       justify-content: center;
     }
+    .royal-modal-body { padding: 28px; }
 
-    .royal-modal-body {
-      padding: 24px;
-    }
-
-    /* Footer */
-    .royal-footer {
-      background: var(--navy-darker);
-      color: #CBD5E1;
-      border-top: 2px solid var(--gold);
-      padding: 48px 0 32px;
-    }
-
-    .footer-inner {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid rgba(201, 162, 39, 0.25);
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .footer-links a {
-      color: #E2E8F0;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-
-    .footer-links a:hover {
-      color: var(--gold-light);
-    }
-
-    /* Responsive Media Queries */
-    @media (max-width: 1024px) {
-      .grid-4 {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .brand-dept-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .hero-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .hero-steps-grid {
-        grid-template-columns: 1fr;
-      }
-      .groups-search-row {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 680px) {
-      .site-header {
-        height: 54px;
-        gap: 10px;
-      }
-      .Announcement-bar {
-        font-size: 0.72rem;
-        padding: 4px 8px;
-      }
-      .grid-4, .grid-3, .grid-2, .brand-dept-grid {
-        grid-template-columns: 1fr;
-      }
-      .royal-search-box {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .search-icon-prefix {
-        display: none;
-      }
-      .hero-section {
-        padding: 36px 0 44px;
-      }
-    }
-
-    /* Phase 6: Multi-Language Selector & Gold Auto-Detect Toast */
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .lang-selector-wrap {
-      position: relative;
-      display: inline-block;
-    }
-
+    /* LANGUAGE SELECTOR */
+    .header-actions { display: flex; align-items: center; gap: 12px; position: relative; }
+    .lang-selector-wrap { position: relative; display: inline-block; }
     .lang-selector-btn {
       display: inline-flex;
       align-items: center;
@@ -1297,1002 +394,171 @@
       color: var(--gold-light);
       border: 1px solid var(--gold);
       border-radius: var(--radius-sm);
-      padding: 6px 12px;
+      padding: 8px 14px;
       font-family: var(--font-sans);
-      font-size: 0.82rem;
+      font-size: 0.9rem;
       font-weight: 700;
       cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.15s ease;
     }
-
-    .lang-selector-btn:hover {
-      background: rgba(201, 162, 39, 0.2);
-      border-color: var(--gold-light);
-      box-shadow: 0 0 12px rgba(201, 162, 39, 0.3);
-    }
-
     .lang-dropdown-menu {
       position: absolute;
       top: calc(100% + 8px);
       right: 0;
-      width: 280px;
-      max-height: 390px;
+      width: 260px;
+      max-height: 350px;
       overflow-y: auto;
       background: var(--navy-deep);
       border: 2px solid var(--gold);
       border-radius: var(--radius-md);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
       padding: 8px;
       z-index: 2500;
       display: none;
     }
-
-    .lang-dropdown-menu.open {
-      display: block;
-    }
-
-    .lang-dropdown-header {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--gold-light);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 6px 10px;
-      border-bottom: 1px solid rgba(201, 162, 39, 0.3);
-      margin-bottom: 6px;
-    }
-
+    .lang-dropdown-menu.open { display: block; }
     .lang-option-btn {
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
       background: transparent;
       color: var(--white);
-      border: 1px solid transparent;
-      border-radius: var(--radius-sm);
+      border: none;
+      border-radius: 6px;
       padding: 8px 10px;
-      font-family: var(--font-sans);
-      font-size: 0.83rem;
-      font-weight: 600;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.12s ease;
-    }
-
-    .lang-option-btn:hover {
-      background: rgba(201, 162, 39, 0.18);
-      border-color: rgba(201, 162, 39, 0.45);
-      color: var(--gold-light);
-    }
-
-    .lang-option-btn.active {
-      background: linear-gradient(135deg, #EAD06B 0%, #C9A227 100%);
-      color: var(--navy-deep);
-      font-weight: 700;
-    }
-
-    .lang-gold-toast {
-      position: fixed;
-      bottom: 22px;
-      right: 22px;
-      z-index: 3000;
-      background: linear-gradient(135deg, #0A1633 0%, #0F2048 100%);
-      color: var(--gold-light);
-      border: 2px solid var(--gold);
-      border-radius: var(--radius-md);
-      padding: 12px 18px;
-      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45), 0 0 18px rgba(201, 162, 39, 0.35);
-      display: none;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.86rem;
-      font-weight: 700;
-      max-width: 420px;
-    }
-
-    .lang-gold-toast.visible {
-      display: flex;
-    }
-
-    .lang-toast-close {
-      background: rgba(201, 162, 39, 0.2);
-      color: var(--gold-light);
-      border: 1px solid var(--gold);
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      cursor: pointer;
       font-size: 0.9rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
     }
+    .lang-option-btn:hover { background: rgba(201,162,39,0.2); color: var(--gold-light); }
+    .lang-option-btn.active { background: var(--gold); color: var(--navy-deep); font-weight: 700; }
+
+    /* BADGES & TABLES */
+    .error-code-tag { font-family: var(--font-mono); background: #FEF2F2; color: var(--code-red); border: 1px solid #FECACA; padding: 2px 8px; border-radius: 6px; font-weight: 700; }
+    .badge-verified { background: var(--verified-green-bg); color: var(--verified-green); border: 1px solid var(--verified-green); padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+    .badge-pending { background: var(--pending-orange-bg); color: var(--pending-orange); border: 1px solid var(--pending-orange); padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; }
+    .royal-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; text-align: left; }
+    .royal-table th, .royal-table td { padding: 12px 14px; border-bottom: 1px solid rgba(201,162,39,0.2); }
+    .royal-table th { background: var(--gold-pale); color: var(--navy-deep); font-weight: 700; }
+    .table-responsive { overflow-x: auto; }
+    .medical-disclaimer-box { background: #FEF2F2; border: 2px solid #EF4444; color: #991B1B; padding: 14px 18px; border-radius: var(--radius-md); font-weight: 700; font-size: 0.95rem; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+    .warnings-red-box { background: #FEF2F2; border: 2px solid #EF4444; border-radius: var(--radius-md); padding: 18px; color: #991B1B; }
+    .warnings-red-box h4 { display: flex; align-items: center; gap: 8px; font-size: 1.05rem; margin-bottom: 8px; }
+    .warnings-red-box ul { padding-left: 20px; font-size: 0.9rem; display: grid; gap: 6px; }
+    .step-item-row { background: rgba(255,255,255,0.06); border: 1px solid rgba(201,162,39,0.3); border-radius: var(--radius-sm); padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
   </style>
 </head>
 <body>
 
-  <!-- STICKY ROYAL HEADER + ANNOUNCEMENT BAR -->
+  <!-- 1. HEADER - SIMPLE -->
   <div class="site-header-wrapper">
     <div class="container">
       <header class="site-header">
-        <!-- Zone 1: Brand Wordmark -->
-        <a href="#top" class="brand-logo" aria-label="errorcodefix.org Home">
-          <span class="brand-logo-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/>
-            </svg>
+        <a href="#top" class="brand-logo">
+          <span class="brand-logo-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg>
           </span>
           <span>errorcodefix<span class="gold-org">.org</span></span>
         </a>
 
-        <!-- Zone 2: Navigation Links -->
-        <nav class="main-nav" aria-label="Primary Navigation">
-          <a href="#top" data-i18n="navHome">Home</a>
-          <a href="#first-30-fixes" data-i18n="navLiveFixes">1540 Live Fixes</a>
-          <a href="#brand-auto-tracker" data-i18n="navAutoTracker">Auto Tracker</a>
-          <a href="#pending-verification-queue" data-i18n="navPendingQueue">Pending Queue</a>
-          <a href="#all-groups" data-i18n="navAllGroups">All Groups</a>
-          <a href="#request-fix" data-i18n="navRequestFix">Request a Fix</a>
-        </nav>
-
-        <!-- Zone 3: Language Selector + Search Action -->
         <div class="header-actions">
+          <!-- Language Selector -->
           <div class="lang-selector-wrap" id="langSelectorWrap">
-            <button
-              type="button"
-              id="langSelectorBtn"
-              class="lang-selector-btn"
-              onclick="toggleLangDropdown(event)"
-              aria-haspopup="listbox"
-              aria-expanded="false"
-              title="Select Language"
-            >
+            <button type="button" id="langSelectorBtn" class="lang-selector-btn" onclick="toggleLangDropdown(event)">
               <span id="currentLangFlag">🇺🇸</span>
               <span id="currentLangLabel">English</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
-            <div id="langDropdownMenu" class="lang-dropdown-menu" role="listbox" aria-label="Select Language">
-              <div class="lang-dropdown-header" id="langDropdownHeader">Select Country &amp; Language (18)</div>
+            <div id="langDropdownMenu" class="lang-dropdown-menu" role="listbox">
               <div id="langOptionsList"></div>
             </div>
           </div>
 
-          <button type="button" class="btn-gold btn-gold-sm" onclick="focusHeroSearch()" aria-label="Focus Search Bar">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <span data-i18n="btnSearchCode">Search Code</span>
-          </button>
+          <a href="mailto:info@errorcodefix.org" class="header-contact-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>info@errorcodefix.org</span>
+          </a>
         </div>
       </header>
     </div>
-
-    <!-- Announcement Bar in Gold -->
-    <div class="Announcement-bar" id="topAnnouncementBar" data-i18n="announcementBar">
-      Phase 5 Active — Auto-Update Engine Running | 1540 Fixes Live (Full 10 Per Group) | 154 Groups · 16 Departments | Auto-Update: ON
-    </div>
   </div>
 
-  <!-- HERO SECTION -->
+  <!-- 2. SEARCH ENGINE - BIGGEST PART -->
   <section id="top" class="hero-section">
-    <div class="container hero-inner">
-      <div class="hero-kicker" data-i18n="heroKicker">OFFICIAL MANUAL VERIFIED ERROR DATABASE</div>
-      <h1 class="hero-title" id="heroMainHeading" data-i18n="heroTitle">Fix Any Error Code in 3 Steps</h1>
-      <p class="hero-subtext" data-i18n="heroSubtext">
-        Paste your error code. Get Brand + Model specific fix. No long articles. No guesswork.
-      </p>
+    <div class="container">
+      <h1 class="hero-title">What Is Broken?</h1>
+      <p class="hero-subtext">Type your error code. We will show you the fix.</p>
 
-      <!-- Big Royal Search Bar with Gold Border + Glow -->
       <form class="royal-search-box" onsubmit="handleHeroSearchSubmit(event)">
-        <span class="search-icon-prefix" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        </span>
         <input
           id="heroSearchInput"
           type="text"
           class="royal-search-input"
-          placeholder="Paste your error code... e.g. E1, CH05, 4C, 0x80070005"
+          placeholder="Type code here... Example: E1"
           autocomplete="off"
           oninput="runHeroSearch(this.value)"
         />
-        <button type="submit" class="btn-gold">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <span data-i18n="btnFindFix">Find 3-Step Fix</span>
-        </button>
+        <button type="submit" class="btn-gold">Find Fix</button>
       </form>
 
-      <!-- 4 Working Search Tabs -->
-      <div class="search-tabs-wrap">
-        <div class="search-tabs" role="tablist" aria-label="Search Mode Tabs">
-          <button type="button" class="search-tab-btn active" data-tab="code" onclick="switchSearchTab('code')" data-i18n="tabCode">Exact Code Search</button>
-          <button type="button" class="search-tab-btn" data-tab="brand" onclick="switchSearchTab('brand')" data-i18n="tabBrand">Brand Search</button>
-          <button type="button" class="search-tab-btn" data-tab="model" onclick="switchSearchTab('model')" data-i18n="tabModel">Model Search</button>
-          <button type="button" class="search-tab-btn" data-tab="problem" onclick="switchSearchTab('problem')" data-i18n="tabProblem">Problem Search</button>
-        </div>
-        <div id="searchTabExamples" class="tab-examples-bar">
-          <!-- Populated dynamically by JS -->
-        </div>
-      </div>
-
-      <!-- Live Search Results Panel -->
+      <!-- Live Search Results Drawer -->
       <div id="heroSearchResults" class="hero-search-results" aria-live="polite">
-        <div class="search-results-header">
-          <div>
-            <strong id="searchResultsTitle" style="color: var(--navy-deep); font-size: 1rem;">Matching Verified Results</strong>
-            <span id="searchResultsModeBadge" class="planned-meta" style="margin-left: 8px;">Exact Code Mode</span>
-          </div>
-          <button type="button" class="btn-gold btn-gold-sm" onclick="closeHeroSearch()">Clear Search</button>
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(201,162,39,0.3); padding-bottom:10px; margin-bottom:14px;">
+          <strong>Matching Verified Results</strong>
+          <button type="button" class="btn-gold" style="padding:6px 12px; font-size:0.85rem;" onclick="closeHeroSearch()">Clear Search</button>
         </div>
         <div id="searchResultsBody"></div>
       </div>
 
-      <!-- 4 Stat Boxes in Royal Cards -->
-      <div class="hero-stats-grid tabular-nums">
-        <div class="royal-stat-card">
-          <div class="royal-stat-value" data-i18n="stat1Val">16 Departments</div>
-          <div class="royal-stat-label" data-i18n="stat1Sub">One Product = One Department</div>
-        </div>
-        <div class="royal-stat-card">
-          <div class="royal-stat-value" data-i18n="stat2Val">154 Groups Covered</div>
-          <div class="royal-stat-label" data-i18n="stat2Sub">Full 10 Fixes Per Group · Zero Overlap</div>
-        </div>
-        <div class="royal-stat-card">
-          <div class="royal-stat-value" data-i18n="stat3Val">1540 Fixes Live</div>
-          <div class="royal-stat-label" style="margin-bottom:6px;" data-i18n="stat3Sub">154 Groups × 10 Fixes · Full Real Coverage</div>
-          <div style="display:flex; justify-content:center; gap:6px; flex-wrap:wrap;">
-            <span class="badge-auto-new" data-i18n="stat3Badge">1540 Fixes Live</span>
-            <span class="badge-verified" style="font-size:0.72rem; padding:3px 9px;" data-i18n="autoUpdateOnBadge">Auto-Update: ON</span>
-          </div>
-        </div>
-        <div class="royal-stat-card">
-          <div class="royal-stat-value" style="font-size:1.3rem;" data-i18n="stat4Val">Phase 5 Auto-Update</div>
-          <div class="royal-stat-label" style="margin-bottom:6px;" data-i18n="stat4Sub">New Model = Auto Detected · New Code = Auto Added</div>
-          <span class="badge-auto-new" data-i18n="autoUpdateOnBadge">Auto-Update: ON</span>
-        </div>
-      </div>
-
-      <!-- 3 Steps Royal Boxes -->
+      <!-- 3 Easy Steps -->
       <div class="hero-steps-grid">
         <div class="hero-step-card">
           <span class="step-num-circle">1</span>
           <div>
-            <h3 data-i18n="stepBox1Title">Step 1: Find Your Error</h3>
-            <p data-i18n="stepBox1Desc">Search by Exact Code, Brand, Model Number, or Common Problem symptom.</p>
+            <h3>Step 1: Find Your Error</h3>
+            <p>Type your error code, model, or brand in the search box above.</p>
           </div>
         </div>
         <div class="hero-step-card">
           <span class="step-num-circle">2</span>
           <div>
-            <h3 data-i18n="stepBox2Title">Step 2: Follow 3-Step Fix</h3>
-            <p data-i18n="stepBox2Desc">Read direct, official manual instructions for your exact Brand + Model.</p>
+            <h3>Step 2: Follow 3-Step Fix</h3>
+            <p>Read direct official manual instructions tailored for your exact device.</p>
           </div>
         </div>
         <div class="hero-step-card">
           <span class="step-num-circle">3</span>
           <div>
-            <h3 data-i18n="stepBox3Title">Step 3: Check &amp; Done</h3>
-            <p data-i18n="stepBox3Desc">Verify error clearance on your display panel in under 3 minutes.</p>
+            <h3>Step 3: Check &amp; Done</h3>
+            <p>Confirm error clearance on your display panel in under 3 minutes.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TRENDING + NEWLY ADDED SECTION -->
-  <section id="trending-fixes" class="section-block">
+  <!-- 3. CATEGORIES - EASY TO UNDERSTAND -->
+  <section class="section-block">
     <div class="container">
       <div class="section-header">
-        <div class="section-eyebrow">LIVE VERIFIED SOLUTIONS</div>
-        <h2 class="section-title" data-i18n="trendingTitle">Trending Errors This Week</h2>
-        <p class="section-subtitle" data-i18n="trendingSub">Click any card below to inspect the complete 3-Step Official Fix and Level 3 Database Record.</p>
+        <h2 class="section-title">What Is Broken? Choose One</h2>
+        <p class="section-subtitle">Select your device category to browse popular models and verified error fixes.</p>
       </div>
 
-      <!-- 8 Royal Cards for Trending Errors -->
-      <div id="trendingErrorsGrid" class="grid-4" style="margin-bottom: 56px;">
-        <!-- Populated by JS -->
-      </div>
-
-      <div class="gold-divider" style="margin-bottom: 48px;"></div>
-
-      <!-- System 4: Newly Added - Auto Published (5 Demo Cards after Trending) -->
-      <div class="section-header">
-        <div class="section-eyebrow">PHASE 5 LIVE AUTO-PUBLISH FEED</div>
-        <h2 class="section-title" data-i18n="newlyAddedTitle">Newly Added - Auto Published</h2>
-        <p class="section-subtitle" data-i18n="newlyAddedSub">5 newly detected Brand + Model error fixes auto-published after Official Manual check. Click any card below to open its full 3-Step Fix page.</p>
-      </div>
-
-      <div id="newlyAddedGrid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); gap: 18px;">
-        <!-- Populated by JS (5 Auto-Published Cards opening real fix pages) -->
-      </div>
-    </div>
-  </section>
-
-  <!-- PHASE 4 SECTION: 1540 LIVE FIXES - FULL 10 PER GROUP - FULL COVERAGE -->
-  <section id="first-30-fixes" class="section-block bg-alt">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">PHASE 4 COMPLETE — 154 GROUPS × 10 FIXES = 1540 SEPARATE BRAND + MODEL PAGES</div>
-        <h2 class="section-title" data-i18n="liveFixesTitle">1540 Live Fixes - Full 10 Per Group - Full Coverage</h2>
-        <p class="section-subtitle" data-i18n="liveFixesSub">
-          Every one of the 154 Groups now has 10 Brand + Model specific fixes (1540 total live pages), each with its own canonical URL and 3-step official manual solution.
-        </p>
-      </div>
-
-      <!-- Filter Bar for 770 Live Fixes Section: Department + Group + Brand + Verification + View Mode -->
-      <div class="groups-controls-panel" style="margin-bottom: 28px;">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 12px; align-items: end;">
-          <div>
-            <label for="f30DeptSelect" style="display:block; font-size:0.78rem; font-weight:700; color:var(--gold-light); margin-bottom:5px;" data-i18n="filterDeptLabel">Filter by Department</label>
-            <select id="f30DeptSelect" class="input-royal" onchange="handleF30DeptChange()">
-              <option value="ALL">All 16 Departments</option>
-            </select>
-          </div>
-          <div>
-            <label for="f30GroupSelect" style="display:block; font-size:0.78rem; font-weight:700; color:var(--gold-light); margin-bottom:5px;" data-i18n="filterGroupLabel">Filter by Group (154)</label>
-            <select id="f30GroupSelect" class="input-royal" onchange="renderFirst30Cards()">
-              <option value="ALL">All 154 Groups</option>
-            </select>
-          </div>
-          <div>
-            <label for="f30BrandSelect" style="display:block; font-size:0.78rem; font-weight:700; color:var(--gold-light); margin-bottom:5px;" data-i18n="filterBrandLabel">Filter by Brand</label>
-            <select id="f30BrandSelect" class="input-royal" onchange="renderFirst30Cards()">
-              <option value="ALL">All Brands</option>
-            </select>
-          </div>
-          <div>
-            <label for="f30VerifySelect" style="display:block; font-size:0.78rem; font-weight:700; color:var(--gold-light); margin-bottom:5px;" data-i18n="filterVerifyLabel">Filter by Verification</label>
-            <select id="f30VerifySelect" class="input-royal" onchange="renderFirst30Cards()">
-              <option value="ALL">All Statuses (Verified + Pending)</option>
-              <option value="Verified">Verified (Official Manual)</option>
-              <option value="Pending Verification">Pending Verification</option>
-            </select>
-          </div>
-          <div>
-            <label for="f30ViewMode" style="display:block; font-size:0.78rem; font-weight:700; color:var(--gold-light); margin-bottom:5px;" data-i18n="filterModeLabel">Display Mode</label>
-            <select id="f30ViewMode" class="input-royal" onchange="renderFirst30Cards()">
-              <option value="GROUPED">Full 10 Per Group View (154 Groups)</option>
-              <option value="CARDS">Individual Royal Cards Grid</option>
-              <option value="FIRST30">Phase 1 First 30 Batch Only</option>
-            </select>
-          </div>
-          <div>
-            <button type="button" class="btn-gold" style="width:100%;" onclick="resetFirst30Filters()" data-i18n="btnResetFilters">Reset Filters (All 1540)</button>
-          </div>
-        </div>
-        <div style="margin-top: 12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; font-size:0.83rem; color:var(--gold-light);">
-          <span id="f30CounterText" class="tabular-nums">Showing 1540 of 1540 Brand + Model Specific Error Fix Pages across 154 Groups (Phase 4 Complete - Nov 2026 - Full Coverage 1540 Done)</span>
-          <span>Rule: One Brand = One Card · Every Brand + Model has a separate canonical URL</span>
-        </div>
-      </div>
-
-      <!-- 770 Live Fixes Container -->
-      <div id="first30Grid" class="grid-3" style="margin-bottom: 36px;">
-        <!-- Populated by JS -->
-      </div>
-
-      <!-- Bottom CTA: Request Next Fix -->
-      <div style="text-align: center; padding: 24px; background: var(--white); border: 1px solid var(--gold); border-radius: var(--radius-lg); box-shadow: var(--shadow-royal);">
-        <h3 class="serif-heading" style="color: var(--navy-deep); font-size: 1.35rem; margin-bottom: 8px;">Need a Newly Launched Model Added via Auto-Update?</h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">Most requested Brand + Model error codes are verified from official manuals first.</p>
-        <a href="#request-fix" class="btn-gold" data-i18n="btnRequestFix">Request Next Fix</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- BRAND REGISTRY SECTION - LEVEL 1 DATABASE (16 DEPARTMENTS) -->
-  <section id="brand-registry" class="section-block bg-alt">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">LEVEL 1 DATABASE ARCHITECTURE</div>
-        <h2 class="section-title" data-i18n="brandRegistryTitle">Brand Registry - No Brand Is Missed</h2>
-        <p class="section-subtitle" data-i18n="brandRegistrySub">Every brand is auto-tracked separately. Click any brand below to filter the 154 Product Groups.</p>
-      </div>
-
-      <div style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 28px; flex-wrap: wrap;">
-        <span id="activeBrandIndicator" style="font-size: 0.9rem; font-weight: 700; color: var(--navy-deep);">Active Brand Filter: All Brands (165+ Tracked Brands)</span>
-        <button type="button" class="btn-gold btn-gold-sm" onclick="filterByBrand('ALL')">Reset Brand Filter</button>
-      </div>
-
-      <div id="brandRegistryContainer" class="brand-dept-grid">
+      <div class="categories-grid" id="categoriesGrid">
         <!-- Populated by JS -->
       </div>
     </div>
   </section>
 
-  <!-- ALL 154 GROUPS SECTION - CORE OF PHASE 0 -->
-  <section id="all-groups" class="section-block">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">COMPLETE TAXONOMY — PHASE 0</div>
-        <h2 class="section-title" data-i18n="allGroupsTitle">Browse All 154 Groups - No Product Is Missed</h2>
-        <p class="section-subtitle" data-i18n="allGroupsSub">Structure based on Amazon Electronics + Appliances + Home &amp; Kitchen. One Product = One Department Only. No Overlapping. No Duplicate.</p>
-      </div>
-
-      <!-- Filter & Search Controls Panel -->
-      <div class="groups-controls-panel">
-        <div id="deptFilterButtons" class="dept-filter-buttons" role="tablist" aria-label="Department Filter">
-          <!-- Populated by JS -->
-        </div>
-
-        <div class="groups-search-row">
-          <div>
-            <input
-              id="groupSearchInput"
-              type="text"
-              class="input-royal"
-              placeholder="Search group... e.g. Washing Machine, Treadmill, AC, Inverter"
-              oninput="renderAllGroups()"
-            />
-          </div>
-          <div>
-            <select id="groupBrandSelect" class="input-royal" onchange="handleBrandDropdownChange(this.value)" aria-label="Filter groups by Brand">
-              <option value="ALL">Filter by Brand: All Brands</option>
-            </select>
-          </div>
-          <div>
-            <button type="button" class="btn-gold" onclick="resetGroupFilters()" data-i18n="btnResetGroupFilters">Reset Filters</button>
-          </div>
-        </div>
-
-        <div style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 0.84rem; color: var(--gold-light);">
-          <span id="groupsCounterStatus" class="tabular-nums">Showing all 16 Departments · 154 Core Groups (+ Separate Power &amp; Baby Sub-Groups)</span>
-          <span>Rule: Iron and Inverter/UPS are separate groups · Baby Sterilizer and Warmer are separate</span>
-        </div>
-      </div>
-
-      <!-- All 154 Groups Container -->
-      <div id="allGroupsContainer">
-        <!-- Populated by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- COMMON PROBLEM MAPPING SECTION -->
-  <section id="problem-mapping" class="section-block bg-alt">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">CROSS-BRAND SYMPTOM INTELLIGENCE</div>
-        <h2 class="section-title" data-i18n="problemMapTitle">Search By Problem - Not Just By Code</h2>
-        <p class="section-subtitle">
-          Same problem can have different codes in different brands. Same code can have different meaning in different brands. We map by Common Problem, but only if verified from official manual.
-        </p>
-      </div>
-
-      <!-- Common Problem Example Table for AC -->
-      <div class="table-responsive" style="margin-bottom: 32px;">
-        <table class="royal-table">
-          <thead>
-            <tr>
-              <th>Common Problem (AC)</th>
-              <th>LG</th>
-              <th>Samsung</th>
-              <th>Voltas</th>
-              <th>Official Brand Solution</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Sensor-Related Fault</strong><br/><span style="font-size:0.78rem; color:var(--text-muted);">Room / Pipe Thermistor Open or Short</span></td>
-              <td>
-                <span class="error-code-tag">CH05</span>
-                <div style="margin-top:5px; font-size:0.78rem;">Code from Official Manual</div>
-                <div style="margin-top:4px;"><span class="badge-verified"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Verified</span></div>
-              </td>
-              <td>
-                <span class="error-code-tag">E101 / E121</span>
-                <div style="margin-top:5px; font-size:0.78rem;">Code from Official Manual</div>
-                <div style="margin-top:4px;"><span class="badge-verified"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Verified</span></div>
-              </td>
-              <td>
-                <span class="error-code-tag">E1 / E2</span>
-                <div style="margin-top:5px; font-size:0.78rem;">Code from Official Manual</div>
-                <div style="margin-top:4px;"><span class="badge-pending">Pending / Verified</span></div>
-              </td>
-              <td>
-                <div style="font-size:0.82rem; margin-bottom:8px; font-weight:600;">Different for each brand - Click brand to see its solution:</div>
-                <div style="display:flex; gap:6px; flex-wrap:wrap;">
-                  <button type="button" class="btn-gold btn-gold-sm" onclick="openErrorModal('p1-5')">LG Solution</button>
-                  <button type="button" class="btn-gold btn-gold-sm" onclick="openErrorModal('p1-4')">Samsung Solution</button>
-                  <button type="button" class="btn-gold btn-gold-sm" onclick="openErrorModal('p1-6')">Voltas Solution</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td><strong>Cooling Fault / Low Refrigerant</strong><br/><span style="font-size:0.78rem; color:var(--text-muted);">AC not cooling / Gas leak detection</span></td>
-              <td>
-                <span class="error-code-tag">CH38</span>
-                <div style="margin-top:5px;"><span class="badge-verified"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Verified</span></div>
-              </td>
-              <td>
-                <span class="error-code-tag">E454</span>
-                <div style="margin-top:5px;"><span class="badge-verified"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Verified</span></div>
-              </td>
-              <td>
-                <span class="error-code-tag">F0 / EC</span>
-                <div style="margin-top:5px;"><span class="badge-pending">Pending Verification</span></div>
-              </td>
-              <td>
-                <button type="button" class="btn-gold btn-gold-sm" onclick="triggerProblemChipSearch('Cooling Fault')">Compare Cooling Fixes</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Common Problem Categories per Department as Chips -->
-      <div class="grid-3">
-        <div class="royal-card">
-          <div>
-            <h3 class="serif-heading" style="color:var(--navy-deep); margin-bottom:8px;">AC &amp; Climate Problems</h3>
-            <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:12px;">Click a symptom to search verified brand codes:</p>
-            <div class="brand-chips-wrap">
-              <button type="button" class="brand-chip-btn" onclick="triggerProblemChipSearch('Sensor Fault')">Sensor Fault</button>
-              <button type="button" class="brand-chip-btn" onclick="triggerProblemChipSearch('Cooling Fault')">Cooling Fault</button>
-              <button type="button" class="brand-chip-btn" onclick="triggerProblemChipSearch('Outdoor Fan Fault')">Outdoor Fan Fault</button>
-              <button type="button" class="brand-chip-btn" onclick="triggerProblemChipSearch('Water Leakage')">Water Leakage</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="royal-card">
-          <div>
-            <h3 class="serif-heading" style="color:var(--navy-deep); margin-bottom:8px;">Washing Machine Problems</h3>
-            <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:12px;">Mapped across LG, Samsung, Whirlpool, IFB, Bosch:</p>
-            <div class="brand-chips-wrap">
-              <button type="button" class="brand-chip-btn" onclick="triggerProblemChipSearch('Water Inlet')">Water Inlet</button>
-              <button type="button" class="brand-chip-btn" onclick="triggerProblemChipSearch('Drainage')">Drainage</button>
-              <button type="button" class="brand-chip-btn" onclick="triggerProblemChipSearch('Motor')">Motor</button>
-              <button type="button" class="brand-chip-btn" onclick="triggerProblemChipSearch('Door Lock')">Door Lock</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="royal-card">
-          <div>
-            <h3 class="serif-heading" style="color:var(--navy-deep); margin-bottom:8px;">Treadmill, BP &amp; Printer Problems</h3>
-            <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:12px;">Fitness, Medical &amp; Office hardware symptoms:</p>
-            <div class="brand-chips-wrap">
-              <button type="button" class="brand-chip-btn" onclick="triggerProblemChipSearch('Speed Sensor')">Treadmill: Speed Sensor</button>
-              <button type="button" class="brand-chip-btn" onclick="triggerProblemChipSearch('Motor')">Treadmill: Motor</button>
-              <button type="button" class="brand-chip-btn" onclick="triggerProblemChipSearch('Belt')">Treadmill: Belt</button>
-              <button type="button" class="brand-chip-btn" onclick="triggerProblemChipSearch('Cuff Fault')">BP: Cuff Fault</button>
-              <button type="button" class="brand-chip-btn" onclick="triggerProblemChipSearch('Sensor Fault')">BP: Sensor Fault</button>
-              <button type="button" class="brand-chip-btn" onclick="triggerProblemChipSearch('Paper Jam')">Printer: Paper Jam</button>
-              <button type="button" class="brand-chip-btn" onclick="triggerProblemChipSearch('Toner')">Printer: Toner</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="rule-callout-box">
-        Rule: Never assume LG CH05 = Samsung E101 unless verified. Mapping Status: Verified / Pending is shown on every mapping.
-      </div>
-    </div>
-  </section>
-
-  <!-- AUTO-UPDATE ENGINE SECTION -->
-  <section id="auto-update-engine" class="section-block bg-navy">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">BRAND-WISE AUTO TRACKER + COMPARE LOGIC</div>
-        <h2 class="section-title" data-i18n="autoUpdateTitle">Auto-Update Engine - New Model? Auto Detected.</h2>
-        <p class="section-subtitle">
-          How errorcodefix.org stays updated with newly launched appliances and electronics without creating duplicates.
-        </p>
-      </div>
-
-      <!-- 4 Steps in Royal Cards -->
-      <div class="grid-4" style="margin-bottom: 36px;">
-        <div class="royal-card" style="background: var(--navy-card); color: var(--white);">
-          <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-              <span class="badge-auto-new">STEP 1</span>
-              <span style="font-size:0.78rem; color:var(--gold-light);">Brand-Wise Crawl</span>
-            </div>
-            <h3 class="serif-heading" style="color:var(--gold-light); margin-bottom:10px; font-size:1.2rem;">Step 1: Auto Search</h3>
-            <p style="font-size:0.86rem; color:#CBD5E1;">
-              For each Brand separately, auto search Brand + Product Model List. Example: <strong>Samsung TV Model List</strong>, <strong>LG AC Model List</strong>, <strong>HP Printer Model List</strong>.
-            </p>
-          </div>
-        </div>
-
-        <div class="royal-card" style="background: var(--navy-card); color: var(--white);">
-          <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-              <span class="badge-auto-new">STEP 2</span>
-              <span style="font-size:0.78rem; color:var(--gold-light);">Delta Engine</span>
-            </div>
-            <h3 class="serif-heading" style="color:var(--gold-light); margin-bottom:10px; font-size:1.2rem;">Step 2: Compare Logic</h3>
-            <div class="formula-banner">New List - Existing List = New Model</div>
-            <p style="font-size:0.83rem; color:#CBD5E1;">
-              Example: New List has <strong>Samsung QA55Q70D</strong>, Existing List does NOT have it = <strong>New Model Detected</strong>. If model already exists, skip — no duplicate.
-            </p>
-          </div>
-        </div>
-
-        <div class="royal-card" style="background: var(--navy-card); color: var(--white);">
-          <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-              <span class="badge-auto-new">STEP 3</span>
-              <span style="font-size:0.78rem; color:var(--gold-light);">Manual Audit</span>
-            </div>
-            <h3 class="serif-heading" style="color:var(--gold-light); margin-bottom:10px; font-size:1.2rem;">Step 3: Verify</h3>
-            <p style="font-size:0.86rem; color:#CBD5E1;">
-              Check Official Manual for new model error codes. If verified, mark <strong>Verified</strong>. If not, mark <strong>Pending Verification</strong>. Medical codes never publish without Verified.
-            </p>
-          </div>
-        </div>
-
-        <div class="royal-card" style="background: var(--navy-card); color: var(--white);">
-          <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-              <span class="badge-auto-new">STEP 4</span>
-              <span style="font-size:0.78rem; color:var(--gold-light);">Live Sync</span>
-            </div>
-            <h3 class="serif-heading" style="color:var(--gold-light); margin-bottom:10px; font-size:1.2rem;">Step 4: Auto Publish</h3>
-            <p style="font-size:0.86rem; color:#CBD5E1;">
-              New Model + New Error Page auto added to <strong>Sitemap</strong> + <strong>Newly Added section</strong> + <strong>Brand Registry</strong>.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Demo Tracker Table (5 Example Rows) -->
-      <div class="table-responsive">
-        <table class="royal-table tabular-nums">
-          <thead>
-            <tr>
-              <th>Brand</th>
-              <th>Product</th>
-              <th>Last Auto Search</th>
-              <th>New Models Found (New List - Existing List)</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Samsung</strong></td>
-              <td>TV (QLED / Smart TV)</td>
-              <td>2026-11-17 · 06:00 UTC</td>
-              <td><code>QA55Q70D</code> (1 New Model Detected)</td>
-              <td><span class="badge-pending">Pending Verification</span></td>
-            </tr>
-            <tr>
-              <td><strong>LG</strong></td>
-              <td>AC (Dual Inverter Split)</td>
-              <td>2026-11-17 · 06:15 UTC</td>
-              <td><code>S3-Q18</code> / <code>S3-Q18KL3A</code> (2 New Models)</td>
-              <td><span class="badge-verified"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Verified</span></td>
-            </tr>
-            <tr>
-              <td><strong>HP</strong></td>
-              <td>Printer (LaserJet / Smart Tank)</td>
-              <td>2026-11-17 · 06:30 UTC</td>
-              <td><code>LaserJet Tank 2606sdw</code> (1 New Model)</td>
-              <td><span class="badge-verified"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Verified</span></td>
-            </tr>
-            <tr>
-              <td><strong>Omron</strong></td>
-              <td>BP Machine (Medical Device)</td>
-              <td>2026-11-17 · 06:45 UTC</td>
-              <td><code>OM-01</code> / <code>HEM-7361T</code> (2 New Models)</td>
-              <td><span class="badge-pending">Pending Verification (Medical Gate)</span></td>
-            </tr>
-            <tr>
-              <td><strong>PowerMax</strong></td>
-              <td>Treadmill (Fitness Equipment)</td>
-              <td>2026-11-17 · 07:00 UTC</td>
-              <td><code>TDM-98</code> (1 New Model)</td>
-              <td><span class="badge-verified"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Verified</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="rule-callout-box" style="background: rgba(201, 162, 39, 0.18); color: var(--gold-light); border-color: var(--gold); margin-bottom: 16px; font-size: 1rem;">
-        <strong>Phase 5 Active - Auto-Update Engine Running - New Model Auto-Detected</strong> &nbsp;·&nbsp; <span class="badge-auto-new" style="margin-left:6px;">Auto-Update: ON</span>
-      </div>
-
-      <div class="rule-callout-box" style="background: rgba(201, 162, 39, 0.14); color: var(--gold-light); border-color: var(--gold);">
-        Note: Discovery is Auto, Verification is Manual from Official Manual, Publish is Auto. Medical codes never publish without Verified.
-      </div>
-    </div>
-  </section>
-
-  <!-- PHASE 5 SYSTEM 1: BRAND AUTO TRACKER - LIVE DASHBOARD -->
-  <section id="brand-auto-tracker" class="section-block bg-alt">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">PHASE 5 SYSTEM 1 — SELF-UPDATING MODEL WATCHDOG</div>
-        <h2 class="section-title" data-i18n="brandTrackerTitle">Brand Auto Tracker - Live</h2>
-        <p class="section-subtitle">
-          Automated Brand-Wise model list crawler across 10 flagship brand lines. New models are detected automatically using delta comparison without manual rebuilding.
-        </p>
-      </div>
-
-      <!-- Gold Compare Logic Box + Run Brand Check (Demo) Button -->
-      <div style="background: linear-gradient(135deg, #0A1633 0%, #0F2048 100%); border: 2px solid var(--gold); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 28px; box-shadow: var(--shadow-royal); color: var(--white);">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:16px;">
-          <div>
-            <span class="badge-auto-new" style="margin-bottom:8px;">COMPARE LOGIC ENGINE · AUTO-UPDATE: ON</span>
-            <h3 class="serif-heading" style="color:var(--gold-light); font-size:1.35rem; margin-top:6px;">
-              Compare Formula: <code style="color:#FFFFFF; background:rgba(201,162,39,0.22); padding:3px 10px; border-radius:6px; border:1px solid var(--gold);">New Model List - Existing Model List = New Model</code>
-            </h3>
-          </div>
-          <button type="button" class="btn-gold" onclick="runBrandCheckDemo()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-            <span>Run Brand Check (Demo)</span>
-          </button>
-        </div>
-
-        <div style="background: rgba(201, 162, 39, 0.14); border: 1px solid var(--gold); border-radius: var(--radius-md); padding: 14px 18px; font-size: 0.92rem; color: var(--gold-light);">
-          <strong>Live Compare Example:</strong> "New List has <strong>Samsung QA55Q70D</strong>, Existing List does NOT have it = <strong>New Model Detected</strong>"
-        </div>
-
-        <div id="brandCheckDemoOutput" style="display:none; margin-top:16px; background:var(--verified-green-bg); border:2px solid var(--verified-green); color:var(--navy-deep); padding:16px 20px; border-radius:var(--radius-md); font-weight:700; font-size:0.95rem;">
-          <!-- Populated on click of Run Brand Check (Demo) -->
-        </div>
-      </div>
-
-      <!-- 10 Example Rows Table: Brand | Product Group | Last Auto Search Date | Existing Models Count | New Models Found | Status -->
-      <div class="table-responsive">
-        <table class="royal-table tabular-nums">
-          <thead>
-            <tr>
-              <th>Brand</th>
-              <th>Product Group</th>
-              <th>Last Auto Search Date</th>
-              <th>Existing Models Count</th>
-              <th>New Models Found</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="brandAutoTrackerTableBody">
-            <!-- Populated by JS (10 Required Brand Rows) -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- PHASE 5 SYSTEM 2: PENDING VERIFICATION QUEUE - NEWLY DETECTED -->
-  <section id="pending-verification-queue" class="section-block">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">PHASE 5 SYSTEM 2 — OFFICIAL SERVICE MANUAL GATE</div>
-        <h2 class="section-title" data-i18n="pendingQueueTitle">Pending Verification Queue - Newly Detected</h2>
-        <p class="section-subtitle">
-          Newly detected models waiting for manual verification from the manufacturer's official service manual before auto-publishing.
-        </p>
-      </div>
-
-      <div class="rule-callout-box" style="margin-top:0; margin-bottom:28px; background:var(--gold-pale); border:2px solid var(--gold); font-size:0.96rem;">
-        <strong>Verification Rule:</strong> Discovery is Auto, Verification is Manual from Official Manual, Publish is Auto. Medical codes never publish without Verified.
-      </div>
-
-      <div id="pendingVerificationGrid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); gap: 18px;">
-        <!-- Populated by JS (5 Demo Cards with "Verify from Manual" button) -->
-      </div>
-    </div>
-  </section>
-
-  <!-- PHASE 5 SYSTEM 3: REQUEST A FIX + MODEL FINDER + TOP REQUESTED FIXES THIS WEEK -->
-  <section id="request-fix" class="section-block bg-alt">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">PHASE 5 SYSTEM 3 — MODEL LOOKUP &amp; TOP REQUESTED QUEUE</div>
-        <h2 class="section-title" data-i18n="didNotFindTitle">Did Not Find Your Error?</h2>
-        <p class="section-subtitle">Check if your exact model number is in our registry or submit a fix request. Most requested fixes are verified and added first.</p>
-      </div>
-
-      <div class="grid-2" style="margin-bottom: 48px;">
-        <!-- Left Box: Model Finder Box -->
-        <div class="royal-card">
-          <div>
-            <span class="planned-meta">INSTANT REGISTRY CHECK</span>
-            <h3 class="serif-heading" style="font-size: 1.4rem; color: var(--navy-deep); margin: 10px 0 8px;" data-i18n="modelFinderTitle">Model Finder Box</h3>
-            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
-              <strong>Where to find your model number:</strong> Model number is on back sticker / under battery / in Settings &gt; About / on rating label.
-            </p>
-
-            <div style="margin-bottom: 14px;">
-              <label for="modelFinderInput" style="display:block; font-size:0.84rem; font-weight:700; color:var(--navy-deep); margin-bottom:6px;">
-                Enter Model Number
-              </label>
-              <input
-                id="modelFinderInput"
-                type="text"
-                class="input-royal"
-                placeholder="Enter Model Number - e.g. WA70BG4582, QA55Q70D, OM-01"
-              />
-            </div>
-
-            <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
-              <button type="button" class="btn-gold" onclick="runModelFinder()" data-i18n="btnFindModel">Find My Model Errors</button>
-              <button type="button" class="brand-chip-btn" onclick="quickTestModel('WA70BG4582')">Try WA70BG4582</button>
-              <button type="button" class="brand-chip-btn" onclick="quickTestModel('QA55Q70D')">Try QA55Q70D</button>
-              <button type="button" class="brand-chip-btn" onclick="quickTestModel('OM-01')">Try OM-01</button>
-              <button type="button" class="brand-chip-btn" onclick="quickTestModel('UNKNOWN-999')">Try Unlisted Model</button>
-            </div>
-
-            <div id="modelFinderOutput" style="background: var(--ivory); border: 1px solid var(--gold); border-radius: var(--radius-md); padding: 14px; font-size: 0.9rem;">
-              Enter a model number above (such as <code>WA70BG4582</code>, <code>QA55Q70D</code>, or <code>OM-01</code>) and click <strong>Find My Model Errors</strong>.
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Box: Upgraded Request a Fix Form -->
-        <div class="royal-card">
-          <div>
-            <span class="planned-meta">PRIORITY MANUAL VERIFICATION</span>
-            <h3 class="serif-heading" style="font-size: 1.4rem; color: var(--navy-deep); margin: 10px 0 8px;" data-i18n="requestFixBoxTitle">Request a Fix</h3>
-            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
-              Submit your Error Code, Brand, Model, and Problem below. Requests are ranked by user demand and verified from official service manuals.
-            </p>
-
-            <form id="requestFixForm" onsubmit="handleRequestFixSubmit(event)" style="display:grid; gap:12px;">
-              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
-                <div>
-                  <label for="reqCode" style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:4px;" data-i18n="lblErrorCode">Error Code *</label>
-                  <input id="reqCode" type="text" class="input-royal" placeholder="e.g. F1, OE, E1, CH05" required />
-                </div>
-                <div>
-                  <label for="reqBrand" style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:4px;" data-i18n="lblBrand">Brand *</label>
-                  <input id="reqBrand" type="text" class="input-royal" placeholder="e.g. Samsung, LG, Omron" required />
-                </div>
-              </div>
-
-              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
-                <div>
-                  <label for="reqModel" style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:4px;" data-i18n="lblModel">Model *</label>
-                  <input id="reqModel" type="text" class="input-royal" placeholder="e.g. AR24, FHM1408BDL" required />
-                </div>
-                <div>
-                  <label for="reqEmail" style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:4px;" data-i18n="lblEmail">Email (Optional)</label>
-                  <input id="reqEmail" type="email" class="input-royal" placeholder="you@example.com" />
-                </div>
-              </div>
-
-              <div>
-                <label for="reqProblem" style="display:block; font-size:0.8rem; font-weight:700; margin-bottom:4px;" data-i18n="lblProblem">Problem *</label>
-                <input id="reqProblem" type="text" class="input-royal" placeholder="Describe what happens when the error code appears..." required />
-              </div>
-
-              <button type="submit" class="btn-gold" style="width:100%; margin-top:4px;" data-i18n="btnRequestFix">Submit Fix Request</button>
-            </form>
-
-            <div id="requestFixConfirmation" style="display:none; margin-top:14px; background:var(--verified-green-bg); border:2px solid var(--verified-green); color:var(--verified-green); padding:14px 16px; border-radius:var(--radius-md); font-weight:700; font-size:0.92rem;">
-              Request Saved. Most requested fixes are added first.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Top Requested Fixes This Week (5 Demo Requests Sorted by Count) -->
-      <div id="top-requested-fixes" style="background: var(--white); border: 2px solid var(--gold); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-royal);">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px; padding-bottom:14px; border-bottom:1px solid rgba(201,162,39,0.35);">
-          <div>
-            <span class="planned-meta">LIVE USER DEMAND RANKING</span>
-            <h3 class="serif-heading" style="font-size:1.5rem; color:var(--navy-deep); margin-top:4px;" data-i18n="topRequestedTitle">Top Requested Fixes This Week</h3>
-            <p style="font-size:0.88rem; color:var(--text-muted); margin-top:2px;">Sorted automatically by request count. Most requested Brand + Model fixes are verified from official manuals first.</p>
-          </div>
-          <span class="badge-auto-new">Sorted by Request Count · Will Be Added Next</span>
-        </div>
-
-        <div id="topRequestedFixesGrid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
-          <!-- Populated by JS (5 Demo Requests sorted by count) -->
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS + DATABASE ARCHITECTURE SECTION -->
-  <section id="database-architecture" class="section-block bg-alt">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">SYSTEM ARCHITECTURE &amp; PAGE STANDARD</div>
-        <h2 class="section-title" data-i18n="howItWorksTitle">How It Works + 3-Level Database Architecture</h2>
-        <p class="section-subtitle">
-          Every page on errorcodefix.org follows a strict relational verification hierarchy with zero duplicate pages.
-        </p>
-      </div>
-
-      <!-- 3-Level Database Cards -->
-      <div class="grid-3" style="margin-bottom: 44px;">
-        <div class="royal-card">
-          <div>
-            <span class="planned-meta">LEVEL 1 DATABASE</span>
-            <h3 class="serif-heading" style="color:var(--navy-deep); font-size:1.3rem; margin:10px 0 8px;">Level 1: Product Registry</h3>
-            <p style="font-size:0.9rem; color:var(--text-main); font-weight:600; margin-bottom:8px;">
-              Department + Product + Brand
-            </p>
-            <p style="font-size:0.84rem; color:var(--text-muted);">
-              Maps all 16 Departments and 154 Product Groups to their verified manufacturer brands without overlapping categories.
-            </p>
-          </div>
-        </div>
-
-        <div class="royal-card">
-          <div>
-            <span class="planned-meta">LEVEL 2 DATABASE</span>
-            <h3 class="serif-heading" style="color:var(--navy-deep); font-size:1.3rem; margin:10px 0 8px;">Level 2: Error Code Registry</h3>
-            <p style="font-size:0.9rem; color:var(--text-main); font-weight:600; margin-bottom:8px;">
-              Brand + Model + Code + Meaning + Verification
-            </p>
-            <p style="font-size:0.84rem; color:var(--text-muted);">
-              Links exact model numbers (e.g. WA70BG4582) to specific fault codes and tracks Official Manual Verification status.
-            </p>
-          </div>
-        </div>
-
-        <div class="royal-card">
-          <div>
-            <span class="planned-meta">LEVEL 3 DATABASE</span>
-            <h3 class="serif-heading" style="color:var(--navy-deep); font-size:1.3rem; margin:10px 0 8px;">Level 3: Solution Registry</h3>
-            <p style="font-size:0.9rem; color:var(--text-main); font-weight:600; margin-bottom:8px;">
-              Symptoms + Causes + Official Fix + Warning + Source + Last Checked
-            </p>
-            <p style="font-size:0.84rem; color:var(--text-muted);">
-              Delivers actionable 3-Step fixes, safety warnings, official manual citations, and related model codes.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 1 Error Page Format Live Showcase -->
-      <div class="error-page-showcase">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px; padding-bottom:14px; border-bottom:1px solid rgba(201,162,39,0.35);">
-          <div>
-            <span class="planned-meta">STANDARD 1 ERROR PAGE FORMAT</span>
-            <h3 class="serif-heading" style="font-size:1.5rem; color:var(--navy-deep); margin-top:4px;">Live Error Page Specification Preview</h3>
-          </div>
-          <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <button type="button" class="btn-gold btn-gold-sm" onclick="renderArchitectureSample('p1-1')">Sample 1: Washing Machine 4C</button>
-            <button type="button" class="btn-gold btn-gold-sm" onclick="renderArchitectureSample('p1-15')">Sample 2: Medical BP Machine E1</button>
-            <button type="button" class="btn-gold btn-gold-sm" onclick="renderArchitectureSample('p1-5')">Sample 3: LG AC CH05</button>
-          </div>
-        </div>
-
-        <!-- Medical Disclaimer Always Shown on Medical Pages & Highlighted Here -->
-        <div class="medical-disclaimer-box">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          <span>Medical Disclaimer (Mandatory on every Medical Device page): "This is a device error fix only. For health concerns, consult a doctor."</span>
-        </div>
-
-        <div id="architectureErrorPageContent">
-          <!-- Populated by JS -->
-        </div>
-
-        <div class="rule-callout-box">
-          Duplicate Rule: One Error Code + Brand + Model = One Page. No duplicate pages. Brand is Filter, not Group.
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PHASE 4 SEO SITEMAP SECTION (ALL 1540 CANONICAL URLS) -->
-  <section id="seo-sitemap" class="section-block">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">SEARCH ENGINE INDEXING — PHASE 4 COMPLETE (1540 URLS)</div>
-        <h2 class="section-title" data-i18n="sitemapTitle">Live SEO Sitemap — All 1540 Brand + Model Error URLs</h2>
-        <p class="section-subtitle">
-          Canonical URL structure (<code>/brand-group-model-code</code>) for all 1540 Live Fixes across 154 Groups. Click any URL below to open its full error fix page.
-        </p>
-      </div>
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:18px; background:var(--navy-deep); padding:14px 18px; border-radius:var(--radius-md); border:1px solid var(--gold);">
-        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-          <label for="sitemapDeptFilter" style="color:var(--gold-light); font-size:0.82rem; font-weight:700;">Filter Sitemap by Department:</label>
-          <select id="sitemapDeptFilter" class="input-royal" style="width:auto; min-width:220px; padding:7px 12px;" onchange="renderSeoSitemap()">
-            <option value="ALL">All 16 Departments (All 1540 URLs)</option>
-          </select>
-        </div>
-        <span id="sitemapCountBadge" class="badge-auto-new">1540 Canonical URLs Indexed · Zero Undefined</span>
-      </div>
-      <div id="seoSitemapGrid" class="sitemap-grid" style="max-height: 540px; overflow-y: auto; padding: 6px;">
-        <!-- Populated by JS -->
+  <!-- 4. HELP BOX AT BOTTOM -->
+  <section class="container">
+    <div class="help-box">
+      <h3>Did Not Find Your Error?</h3>
+      <p>We will help you in 24 hours. Contact our support desk directly.</p>
+      <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+        <a href="mailto:info@errorcodefix.org" class="btn-gold" style="font-size:1.15rem; padding:16px 36px;">Email Us - info@errorcodefix.org</a>
+        <button type="button" class="btn-gold" style="background:rgba(255,255,255,0.15); color:var(--gold-light); border:1px solid var(--gold);" onclick="copyEmailToClipboard('info@errorcodefix.org', this)">Copy Email</button>
       </div>
     </div>
   </section>
@@ -2301,666 +567,52 @@
   <footer class="royal-footer">
     <div class="container">
       <div class="footer-inner">
-        <div>
-          <a href="#top" class="brand-logo" style="margin-bottom:6px;">
-            <span class="brand-logo-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg>
-            </span>
-            <span>errorcodefix<span class="gold-org">.org</span></span>
-          </a>
-          <p style="font-size:0.9rem; color:var(--gold-light); font-weight:600;" data-i18n="footerTagline">
-            errorcodefix.org - Fix Any Error in 3 Steps - Brand + Model Verified
-          </p>
-        </div>
-
-        <nav class="footer-links" aria-label="Footer Links">
+        <div><strong>errorcodefix.org</strong> &nbsp;·&nbsp; Contact: <a href="mailto:info@errorcodefix.org" style="color:var(--gold-light);">info@errorcodefix.org</a></div>
+        <div class="footer-links">
           <a href="#top">Home</a>
-          <a href="#all-groups">All Groups</a>
-          <a href="#brand-registry">Brand Registry</a>
-          <a href="#request-fix">Request a Fix</a>
-          <a href="#about" onclick="openInfoModal('about'); return false;">About</a>
-          <a href="#contact" onclick="openInfoModal('contact'); return false;">Contact</a>
-          <a href="#privacy" onclick="openInfoModal('privacy'); return false;">Privacy Policy</a>
-        </nav>
-      </div>
-
-      <div style="padding-top:20px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:0.8rem; color:#94A3B8;">
-        <span>&copy; 2026 errorcodefix.org. All 16 Departments &amp; 154 Product Groups Indexed.</span>
-        <span>One Error Code + Brand + Model = One Page. Official Manual Verified System.</span>
+          <a href="#" onclick="openInfoModal('about'); return false;">About</a>
+          <a href="#" onclick="openInfoModal('privacy'); return false;">Privacy</a>
+          <a href="#" onclick="openAdminModal(); return false;" style="color:var(--gold);">Admin</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- UNIVERSAL ROYAL MODAL (For Group View, Error Fix Page, Newly Added Verification, & Info Pages) -->
-  <div id="royalModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="royalModalTitle" onclick="handleBackdropClick(event)">
+  <!-- MODAL -->
+  <div id="royalModalBackdrop" class="modal-backdrop" onclick="handleBackdropClick(event)">
     <div class="royal-modal">
       <div class="royal-modal-header">
         <h3 id="royalModalTitle">Details</h3>
-        <button type="button" class="modal-close-btn" onclick="closeRoyalModal()" aria-label="Close Modal">&times;</button>
+        <button type="button" class="modal-close-btn" onclick="closeRoyalModal()">&times;</button>
       </div>
       <div id="royalModalBody" class="royal-modal-body"></div>
     </div>
   </div>
 
-  <!-- GOLD LANGUAGE AUTO-DETECT TOAST -->
-  <div id="langAutoToast" class="lang-gold-toast" role="status" aria-live="polite">
-    <span id="langAutoToastText">Showing in English - Change anytime from top</span>
-    <button type="button" class="lang-toast-close" onclick="closeLangToast()" aria-label="Close Language Notice">&times;</button>
-  </div>
-
-  <!-- COMPLETE APPLICATION DATA & INTERACTIVE JAVASCRIPT -->
   <script>
-    /*************************************************************************
-     * 1. LEVEL 1 DATABASE: BRAND REGISTRY (ALL 16 DEPARTMENTS & ALL BRANDS)
-     *************************************************************************/
-    const BRAND_REGISTRY = [
-      {
-        category: "1. Cell Phones (10 Groups)",
-        deptFilter: "Cell Phones",
-        brands: ["Samsung", "Apple", "Google Pixel", "OnePlus", "Xiaomi", "Redmi", "POCO", "Motorola", "OPPO", "Vivo", "Realme", "Nothing", "Nokia", "Honor", "Huawei", "ASUS", "Lenovo", "Tecno", "Infinix", "Amazon Kindle", "Anker", "SanDisk", "Spigen"]
-      },
-      {
-        category: "2. Computers & Accessories (12 Groups)",
-        deptFilter: "Computers",
-        brands: ["HP", "Dell", "Lenovo", "ASUS", "Acer", "MSI", "Apple", "Microsoft Surface", "Samsung", "LG", "Canon", "Epson", "Brother", "Seagate", "Western Digital", "SanDisk", "Kingston", "Crucial", "TP-Link", "Netgear", "APC", "Synology", "QNAP"]
-      },
-      {
-        category: "3. Software & OS (8 Groups)",
-        deptFilter: "Software & OS",
-        brands: ["Microsoft Windows", "Apple macOS", "Google Android", "Apple iOS", "Microsoft 365", "Kaspersky", "Bitdefender", "Norton", "McAfee", "NVIDIA", "AMD", "Intel", "Google Chrome", "Mozilla Firefox"]
-      },
-      {
-        category: "4. TV & Media Systems (10 Groups)",
-        deptFilter: "TV & Video",
-        brands: ["Samsung", "LG", "Sony", "TCL", "Hisense", "Panasonic", "Philips", "Vu", "Xiaomi", "Toshiba", "Amazon Fire TV", "Roku", "Tata Play", "Airtel Digital TV", "Epson", "BenQ", "JBL", "Bose"]
-      },
-      {
-        category: "5. Audio (10 Groups)",
-        deptFilter: "Audio",
-        brands: ["Sony", "JBL", "Bose", "Sennheiser", "boAt", "Denon", "Yamaha", "Harman Kardon", "Marshall", "Philips", "Pioneer", "Blue Yeti", "Shure", "Rode", "Sonos", "Saregama"]
-      },
-      {
-        category: "6. Camera & Security (10 Groups)",
-        deptFilter: "Camera & Security",
-        brands: ["Canon", "Nikon", "Sony", "Fujifilm", "Panasonic", "GoPro", "DJI", "Insta360", "Hikvision", "Dahua", "CP Plus", "Reolink", "Arlo", "Eufy", "Ring", "TP-Link Tapo", "Philips Avent"]
-      },
-      {
-        category: "7. Wearables (8 Groups)",
-        deptFilter: "Wearables",
-        brands: ["Apple Watch", "Samsung Galaxy Watch", "Garmin", "Fitbit", "Amazfit", "Huawei Watch", "Casio", "Noise", "boAt", "Ray-Ban Meta", "Meta Quest", "Oura", "Ultrahuman", "Nike", "Apple AirTag"]
-      },
-      {
-        category: "8. Medical Devices (10 Groups)",
-        deptFilter: "Medical Devices",
-        brands: ["Omron", "Dr Trust", "Accu-Chek", "OneTouch", "Beurer", "Philips Respironics", "ResMed", "BPL", "Contec", "HealthSense", "Braun", "Signia", "Phonak"]
-      },
-      {
-        category: "9. Car, Bike & EV (10 Groups)",
-        deptFilter: "Car Bike & EV",
-        brands: ["Pioneer", "Sony", "70mai", "Garmin", "Anker", "Bosch", "Tata Motors", "Mahindra", "Hyundai", "Maruti Suzuki", "Ola Electric", "Ather", "TVS", "Hero", "Bajaj", "Exide", "Amaron"]
-      },
-      {
-        category: "10. Home Appliances (12 Groups — Iron Separate from Inverter/UPS)",
-        deptFilter: "Home Appliances",
-        brands: ["Samsung", "LG", "Whirlpool", "Bosch", "IFB", "Voltas", "Daikin", "Haier", "Godrej", "Kent", "Aquaguard", "Racold", "Havells", "Symphony", "Crompton", "Atomberg", "Dyson", "Eureka Forbes", "Philips", "Luminous", "Microtek", "V-Guard"]
-      },
-      {
-        category: "11. Kitchen (10 Groups)",
-        deptFilter: "Kitchen",
-        brands: ["Prestige", "Philips", "Bajaj", "Havells", "Panasonic", "Bosch", "IFB", "Faber", "Elica", "DeLonghi", "Nespresso", "Morphy Richards", "Sujata", "Kuvings"]
-      },
-      {
-        category: "12. Office Electronics (8 Groups)",
-        deptFilter: "Office",
-        brands: ["Panasonic", "Beetel", "Casio", "Fellowes", "AmazonBasics", "Scotch", "Matrix", "eSSL", "ZKTeco", "Canon", "Xerox", "Ricoh", "Kyocera", "Brother"]
-      },
-      {
-        category: "13. Musical Instruments (8 Groups)",
-        deptFilter: "Musical",
-        brands: ["Yamaha", "Casio", "Roland", "Korg", "Akai", "Arturia", "Fender", "Boss", "Alesis", "Marshall", "Pioneer DJ", "Denon DJ"]
-      },
-      {
-        category: "14. Smart Home (10 Groups)",
-        deptFilter: "Smart Home",
-        brands: ["Amazon Echo", "Google Nest", "Samsung SmartThings", "Aqara", "Philips Hue", "Wipro", "TP-Link Tapo", "Yale", "Godrej", "Ring", "Sonoff", "Xiaomi", "SimpliSafe"]
-      },
-      {
-        category: "15. Gaming (10 Groups)",
-        deptFilter: "Gaming",
-        brands: ["Sony PlayStation", "Microsoft Xbox", "Nintendo", "ASUS ROG", "MSI", "Alienware", "Valve Steam", "Riot Games", "Krafton", "Garena", "Roblox", "Mojang", "Discord"]
-      },
-      {
-        category: "16. Personal Care / Fitness (8 Groups)",
-        deptFilter: "Personal Care / Fitness",
-        brands: ["Philips", "Braun", "Wahl", "Dyson", "Havells", "Oral-B", "Agaro", "Lifelong", "PowerMax", "Fitkit", "Cult", "Decathlon", "Philips Avent", "Chicco"]
-      }
+
+    const LANGUAGES_LIST = [
+      { code: "en", name: "English", country: "United States", flag: "🇺🇸", nativeName: "English" },
+      { code: "hi", name: "Hindi", country: "India", flag: "🇮🇳", nativeName: "हिन्दी" },
+      { code: "ja", name: "Japanese", country: "Japan", flag: "🇯🇵", nativeName: "日本語" },
+      { code: "es", name: "Spanish", country: "Spain", flag: "🇪🇸", nativeName: "Español" },
+      { code: "fr", name: "French", country: "France", flag: "🇫🇷", nativeName: "Français" },
+      { code: "de", name: "German", country: "Germany", flag: "🇩🇪", nativeName: "Deutsch" },
+      { code: "it", name: "Italian", country: "Italy", flag: "🇮🇹", nativeName: "Italiano" },
+      { code: "pt", name: "Portuguese", country: "Brazil", flag: "🇧🇷", nativeName: "Português" },
+      { code: "ru", name: "Russian", country: "Russia", flag: "🇷🇺", nativeName: "Русский" },
+      { code: "ko", name: "Korean", country: "South Korea", flag: "🇰🇷", nativeName: "한국어" },
+      { code: "zh", name: "Chinese Simplified", country: "China", flag: "🇨🇳", nativeName: "中文" },
+      { code: "tr", name: "Turkish", country: "Turkey", flag: "🇹🇷", nativeName: "Türkçe" },
+      { code: "nl", name: "Dutch", country: "Netherlands", flag: "🇳🇱", nativeName: "Nederlands" },
+      { code: "pl", name: "Polish", country: "Poland", flag: "🇵🇱", nativeName: "Polski" },
+      { code: "id", name: "Indonesian", country: "Indonesia", flag: "🇮🇩", nativeName: "Bahasa Indonesia" },
+      { code: "th", name: "Thai", country: "Thailand", flag: "🇹🇭", nativeName: "ไทย" },
+      { code: "vi", name: "Vietnamese", country: "Vietnam", flag: "🇻🇳", nativeName: "Tiếng Việt" },
+      { code: "ar", name: "Arabic", country: "Saudi Arabia", flag: "🇸🇦", nativeName: "العربية" }
     ];
+    let currentLang = "en";
 
-    /*************************************************************************
-     * 2. ALL 16 DEPARTMENTS & 154 GROUPS (+ SEPARATE INVERTER/UPS & BABY SUB-GROUPS)
-     *************************************************************************/
-    const DEPARTMENTS_DATA = [
-  {
-    "id": "Cell Phones",
-    "label": "Cell Phones",
-    "fullName": "1. Cell Phones (10 Groups)",
-    "countLabel": "10 Groups",
-    "brands": [
-      "Samsung",
-      "Apple",
-      "Google Pixel",
-      "OnePlus",
-      "Xiaomi",
-      "Redmi",
-      "POCO",
-      "Motorola",
-      "OPPO",
-      "Vivo",
-      "Realme",
-      "Nothing",
-      "Nokia",
-      "Honor",
-      "Huawei",
-      "ASUS",
-      "Lenovo",
-      "Tecno",
-      "Infinix"
-    ],
-    "groups": [
-      "Smartphone Android",
-      "iPhone",
-      "Feature Phone",
-      "Tablet",
-      "Kindle",
-      "Power Bank",
-      "Memory Card",
-      "Mobile Accessories",
-      "SIM / Network Error",
-      "Fold Phone"
-    ]
-  },
-  {
-    "id": "Computers",
-    "label": "Computers",
-    "fullName": "2. Computers & Accessories (12 Groups)",
-    "countLabel": "12 Groups",
-    "brands": [
-      "HP",
-      "Dell",
-      "Lenovo",
-      "ASUS",
-      "Acer",
-      "MSI",
-      "Apple",
-      "Microsoft Surface",
-      "Samsung",
-      "Toshiba",
-      "Seagate",
-      "Western Digital",
-      "SanDisk",
-      "Kingston",
-      "Crucial",
-      "Synology",
-      "QNAP"
-    ],
-    "groups": [
-      "Laptop Windows",
-      "MacBook",
-      "Chromebook",
-      "Desktop PC",
-      "Monitor",
-      "Printer",
-      "Scanner",
-      "External HDD / SSD",
-      "Pen Drive",
-      "Router / Modem",
-      "UPS",
-      "NAS Storage"
-    ]
-  },
-  {
-    "id": "Software & OS",
-    "label": "Software & OS",
-    "fullName": "3. Software & Operating Systems (8 Groups)",
-    "countLabel": "8 Groups",
-    "brands": [
-      "Microsoft Surface",
-      "Apple",
-      "Google Pixel",
-      "Samsung",
-      "HP",
-      "Dell",
-      "Lenovo",
-      "ASUS"
-    ],
-    "groups": [
-      "Windows OS",
-      "macOS",
-      "Android OS",
-      "iOS",
-      "Microsoft Office",
-      "Antivirus",
-      "Drivers",
-      "Browser Software"
-    ]
-  },
-  {
-    "id": "TV & Video",
-    "label": "TV & Video",
-    "fullName": "4. TV & Video (10 Groups)",
-    "countLabel": "10 Groups",
-    "brands": [
-      "Samsung",
-      "LG",
-      "Sony",
-      "TCL",
-      "Hisense",
-      "Panasonic",
-      "Philips",
-      "Vu",
-      "Xiaomi",
-      "Toshiba"
-    ],
-    "groups": [
-      "LED / Smart TV",
-      "Fire TV Stick",
-      "Streaming Devices",
-      "DTH / Set-Top Box",
-      "Projector",
-      "Blu-ray Player",
-      "Home Theatre",
-      "Soundbar",
-      "DVD Player",
-      "TV Remote"
-    ]
-  },
-  {
-    "id": "Audio",
-    "label": "Audio",
-    "fullName": "5. Audio (10 Groups)",
-    "countLabel": "10 Groups",
-    "brands": [
-      "JBL",
-      "Bose",
-      "Sony",
-      "Sennheiser",
-      "boAt",
-      "Denon",
-      "Yamaha",
-      "Harman Kardon",
-      "Marshall",
-      "Philips",
-      "Samsung",
-      "LG"
-    ],
-    "groups": [
-      "Headphones",
-      "Earbuds",
-      "Bluetooth Speaker",
-      "Home Speaker",
-      "Car Speaker",
-      "Microphones",
-      "Amplifier",
-      "AV Receiver",
-      "Sound System",
-      "Radio"
-    ]
-  },
-  {
-    "id": "Camera & Security",
-    "label": "Camera & Security",
-    "fullName": "6. Camera & Security (10 Groups)",
-    "countLabel": "10 Groups",
-    "brands": [
-      "Canon",
-      "Nikon",
-      "Sony",
-      "Fujifilm",
-      "Panasonic",
-      "GoPro",
-      "DJI",
-      "Insta360",
-      "Hikvision",
-      "Dahua",
-      "CP Plus",
-      "Reolink",
-      "Arlo",
-      "Eufy",
-      "Ring",
-      "TP-Link Tapo"
-    ],
-    "groups": [
-      "DSLR",
-      "Mirrorless",
-      "Action Cam GoPro",
-      "Drone Camera + Flight Error",
-      "Security Camera / CCTV",
-      "DVR",
-      "Instant Camera",
-      "Camera Lens",
-      "Camera Battery",
-      "Baby Monitor Camera"
-    ]
-  },
-  {
-    "id": "Wearables",
-    "label": "Wearables",
-    "fullName": "7. Wearables (8 Groups)",
-    "countLabel": "8 Groups",
-    "brands": [
-      "Apple Watch",
-      "Samsung Galaxy Watch",
-      "Garmin",
-      "Fitbit",
-      "Amazfit",
-      "Huawei Watch",
-      "Casio",
-      "Noise",
-      "boAt"
-    ],
-    "groups": [
-      "Smartwatch",
-      "Fitness Band",
-      "Casio / Digital Watch",
-      "Smart Glasses",
-      "VR Headset",
-      "Smart Ring",
-      "Smart Shoes",
-      "Fitness Tracker Tag"
-    ]
-  },
-  {
-    "id": "Medical Devices",
-    "label": "Medical Devices",
-    "fullName": "8. Medical Devices (10 Groups)",
-    "countLabel": "10 Groups",
-    "brands": [
-      "Omron",
-      "Dr Trust",
-      "Accu-Chek",
-      "OneTouch",
-      "Beurer",
-      "Philips Respironics",
-      "ResMed",
-      "BPL",
-      "Contec",
-      "HealthSense"
-    ],
-    "groups": [
-      "BP Machine",
-      "Glucometer / Sugar Machine",
-      "Thermometer",
-      "Pulse Oximeter",
-      "Nebulizer",
-      "Hearing Aid",
-      "Weighing Scale",
-      "ECG Monitor",
-      "CPAP Machine",
-      "Oxygen Concentrator"
-    ]
-  },
-  {
-    "id": "Car Bike & EV",
-    "label": "Car Bike & EV",
-    "fullName": "9. Car, Bike & EV (10 Groups)",
-    "countLabel": "10 Groups",
-    "brands": [
-      "Bosch",
-      "Continental",
-      "Garmin",
-      "Pioneer",
-      "JVC",
-      "Kenwood",
-      "Tata Motors",
-      "Mahindra",
-      "Hyundai",
-      "Maruti Suzuki",
-      "TVS",
-      "Hero",
-      "Bajaj",
-      "Ather",
-      "Ola Electric",
-      "MG",
-      "BYD",
-      "Exide",
-      "Amaron"
-    ],
-    "groups": [
-      "Car Stereo",
-      "Dashcam",
-      "GPS Navigator",
-      "Car Charger",
-      "OBD2 Scanner",
-      "EV Charger",
-      "EV Scooter Display",
-      "Car AC Display",
-      "Car Battery",
-      "Bike Meter"
-    ]
-  },
-  {
-    "id": "Home Appliances",
-    "label": "Home Appliances",
-    "fullName": "10. Home Appliances (12 Groups — Iron Separate from Inverter/UPS)",
-    "countLabel": "12 Groups",
-    "brands": [
-      "LG",
-      "Samsung",
-      "Whirlpool",
-      "IFB",
-      "Bosch",
-      "Haier",
-      "Godrej",
-      "Voltas",
-      "Daikin",
-      "Hitachi",
-      "Blue Star",
-      "Carrier",
-      "Panasonic",
-      "Havells",
-      "Bajaj",
-      "Crompton",
-      "Dyson",
-      "Eureka Forbes",
-      "Kent",
-      "Aquaguard",
-      "V-Guard"
-    ],
-    "groups": [
-      "Washing Machine",
-      "AC",
-      "Refrigerator",
-      "Dishwasher",
-      "Microwave",
-      "RO",
-      "Geyser / Water Heater",
-      "Cooler",
-      "Fan",
-      "Vacuum Cleaner",
-      "Air Purifier",
-      "Iron"
-    ]
-  },
-  {
-    "id": "Kitchen",
-    "label": "Kitchen",
-    "fullName": "11. Kitchen (10 Groups)",
-    "countLabel": "10 Groups",
-    "brands": [
-      "Prestige",
-      "Philips",
-      "Bajaj",
-      "Havells",
-      "Panasonic",
-      "Bosch",
-      "IFB",
-      "LG",
-      "Samsung",
-      "Crompton"
-    ],
-    "groups": [
-      "Induction",
-      "Mixer Grinder",
-      "Electric Kettle",
-      "Rice Cooker",
-      "Air Fryer",
-      "Chimney",
-      "Coffee Machine",
-      "Toaster",
-      "Food Processor",
-      "Juicer"
-    ]
-  },
-  {
-    "id": "Office",
-    "label": "Office",
-    "fullName": "12. Office Electronics (8 Groups)",
-    "countLabel": "8 Groups",
-    "brands": [
-      "Brother",
-      "Epson",
-      "Canon",
-      "Xerox",
-      "Ricoh",
-      "Kyocera",
-      "Zebra",
-      "Casio",
-      "HP"
-    ],
-    "groups": [
-      "Landline Phone",
-      "Calculator",
-      "Shredder",
-      "Laminator",
-      "EPABX",
-      "Attendance / Biometric",
-      "Photocopier",
-      "Fax Machine"
-    ]
-  },
-  {
-    "id": "Musical",
-    "label": "Musical",
-    "fullName": "13. Musical Instruments (8 Groups)",
-    "countLabel": "8 Groups",
-    "brands": [
-      "Yamaha",
-      "Casio",
-      "Bose",
-      "JBL",
-      "Sennheiser",
-      "Denon",
-      "Marshall",
-      "Harman Kardon"
-    ],
-    "groups": [
-      "Keyboard / Piano",
-      "Digital Piano",
-      "Synthesizer",
-      "MIDI Controller",
-      "Electric Guitar",
-      "Electronic Drum",
-      "Speaker / Amplifier",
-      "DJ Mixer"
-    ]
-  },
-  {
-    "id": "Smart Home",
-    "label": "Smart Home",
-    "fullName": "14. Smart Home (10 Groups)",
-    "countLabel": "10 Groups",
-    "brands": [
-      "Amazon Alexa",
-      "Google Nest",
-      "Philips Hue",
-      "TP-Link",
-      "Aqara",
-      "Xiaomi",
-      "Ring",
-      "Eufy",
-      "Arlo"
-    ],
-    "groups": [
-      "Echo / Alexa",
-      "Google Home",
-      "Smart Hub",
-      "Smart Bulb",
-      "Smart Plug",
-      "Smart Lock",
-      "Smart Doorbell",
-      "Smart Switch",
-      "Smart Sensors",
-      "Smart Security System"
-    ]
-  },
-  {
-    "id": "Gaming",
-    "label": "Gaming",
-    "fullName": "15. Gaming (10 Groups)",
-    "countLabel": "10 Groups",
-    "brands": [
-      "Sony PlayStation",
-      "Microsoft Xbox",
-      "Nintendo",
-      "Valve Steam",
-      "Razer",
-      "Logitech",
-      "Corsair",
-      "ASUS",
-      "MSI"
-    ],
-    "groups": [
-      "PS5",
-      "Xbox",
-      "Nintendo Switch",
-      "Gaming PC",
-      "Steam Games",
-      "Valorant",
-      "BGMI / PUBG",
-      "Free Fire",
-      "Roblox / Minecraft",
-      "Discord / Gaming App"
-    ]
-  },
-  {
-    "id": "Personal Care / Fitness",
-    "label": "Personal Care / Fitness",
-    "fullName": "16. Personal Care / Fitness (8 Groups — Sterilizer & Warmer Tracked Separately)",
-    "countLabel": "8 Groups",
-    "brands": [
-      "Philips",
-      "Braun",
-      "Wahl",
-      "Panasonic",
-      "Dyson",
-      "Havells",
-      "Syska",
-      "Beurer",
-      "Omron",
-      "HealthSense",
-      "Cult",
-      "PowerMax",
-      "Fitkit",
-      "Decathlon",
-      "Lifelong",
-      "Johnson"
-    ],
-    "groups": [
-      "Trimmer / Shaver",
-      "Hair Dryer",
-      "Hair Straightener",
-      "Electric Toothbrush",
-      "Massager",
-      "Treadmill",
-      "Exercise Cycle",
-      "Baby Products - Sterilizer Separate, Warmer Separate"
-    ]
-  }
-];
-
-    /*************************************************************************
-     * 3. LEVEL 2 & LEVEL 3 DATABASE: ALL 770 LIVE FIXES (TOP 5 PER GROUP)
-     *************************************************************************/
     const ERROR_FIX_DATABASE = {
   "p1-1": {"id":"p1-1","num":1,"slug":"/samsung-washing-machine-wa70bg4582-4c-water-supply-error","seoUrl":"/samsung-washing-machine-wa70bg4582-4c-water-supply-error","cardTitle":"Samsung Washing Machine — 4C","department":"Home Appliances","group":"Washing Machine","brand":"Samsung","model":"WA70BG4582 / WA70 Series","code":"4C","meaning":"Water Supply Error","problem":"Water not coming / Slow filling","verification":"Verified","lastChecked":"Nov 2026","officialSourceType":"Official Manual","officialSource":"Official Manual - Samsung WA70BG4582 / WA70 Series","isMedical":false,"problemTags":["water not coming","slow filling","water inlet","4c","washing machine"],"symptoms":["Washing machine stops filling within 5 to 10 minutes of starting a cycle.","Digital panel flashes red 4C code and plays an alert chime.","Drum has very little or no water entering through the detergent tray.","Normal operation on Samsung WA70BG4582 / WA70 Series remains paused until 4C (Water Supply Error) is cleared and verified."],"causes":["Main cold water supply tap is closed or household tank water pressure is too low.","Small mesh filter screen inside the water inlet valve is blocked with sand or rust.","Water supply hose behind the washing machine is bent or pinched against the wall.","Temporary controller latch or connector oxidation on the Samsung WA70BG4582 / WA70 Series sensing circuit."],"step1Problem":"The washing machine is not getting enough water within the expected time limit. This usually happens when the water tap is closed, the hose is bent, or the tiny mesh filter at the back is blocked with dirt.","step2Fix":["Turn off the washing machine power switch and unplug the power plug from the wall socket.","Check the main water tap and turn it fully counter-clockwise so water flows at full speed.","Unscrew the water hose from the back of your Samsung WA70BG4582 machine and gently pull out the tiny mesh filter screen with your fingers or pliers.","Wash the mesh filter under running tap water with an old toothbrush until all dirt is gone, put it back in, and screw the hose on tightly.","Make sure the water hose is not bent behind the machine, plug the power back in, and start a Rinse cycle."],"step3Check":"Start a quick Rinse cycle and watch water flow strongly through the detergent box for 2 minutes. If 4C disappears and the drum fills normally, the fix worked.","stillNotFixed":"If water flows strongly from the tap and the mesh filter is clean, the internal water inlet valve may have failed. Contact an authorized Samsung service technician to replace the inlet valve.","warnings":["Turn off power and unplug the cord before unscrewing wet water hoses.","Do NOT open sealed electronic board covers or touch internal wiring with wet hands.","Do NOT run the washing machine without the inlet mesh filter installed."],"relatedErrors":[{"code":"OE (LG FHM1408BDW)","targetId":"p1-2"},{"code":"IE (LG FHM1408BDW)","targetId":"p1-3"},{"code":"F02 (Whirlpool 360° Bloomwash Pro 7.5Kg (31372))","targetId":"p3-423"}],"faqs":[{"q":"Why does my Samsung WA70BG4582 show 4C even when the tap is open?","a":"Even with an open tap, sand particles often block the small mesh screen inside the back inlet connector, stopping water from entering the tub."},{"q":"Is Samsung 4C the same as older 4E error codes?","a":"Yes, newer WA70 Series models display 4C instead of 4E for water supply errors."},{"q":"Can low overhead water tank height cause 4C?","a":"Yes, if your overhead tank is nearly empty or has very low pressure, the washer cannot fill fast enough and shows 4C."}]},
   "p1-2": {"id":"p1-2","num":2,"slug":"/lg-washing-machine-fhm1408bdw-oe-drain-error","seoUrl":"/lg-washing-machine-fhm1408bdw-oe-drain-error","cardTitle":"LG Washing Machine — OE","department":"Home Appliances","group":"Washing Machine","brand":"LG","model":"FHM1408BDW / Front Load","code":"OE","meaning":"Drain Error","problem":"Water not draining","verification":"Verified","lastChecked":"Nov 2026","officialSourceType":"Official Manual","officialSource":"Official Manual - LG FHM1408BDW / Front Load","isMedical":false,"problemTags":["water not draining","washing machine not draining","drainage","oe"],"symptoms":["Wash cycle stops before the spin cycle begins and soapy water stays trapped inside the drum.","Front LED screen flashes OE after trying to drain for 10 minutes.","A humming sound comes from the bottom right corner, but no water exits the drain pipe.","Normal operation on LG FHM1408BDW / Front Load remains paused until OE (Drain Error) is cleared and verified."],"causes":["Coins, lint, buttons, or hair pins are blocking the bottom front drain pump filter.","The rear corrugated drain hose is kinked, crushed, or raised higher than 100 cm from the floor.","Household floor drain pipe is clogged with lint buildup.","Temporary controller latch or connector oxidation on the LG FHM1408BDW / Front Load sensing circuit."],"step1Problem":"Your LG FHM1408BDW front-load washer cannot push dirty water out of the drum within 10 minutes. In most homes, a coin or lint ball is stuck inside the bottom drain filter trap.","step2Fix":["Turn off the washing machine and unplug the power cord from the wall outlet.","Open the small rectangular access door at the bottom-right front corner of the machine and place a shallow bowl and towel underneath.","Pull out the small black rubber drain tube, remove its plug to let trapped water drain into the bowl, and put the plug back.","Twist the round pump filter knob counter-clockwise to take it out, remove all lint, coins, or threads, and rinse it clean under tap water.","Screw the pump filter tightly back in, straighten the rear drain pipe so it lies flat, and run a Spin-Only cycle."],"step3Check":"Select the Spin-Only cycle and press Start. Confirm water rushes out of the drain hose within 60 seconds and the drum spins dry without showing OE.","stillNotFixed":"If the bottom filter and drain hose are completely clear and OE still appears, the drain pump motor may be worn out. Call an LG technician to inspect the drain pump.","warnings":["Turn off power before opening the bottom drain filter door.","Wait for hot wash water to cool down before unplugging the emergency drain tube to avoid burns.","Do NOT open sealed pump housing or bypass door lock safety switches."],"relatedErrors":[{"code":"IE (LG FHM1408BDW)","targetId":"p1-3"},{"code":"F02 (Whirlpool 360° Bloomwash Pro 7.5Kg (31372))","targetId":"p3-423"},{"code":"E18 / F18 (Bosch Serie 6 WGA1420TIN 9Kg Front Load)","targetId":"p3-424"}],"faqs":[{"q":"How often should I clean the LG FHM1408BDW bottom drain filter?","a":"Clean the bottom-right drain pump filter once every month to prevent OE drain errors."},{"q":"Why does water leak from the bottom when I open the round knob?","a":"Any water still sitting in the drum will flow out—always drain with the small black rubber tube into a bowl first."},{"q":"Can too much detergent foam cause OE?","a":"Yes, excessive suds can create an airlock in the drain pump and slow down draining."}]},
@@ -4867,26 +2519,7 @@
     /*************************************************************************
      * PHASE 6: MULTI-LANGUAGE AUTO-DETECT & TRANSLATION SYSTEM (18 LANGUAGES)
      *************************************************************************/
-    const LANGUAGES_LIST = [
-      { code: "en", flag: "🇺🇸", country: "United States", name: "English", nativeName: "English" },
-      { code: "hi", flag: "🇮🇳", country: "India", name: "Hindi", nativeName: "हिन्दी (Hindi)" },
-      { code: "ja", flag: "🇯🇵", country: "Japan", name: "Japanese", nativeName: "日本語 (Japanese)" },
-      { code: "es", flag: "🇪🇸", country: "Spain", name: "Spanish", nativeName: "Español (Spanish)" },
-      { code: "fr", flag: "🇫🇷", country: "France", name: "French", nativeName: "Français (French)" },
-      { code: "de", flag: "🇩🇪", country: "Germany", name: "German", nativeName: "Deutsch (German)" },
-      { code: "it", flag: "🇮🇹", country: "Italy", name: "Italian", nativeName: "Italiano (Italian)" },
-      { code: "pt", flag: "🇧🇷", country: "Brazil", name: "Portuguese", nativeName: "Português (Portuguese)" },
-      { code: "ru", flag: "🇷🇺", country: "Russia", name: "Russian", nativeName: "Русский (Russian)" },
-      { code: "ko", flag: "🇰🇷", country: "South Korea", name: "Korean", nativeName: "한국어 (Korean)" },
-      { code: "zh", flag: "🇨🇳", country: "China", name: "Chinese Simplified", nativeName: "简体中文 (Chinese)" },
-      { code: "tr", flag: "🇹🇷", country: "Turkey", name: "Turkish", nativeName: "Türkçe (Turkish)" },
-      { code: "nl", flag: "🇳🇱", country: "Netherlands", name: "Dutch", nativeName: "Nederlands (Dutch)" },
-      { code: "pl", flag: "🇵🇱", country: "Poland", name: "Polish", nativeName: "Polski (Polish)" },
-      { code: "id", flag: "🇮🇩", country: "Indonesia", name: "Indonesian", nativeName: "Bahasa Indonesia" },
-      { code: "th", flag: "🇹🇭", country: "Thailand", name: "Thai", nativeName: "ไทย (Thai)" },
-      { code: "vi", flag: "🇻🇳", country: "Vietnam", name: "Vietnamese", nativeName: "Tiếng Việt (Vietnamese)" },
-      { code: "ar", flag: "🇸🇦", country: "Saudi Arabia", name: "Arabic", nativeName: "العربية (Arabic)" }
-    ];
+    
 
     const COUNTRY_TO_LANG = {
       US: "en", GB: "en", AU: "en", CA: "en", NZ: "en", IE: "en", SG: "en", ZA: "en",
@@ -5821,7 +3454,7 @@
       TRANSLATIONS[lc] = Object.assign({}, TRANSLATIONS.en, TRANSLATIONS[lc]);
     });
 
-    let currentLang = "en";
+    /* currentLang */
     let currentOpenErrorId = null;
     const fixTranslationState = {};
 
@@ -6653,641 +4286,150 @@
       }
     }
 
-    /* Phase 5 System 1: Render Brand Auto Tracker Table (10 Rows) & Run Brand Check Demo */
-    function renderBrandAutoTracker() {
-      const tbody = document.getElementById("brandAutoTrackerTableBody");
-      if (!tbody) return;
-      tbody.innerHTML = BRAND_AUTO_TRACKER_DATA.map(row => {
-        const isVer = row.status === "Verified";
-        return `
-          <tr>
-            <td><strong>${row.brand}</strong></td>
-            <td><strong>${row.productGroup}</strong></td>
-            <td>${row.lastSearchDate}</td>
-            <td><code>${row.existingCount} Models</code></td>
-            <td>
-              <span style="font-weight:${row.newModelsFound.startsWith('0') ? '500' : '700'}; color:${row.newModelsFound.startsWith('0') ? 'var(--text-main)' : 'var(--pending-orange)'};">
-                ${row.newModelsFound}
-              </span>
-            </td>
-            <td>
-              ${isVer ? `
-                <span class="badge-verified">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                  Verified
-                </span>
-              ` : `
-                <span class="badge-pending" style="cursor:pointer;" onclick="openNewlyAddedModal('${row.queueId || 'pvq-1'}')">Pending Verification</span>
-              `}
-            </td>
-          </tr>
-        `;
-      }).join("");
-    }
+    
 
-    function runBrandCheckDemo() {
-      const out = document.getElementById("brandCheckDemoOutput");
-      if (!out) return;
-      out.style.display = "block";
-      out.innerHTML = `
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-          <div>
-            <span class="badge-auto-new" style="margin-right:8px;">LIVE DEMO SCAN COMPLETE</span>
-            <span>Checked 10 Brands. 2 New Models Found: <strong>Samsung QA55Q70D TV</strong>, <strong>LG New AC Model</strong>. These are in Pending Verification queue.</span>
+    const FRIENDLY_CATEGORIES = [
+      { id: "Cell Phones", name: "Mobile Phone", icon: "📱", deptId: "Cell Phones" },
+      { id: "Computers", name: "Computer & Laptop", icon: "💻", deptId: "Computers" },
+      { id: "TV & Video", name: "TV", icon: "📺", deptId: "TV & Video" },
+      { id: "Audio", name: "Sound & Speaker", icon: "🔊", deptId: "Audio" },
+      { id: "Camera & Security", name: "Camera", icon: "📷", deptId: "Camera & Security" },
+      { id: "Wearables", name: "Watch", icon: "⌚", deptId: "Wearables" },
+      { id: "Medical Devices", name: "Health Machine - BP, Sugar", icon: "🩺", deptId: "Medical Devices" },
+      { id: "Car Bike & EV", name: "Car & Bike", icon: "🚗", deptId: "Car Bike & EV" },
+      { id: "Home Appliances", name: "Home - AC, Fridge, Washing Machine", icon: "❄️", deptId: "Home Appliances" },
+      { id: "Kitchen", name: "Kitchen", icon: "🍳", deptId: "Kitchen" },
+      { id: "Office", name: "Office", icon: "🖨️", deptId: "Office" },
+      { id: "Musical", name: "Music", icon: "🎸", deptId: "Musical" },
+      { id: "Smart Home", name: "Smart Home - Alexa", icon: "🏠", deptId: "Smart Home" },
+      { id: "Gaming", name: "Games - PS5, Xbox", icon: "🎮", deptId: "Gaming" },
+      { id: "Personal Care / Fitness", name: "Hair & Body", icon: "💇", deptId: "Personal Care / Fitness" },
+      { id: "Software & OS", name: "Software - Windows", icon: "🪟", deptId: "Software & OS" }
+    ];
+
+    
+
+    /* currentLang */
+
+    function renderCategories() {
+      const grid = document.getElementById("categoriesGrid");
+      if (!grid) return;
+      grid.innerHTML = FRIENDLY_CATEGORIES.map(cat => `
+        <div class="category-card" onclick="openCategoryModal('${cat.deptId.replace(/'/g, "\\'")}', '${cat.name.replace(/'/g, "\\'")}')" style="cursor:pointer;">
+          <div class="category-info">
+            <span class="category-icon">${cat.icon}</span>
+            <span class="category-name">${cat.name}</span>
           </div>
-          <a href="#pending-verification-queue" class="btn-gold btn-gold-sm">View Pending Queue &darr;</a>
+          <button type="button" class="btn-gold" style="padding:8px 16px; font-size:0.9rem;">See Fixes</button>
         </div>
-      `;
-    }
-
-    /* Phase 5 System 2: Render Pending Verification Queue (5 Demo Cards) */
-    function renderPendingVerificationQueue() {
-      const grid = document.getElementById("pendingVerificationGrid");
-      if (!grid) return;
-      grid.innerHTML = NEWLY_ADDED_AUTO.map(item => {
-        const isVer = item.status === "Verified";
-        return `
-          <article class="royal-card">
-            <div>
-              <div class="trending-card-top" style="flex-wrap:wrap; gap:6px;">
-                <span class="badge-auto-new">NEW - Auto Detected</span>
-                ${isVer ? `
-                  <span class="badge-verified">
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                    Verified
-                  </span>
-                ` : `
-                  <span class="badge-pending">Status: Pending Verification</span>
-                `}
-              </div>
-              <h3 class="trending-card-title" style="font-size:1.02rem; margin-bottom:6px;">${item.title}</h3>
-              <p class="trending-card-desc" style="margin-bottom:12px;">
-                <strong>Brand:</strong> ${item.brand}<br/>
-                <strong>Model:</strong> <code>${item.model}</code><br/>
-                <strong>Detected Date:</strong> ${item.detectedDate}<br/>
-                <span style="font-size:0.78rem; color:var(--text-muted);">${item.detectedTime}</span>
-              </p>
-            </div>
-            <div class="trending-card-footer">
-              <button type="button" class="btn-gold btn-gold-sm" style="width:100%;" onclick="openNewlyAddedModal('${item.id}')">
-                ${t("btnVerifyManual")}
-              </button>
-            </div>
-          </article>
-        `;
-      }).join("");
-    }
-
-    /* Phase 5 System 3: Render Top Requested Fixes This Week (5 Demo Requests Sorted by Count) */
-    function renderTopRequestedFixes() {
-      const grid = document.getElementById("topRequestedFixesGrid");
-      if (!grid) return;
-      const sorted = [...TOP_REQUESTED_FIXES].sort((a, b) => b.requestsCount - a.requestsCount);
-      grid.innerHTML = sorted.map((req, idx) => `
-        <article class="royal-card" style="background:var(--ivory); padding:18px;">
-          <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
-              <span class="error-code-tag">${req.code}</span>
-              <span class="badge-auto-new" style="font-size:0.75rem;">${req.requestsCount} Requests</span>
-            </div>
-            <h4 class="serif-heading" style="font-size:1.05rem; color:var(--navy-deep); margin-bottom:4px;">
-              #${idx + 1}: ${req.label}
-            </h4>
-            <div style="font-size:0.8rem; font-weight:700; color:var(--text-main); margin-bottom:6px;">
-              ${req.brand} · ${req.model}
-            </div>
-            <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:12px;">
-              ${req.problem}
-            </p>
-          </div>
-          <div style="padding-top:10px; border-top:1px solid rgba(201,162,39,0.25); display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
-            <span class="badge-pending" style="font-size:0.72rem; padding:3px 8px;">${req.badge}</span>
-            <button type="button" class="brand-chip-btn" style="font-size:0.75rem; padding:4px 9px;" onclick="upvoteRequestedFix('${req.id}')">
-              +1 Request
-            </button>
-          </div>
-        </article>
       `).join("");
     }
 
-    function upvoteRequestedFix(reqId) {
-      const target = TOP_REQUESTED_FIXES.find(r => r.id === reqId);
-      if (target) {
-        target.requestsCount += 1;
-        renderTopRequestedFixes();
-      }
-    }
-
-    function openNewlyAddedModal(autoId) {
-      const item = NEWLY_ADDED_AUTO.find(x => x.id === autoId) || NEWLY_ADDED_AUTO[0];
+    function openCategoryModal(deptId, catName) {
+      const dept = DEPARTMENTS_DATA.find(d => d.id === deptId) || DEPARTMENTS_DATA[0];
       const backdrop = document.getElementById("royalModalBackdrop");
-      const modalBox = backdrop.querySelector(".royal-modal");
-      backdrop.classList.remove("fullpage-mode");
-      if (modalBox) modalBox.classList.remove("fullpage-modal");
-
       const titleEl = document.getElementById("royalModalTitle");
       const bodyEl = document.getElementById("royalModalBody");
 
-      titleEl.textContent = `Official Manual Verification — ${item.title}`;
+      titleEl.textContent = catName + " — Choose Product Group";
       bodyEl.innerHTML = `
-        ${item.isMedical ? `
-          <div class="medical-disclaimer-box">
-            <span>Medical Gate Active: Medical codes never publish without Verified status from the official manufacturer manual.</span>
-          </div>
-        ` : ""}
-
-        <div style="background:var(--pending-orange-bg); border:2px solid var(--pending-orange); border-radius:var(--radius-md); padding:18px; margin-bottom:20px;">
-          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
-            <span class="badge-auto-new">NEW - Auto Detected (${item.detectedDate || "Nov 2026"})</span>
-            <span class="badge-pending">${item.status}</span>
-          </div>
-          <p style="font-size:1.05rem; font-weight:700; color:var(--navy-deep);">
-            "Discovery is Auto, Verification is Manual from Official Manual, Publish is Auto."
-          </p>
-        </div>
-
-        <div class="table-responsive" style="margin-bottom:20px;">
-          <table class="royal-table">
-            <tbody>
-              <tr><th>Brand</th><td><strong>${item.brand}</strong></td></tr>
-              <tr><th>Product Group</th><td>${item.group}</td></tr>
-              <tr><th>Detected Model</th><td><code>${item.model}</code></td></tr>
-              <tr><th>Detected Date</th><td>${item.detectedDate || "Nov 18, 2026"}</td></tr>
-              <tr><th>Compare Formula</th><td><code>New Model List - Existing Model List = ${item.model}</code></td></tr>
-              <tr><th>Queued Codes</th><td><code>${item.manualCodeSample || "All Official Manual Codes"}</code></td></tr>
-              <tr><th>Verification Status</th><td><span class="badge-pending">${item.status}</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:18px;">
-          Our Auto-Update Engine discovers new models automatically, but we never publish error solutions without verifying every code directly from the manufacturer's official manual.
-        </p>
-
-        <div style="display:flex; justify-content:flex-end; gap:10px; flex-wrap:wrap;">
-          <button type="button" class="btn-gold" onclick="closeRoyalModal(); prefillModelRequest('${item.brand}', '${item.model}')">Prioritize This Model in Request Queue</button>
-        </div>
-      `;
-      backdrop.classList.add("open");
-    }
-
-    function prefillModelRequest(brand, model) {
-      document.getElementById("reqBrand").value = brand;
-      document.getElementById("reqModel").value = model;
-      document.getElementById("reqCode").value = "ALL CODES";
-      document.getElementById("request-fix").scrollIntoView({ behavior: "smooth" });
-    }
-
-    /* Render Brand Registry Section — All 16 Departments */
-    function renderBrandRegistry() {
-      const container = document.getElementById("brandRegistryContainer");
-      container.innerHTML = BRAND_REGISTRY.map(group => `
-        <div class="brand-dept-box">
-          <div class="brand-dept-title">
-            <span>${group.category}</span>
-            <span class="planned-meta tabular-nums">${group.brands.length} Brands</span>
-          </div>
-          <div class="brand-chips-wrap">
-            ${group.brands.map(brand => `
-              <button
-                type="button"
-                class="brand-chip-btn ${selectedBrand === brand ? 'active' : ''}"
-                onclick="filterByBrand('${brand.replace(/'/g, "\\'")}', true)"
-              >${brand}</button>
-            `).join("")}
-          </div>
-        </div>
-      `).join("");
-    }
-
-    function populateBrandDropdown() {
-      const select = document.getElementById("groupBrandSelect");
-      const allBrandsSet = new Set();
-      BRAND_REGISTRY.forEach(cat => cat.brands.forEach(b => allBrandsSet.add(b)));
-      const sortedBrands = Array.from(allBrandsSet).sort((a, b) => a.localeCompare(b));
-
-      select.innerHTML = `<option value="ALL">Filter by Brand: All Brands (${sortedBrands.length})</option>` +
-        sortedBrands.map(b => `<option value="${b}">${b}</option>`).join("");
-    }
-
-    function filterByBrand(brandName, scrollToGroups = false) {
-      selectedBrand = brandName;
-      const indicator = document.getElementById("activeBrandIndicator");
-      const select = document.getElementById("groupBrandSelect");
-
-      if (brandName === "ALL") {
-        indicator.textContent = "Active Brand Filter: All Brands (16 Departments · 165+ Tracked Brands)";
-        if (select) select.value = "ALL";
-      } else {
-        indicator.textContent = `Active Brand Filter: ${brandName} (Showing groups covering ${brandName})`;
-        if (select) select.value = brandName;
-      }
-
-      renderBrandRegistry();
-      renderAllGroups();
-
-      if (scrollToGroups && brandName !== "ALL") {
-        document.getElementById("all-groups").scrollIntoView({ behavior: "smooth" });
-      }
-    }
-
-    function handleBrandDropdownChange(val) {
-      filterByBrand(val, false);
-    }
-
-    /* Render Department Filter Buttons & All 154 Groups */
-    function renderDepartmentButtons() {
-      const wrap = document.getElementById("deptFilterButtons");
-      const buttons = [
-        { id: "ALL", label: t("navAllGroups") + " (154)" },
-        ...DEPARTMENTS_DATA.map(d => ({ id: d.id, label: tDept(d.id) }))
-      ];
-
-      wrap.innerHTML = buttons.map(b => `
-        <button
-          type="button"
-          class="dept-btn ${selectedDepartment === b.id ? 'active' : ''}"
-          onclick="selectDepartmentFilter('${b.id.replace(/'/g, "\\'")}')"
-        >${b.label}</button>
-      `).join("");
-    }
-
-    function selectDepartmentFilter(deptId) {
-      selectedDepartment = deptId;
-      renderDepartmentButtons();
-      renderAllGroups();
-    }
-
-    function resetGroupFilters() {
-      selectedDepartment = "ALL";
-      selectedBrand = "ALL";
-      const searchInput = document.getElementById("groupSearchInput");
-      const brandSelect = document.getElementById("groupBrandSelect");
-      if (searchInput) searchInput.value = "";
-      if (brandSelect) brandSelect.value = "ALL";
-      document.getElementById("activeBrandIndicator").textContent = "Active Brand Filter: All Brands (16 Departments · 165+ Tracked Brands)";
-      renderBrandRegistry();
-      renderDepartmentButtons();
-      renderAllGroups();
-    }
-
-    function renderAllGroups() {
-      const container = document.getElementById("allGroupsContainer");
-      const statusEl = document.getElementById("groupsCounterStatus");
-      const query = (document.getElementById("groupSearchInput")?.value || "").trim().toLowerCase();
-
-      let totalRenderedGroups = 0;
-      let totalRenderedDepts = 0;
-      let html = "";
-
-      DEPARTMENTS_DATA.forEach((dept, deptIdx) => {
-        if (selectedDepartment !== "ALL" && dept.id !== selectedDepartment) {
-          return;
-        }
-
-        const groupFixesInDept = FIXES_BY_DEPT_MAP.get(dept.id) || [];
-        const deptHasBrand =
-          selectedBrand === "ALL" ||
-          dept.brands.some(b => b.toLowerCase() === selectedBrand.toLowerCase()) ||
-          groupFixesInDept.some(e => e.brand.toLowerCase() === selectedBrand.toLowerCase());
-        if (!deptHasBrand) {
-          return;
-        }
-
-        const filteredGroups = dept.groups.filter(gName => {
-          if (!query) return true;
-          return gName.toLowerCase().includes(query) ||
-                 dept.label.toLowerCase().includes(query) ||
-                 dept.brands.some(b => b.toLowerCase().includes(query));
-        });
-
-        if (filteredGroups.length === 0) return;
-
-        totalRenderedDepts++;
-        totalRenderedGroups += filteredGroups.length;
-
-        html += `
-          <div class="dept-section-block">
-            <div class="dept-section-heading">
-              <h3>${dept.fullName}</h3>
-              <span class="planned-meta tabular-nums">${filteredGroups.length} Groups · 10 Fixes Per Group (${filteredGroups.length * 10} Live Fixes)</span>
-            </div>
-            <div class="grid-4">
-              ${filteredGroups.map((groupName, gIdx) => {
-                const liveFixes = FIXES_BY_GROUP_MAP.get(groupName.toLowerCase()) || [];
-
-                return `
-                  <article class="royal-card">
-                    <div>
-                      <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px;">
-                        <span style="font-size:0.74rem; font-weight:700; color:var(--text-muted);">${tDept(dept.id)}</span>
-                        <span class="badge-verified" style="font-size:0.7rem; padding:2px 8px;">${liveFixes.length} Fixes Live — Full 10</span>
-                      </div>
-
-                      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-                        <span class="group-card-icon" aria-hidden="true">${deptIdx + 1}.${gIdx + 1}</span>
-                        <h4 style="font-size:1rem; font-weight:700; color:var(--navy-deep); line-height:1.3;">${groupName}</h4>
-                      </div>
-
-                      <div style="display:grid; gap:4px; margin-bottom:12px;">
-                        ${liveFixes.map((fx, fIdx) => `
-                          <div
-                            style="font-size:0.76rem; color:var(--navy-deep); background:var(--ivory); border:1px solid rgba(201,162,39,0.28); border-radius:4px; padding:4px 7px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:4px;"
-                            onclick="openErrorModal('${fx.id}')"
-                            title="Click to open ${fx.brand} ${fx.model} (${fx.code}) fix page"
-                          >
-                            <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-                              <strong>Fix ${fIdx + 1}:</strong> <span style="color:var(--code-red); font-weight:800;">${fx.code}</span> · ${fx.brand}
-                            </span>
-                            <span style="font-size:0.68rem; color:var(--gold); font-weight:700; flex-shrink:0;">View &rarr;</span>
-                          </div>
-                        `).join("")}
-                      </div>
-                    </div>
-
-                    <div style="padding-top:10px; border-top:1px solid rgba(201,162,39,0.22); display:flex; justify-content:space-between; align-items:center; gap:6px; flex-wrap:wrap;">
-                      <button
-                        type="button"
-                        class="btn-gold btn-gold-sm"
-                        onclick="openGroupModal('${dept.id.replace(/'/g, "\\'")}', '${groupName.replace(/'/g, "\\'")}') "
-                      >${t("btnViewAll10Fixes")}</button>
-                      <button
-                        type="button"
-                        class="brand-chip-btn"
-                        onclick="selectGroupInLiveFixes('${groupName.replace(/'/g, "\\'")}') "
-                      >${t("btnFilterCards")}</button>
-                    </div>
-                  </article>
-                `;
-              }).join("")}
-            </div>
-          </div>
-        `;
-      });
-
-      if (!html) {
-        html = `
-          <div class="royal-card" style="text-align:center; padding:40px;">
-            <h3 class="serif-heading" style="color:var(--navy-deep); margin-bottom:8px;">No Matching Product Groups Found</h3>
-            <p style="color:var(--text-muted); margin-bottom:16px;">Try clearing your search or resetting the Brand/Department filter.</p>
-            <div><button type="button" class="btn-gold" onclick="resetGroupFilters()">Show All 154 Groups</button></div>
-          </div>
-        `;
-      }
-
-      container.innerHTML = html;
-      if (statusEl) {
-        statusEl.textContent = `Showing ${totalRenderedDepts} Department(s) · ${totalRenderedGroups} Group Cards Displayed (${totalRenderedGroups * 10} Live Fixes — Full 10 Per Group)`;
-      }
-    }
-
-    /* Group Modal: Shows All 5 Live Fixes for That Group + Brand Registry + Planned Roadmap */
-    function openGroupModal(deptId, groupName) {
-      const backdrop = document.getElementById("royalModalBackdrop");
-      const modalBox = backdrop.querySelector(".royal-modal");
-      backdrop.classList.remove("fullpage-mode");
-      if (modalBox) modalBox.classList.remove("fullpage-modal");
-
-      const dept = DEPARTMENTS_DATA.find(d => d.id === deptId || d.label === deptId) || DEPARTMENTS_DATA[0];
-      const titleEl = document.getElementById("royalModalTitle");
-      const bodyEl = document.getElementById("royalModalBody");
-
-      titleEl.textContent = `${groupName} — Full 10 Live Fixes (${dept.label})`;
-
-      const isMedicalDept = dept.id === "Medical Devices";
-
-      const liveErrorMatches = FIXES_BY_GROUP_MAP.get(groupName.toLowerCase()) || [];
-
-      bodyEl.innerHTML = `
-        ${isMedicalDept ? `
-          <div class="medical-disclaimer-box">
-            <span>Medical Disclaimer: "This is a device error fix only. For health concerns, consult a doctor."</span>
-          </div>
-        ` : ""}
-
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:18px;">
-          <div>
-            <span class="planned-meta">Department: ${dept.label}</span>
-            <span class="planned-meta" style="margin-left:6px;">${liveErrorMatches.length} Live Fixes (Full 10 Per Group — Fix 1 to Fix 10)</span>
-          </div>
-          <button type="button" class="btn-gold btn-gold-sm" onclick="closeRoyalModal(); selectGroupInLiveFixes('${groupName.replace(/'/g, "\\'")}')">
-            Open All 10 Cards in Live Grid
-          </button>
-        </div>
-
-        <div style="margin-bottom:22px;">
-          <h4 class="serif-heading" style="color:var(--navy-deep); margin-bottom:10px;">Full 10 Live Brand + Model Fixes for ${groupName} (Fix 1 to Fix 10)</h4>
-          <div style="display:grid; gap:10px;">
-            ${liveErrorMatches.map((fx, idx) => {
-              const isVer = fx.verification === "Verified";
-              return `
-                <div style="background:var(--ivory); border:1px solid var(--gold); border-radius:var(--radius-md); padding:12px 14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-                  <div>
-                    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
-                      <span class="badge-auto-new">Fix ${idx + 1}</span>
-                      <span class="error-code-tag">${fx.code}</span>
-                      <strong style="color:var(--navy-deep);">${fx.brand} — ${fx.model}</strong>
-                      ${isVer ? `<span class="badge-verified">Verified</span>` : `<span class="badge-pending">Pending Verification</span>`}
-                    </div>
-                    <div style="font-size:0.84rem; color:var(--text-main);">
-                      <strong>Meaning:</strong> ${fx.meaning} &nbsp;|&nbsp; <strong>Problem:</strong> ${fx.problem}
-                    </div>
-                    <div style="font-size:0.74rem; color:var(--text-muted); font-family:monospace; margin-top:2px;">
-                      URL: ${fx.seoUrl || fx.slug}
-                    </div>
-                  </div>
-                  <button type="button" class="btn-gold btn-gold-sm" onclick="openErrorModal('${fx.id}')">View Fix ${idx + 1}</button>
+        <div style="display:grid; gap:12px;">
+          ${dept.groups.map(gName => {
+            const fixes = FIXES_BY_GROUP_MAP.get(gName.toLowerCase()) || [];
+            return `
+              <div class="royal-card" style="padding:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                <div>
+                  <h4 style="font-size:1.1rem; color:var(--navy-deep); font-weight:700;">${gName}</h4>
+                  <span style="font-size:0.84rem; color:var(--text-muted);">${fixes.length} Brand + Model Verified Fixes Available</span>
                 </div>
-              `;
-            }).join("")}
-          </div>
-        </div>
-
-        <div style="margin-bottom:20px;">
-          <h4 class="serif-heading" style="color:var(--navy-deep); margin-bottom:8px;">Brand Registry for ${groupName}</h4>
-          <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:10px;">Every brand below is tracked separately (Brand is Filter, not Group):</p>
-          <div class="brand-chips-wrap">
-            ${dept.brands.map(b => `
-              <button type="button" class="brand-chip-btn" onclick="closeRoyalModal(); filterByBrand('${b.replace(/'/g, "\\'")}', true)">${b}</button>
-            `).join("")}
-          </div>
-        </div>
-
-        <div style="background:var(--gold-pale); border:1px solid var(--gold); border-radius:var(--radius-md); padding:14px; margin-bottom:20px;">
-          <strong style="color:var(--navy-deep); font-size:0.9rem;">Model Finder Help:</strong>
-          <p style="font-size:0.85rem; color:var(--text-main); margin-top:4px;">
-            "Model number is on back sticker / under battery / in Settings &gt; About"
-          </p>
-        </div>
-
-        <div style="display:flex; justify-content:flex-end; gap:10px; flex-wrap:wrap;">
-          <button type="button" class="btn-gold" onclick="closeRoyalModal(); requestGroupFix('${groupName.replace(/'/g, "\\'")}', '${dept.brands[0].replace(/'/g, "\\'")}')">
-            Request Another Fix for ${groupName}
-          </button>
+                <button type="button" class="btn-gold btn-gold-sm" onclick="openGroupModalByGroup('${gName.replace(/'/g, "\\'")}')">Browse Fixes (&darr;)</button>
+              </div>
+            `;
+          }).join("")}
         </div>
       `;
-
       backdrop.classList.add("open");
     }
 
-    function requestGroupFix(groupName, sampleBrand) {
-      document.getElementById("reqBrand").value = sampleBrand;
-      document.getElementById("reqProblem").value = `Need verified error fix for ${groupName}`;
-      document.getElementById("request-fix").scrollIntoView({ behavior: "smooth" });
-      setTimeout(() => document.getElementById("reqCode").focus(), 300);
-    }
+    function openGroupModalByGroup(groupName) {
+      const fixes = FIXES_BY_GROUP_MAP.get(groupName.toLowerCase()) || [];
+      const titleEl = document.getElementById("royalModalTitle");
+      const bodyEl = document.getElementById("royalModalBody");
 
-    /* Problem Chip Search Trigger */
-    function triggerProblemChipSearch(problemLabel) {
-      switchSearchTab("problem");
-      const input = document.getElementById("heroSearchInput");
-      if (input) {
-        input.value = problemLabel;
-        runHeroSearch(problemLabel);
-        input.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-    }
-
-    /* Model Finder Box Logic */
-    function quickTestModel(modelStr) {
-      const input = document.getElementById("modelFinderInput");
-      if (input) {
-        input.value = modelStr;
-        runModelFinder();
-      }
-    }
-
-    function runModelFinder() {
-      const input = document.getElementById("modelFinderInput");
-      const out = document.getElementById("modelFinderOutput");
-      const raw = (input?.value || "").trim().toUpperCase();
-
-      if (!raw) {
-        out.innerHTML = `<span style="color:var(--code-red); font-weight:700;">Please enter a model number (e.g. WA70BG4582, QA55Q70D, OM-01).</span>`;
-        return;
-      }
-
-      const foundKey = Object.keys(MODEL_REGISTRY_LOOKUP).find(k => raw.includes(k) || k.includes(raw));
-      if (foundKey) {
-        const info = MODEL_REGISTRY_LOOKUP[foundKey];
-        out.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
-            <strong style="color:var(--verified-green);">Model found in registry: ${foundKey} (${info.brand} ${info.group})</strong>
-            ${info.status === "Verified"
-              ? `<span class="badge-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Verified</span>`
-              : `<span class="badge-pending">Pending Verification</span>`
-            }
-          </div>
-          <p style="font-size:0.86rem; color:var(--text-main); margin-bottom:10px;">${info.notes}</p>
-          ${info.fixId
-            ? `<button type="button" class="btn-gold btn-gold-sm" onclick="openErrorModal('${info.fixId}')">Open Verified Model Fixes</button>`
-            : `<button type="button" class="btn-gold btn-gold-sm" onclick="openNewlyAddedModal('auto-1')">Check Auto-Verification Status</button>`
-          }
-        `;
-        return;
-      }
-
-      const dbMatch = Object.values(ERROR_FIX_DATABASE).find(item => item.model.toUpperCase().includes(raw));
-      if (dbMatch) {
-        out.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
-            <strong style="color:var(--verified-green);">Model found in registry: ${dbMatch.model} (${dbMatch.brand} ${dbMatch.group})</strong>
-            <span class="badge-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Verified</span>
-          </div>
-          <p style="font-size:0.86rem; color:var(--text-main); margin-bottom:10px;">${dbMatch.brand} ${dbMatch.model} (${dbMatch.group}) — ${dbMatch.code}: ${dbMatch.meaning} is live in Phase 1.</p>
-          <button type="button" class="btn-gold btn-gold-sm" onclick="openErrorModal('${dbMatch.id}')">Open Verified Model Fix</button>
-        `;
-        return;
-      }
-
-      out.innerHTML = `
-        <div style="color:var(--pending-orange); font-weight:700; margin-bottom:6px;">
-          Model not found - Request it below ("${raw}")
+      titleEl.textContent = groupName + " — Verified Fixes";
+      bodyEl.innerHTML = `
+        <div style="display:grid; gap:10px;">
+          ${fixes.map((fx, idx) => `
+            <div style="background:var(--ivory); border:1px solid var(--gold); border-radius:var(--radius-md); padding:14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+              <div>
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+                  <span class="error-code-tag">${fx.code}</span>
+                  <strong style="color:var(--navy-deep);">${fx.brand} — ${fx.model}</strong>
+                  ${fx.verification === "Verified" ? '<span class="badge-verified">Verified</span>' : '<span class="badge-pending">Pending</span>'}
+                </div>
+                <div style="font-size:0.86rem; color:var(--text-main);"><strong>Meaning:</strong> ${fx.meaning}</div>
+              </div>
+              <button type="button" class="btn-gold btn-gold-sm" onclick="openErrorModal('${fx.id}')">See Fix</button>
+            </div>
+          `).join("")}
         </div>
-        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:8px;">
-          We have copied <code>${raw}</code> into the Request a Fix form on the right so our team can verify its official manual.
-        </p>
       `;
-      const reqModel = document.getElementById("reqModel");
-      if (reqModel) reqModel.value = raw;
     }
 
-    /* Request a Fix Form Submission — Saves & Updates Top Requested Fixes Live */
-    function handleRequestFixSubmit(e) {
+    // Smart Universal Search
+    function runHeroSearch(rawQuery) {
+      const panel = document.getElementById("heroSearchResults");
+      const body = document.getElementById("searchResultsBody");
+      const query = (rawQuery || "").trim().toLowerCase();
+
+      if (!query) {
+        panel.classList.remove("visible");
+        return;
+      }
+
+      panel.classList.add("visible");
+      const allFixes = ALL_770_IDS.map(id => ERROR_FIX_DATABASE[id]);
+      const matched = allFixes.filter(item => item._haystack.includes(query)).slice(0, 15);
+
+      if (matched.length === 0) {
+        body.innerHTML = `<p style="padding:10px; color:var(--text-muted);">No instant match for "${rawQuery}". Contact <a href="mailto:info@errorcodefix.org" style="color:var(--code-red);">info@errorcodefix.org</a> for help.</p>`;
+        return;
+      }
+
+      body.innerHTML = matched.map(fix => `
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding:12px; border-bottom:1px solid rgba(201,162,39,0.2);">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+              <span class="error-code-tag">${fix.code}</span>
+              <strong>${fix.brand} ${fix.model} (${fix.group})</strong>
+            </div>
+            <div style="font-size:0.85rem; color:var(--text-muted);">${fix.meaning}</div>
+          </div>
+          <button type="button" class="btn-gold btn-gold-sm" onclick="openErrorModal('${fix.id}')">See Fix</button>
+        </div>
+      `).join("");
+    }
+
+    function closeHeroSearch() {
+      const input = document.getElementById("heroSearchInput");
+      const panel = document.getElementById("heroSearchResults");
+      if (input) input.value = "";
+      if (panel) panel.classList.remove("visible");
+    }
+
+    function handleHeroSearchSubmit(e) {
       e.preventDefault();
-      const codeVal = (document.getElementById("reqCode")?.value || "").trim();
-      const brandVal = (document.getElementById("reqBrand")?.value || "").trim();
-      const modelVal = (document.getElementById("reqModel")?.value || "").trim();
-      const problemVal = (document.getElementById("reqProblem")?.value || "").trim();
-
-      if (codeVal && brandVal && modelVal) {
-        const existing = TOP_REQUESTED_FIXES.find(
-          r => r.brand.toLowerCase() === brandVal.toLowerCase() &&
-               r.code.toLowerCase() === codeVal.toLowerCase()
-        );
-        if (existing) {
-          existing.requestsCount += 1;
-        } else {
-          TOP_REQUESTED_FIXES.push({
-            id: "req-user-" + Date.now(),
-            brand: brandVal,
-            model: modelVal,
-            code: codeVal.toUpperCase(),
-            label: `${brandVal} ${modelVal} ${codeVal.toUpperCase()}`,
-            problem: problemVal || "User requested official service manual verification",
-            requestsCount: 7,
-            badge: "Will be added next"
-          });
-        }
-        renderTopRequestedFixes();
-      }
-
-      const conf = document.getElementById("requestFixConfirmation");
-      if (conf) {
-        conf.textContent = "Request Saved. Most requested fixes are added first.";
-        conf.style.display = "block";
-      }
-      e.target.reset();
+      const input = document.getElementById("heroSearchInput");
+      if (input) runHeroSearch(input.value);
     }
 
-    /* 1 Error Page Format Builder — Exact Specification for All 1540 Group Fixes + Phase 6 On-Demand Translation */
+    /* Build Error Page HTML */
     function buildErrorPageHTML(item, copyBtnId) {
-      const targetLangCode = currentLang === "en" ? "hi" : currentLang;
-      const targetLangMeta = getLangMeta(targetLangCode);
-      const isTranslatedView = Boolean(fixTranslationState[item.id]);
-      const activeDict = isTranslatedView ? (TRANSLATIONS[targetLangCode] || TRANSLATIONS.en) : (TRANSLATIONS[currentLang] || TRANSLATIONS.en);
-
-      const trText = (txt) => isTranslatedView ? translateFixBodyText(txt, targetLangCode) : txt;
-      const stepsList = item.step2Fix.map(s => trText(s));
-      const stepsTextForCopy = stepsList.map((s, idx) => `Step ${idx + 1}: ${s}`).join("\n");
+      const stepsTextForCopy = item.step2Fix.map((s, idx) => `Step ${idx + 1}: ${s}`).join("\n");
       const isVerified = item.verification === "Verified";
-      const warningsList = (Array.isArray(item.warnings) ? item.warnings : [item.warnings]).map(w => trText(w));
+      const warningsList = Array.isArray(item.warnings) ? item.warnings : [item.warnings];
 
       return `
-        <!-- Phase 6 On-Demand Fix Translation Bar -->
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:16px; padding:12px 16px; background:linear-gradient(135deg, #0A1633 0%, #0F2048 100%); border:2px solid var(--gold); border-radius:var(--radius-md); color:var(--white);">
-          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-            <span class="badge-auto-new">${targetLangMeta.flag} ${targetLangMeta.country} - ${targetLangMeta.name}</span>
-            <span style="font-size:0.85rem; color:var(--gold-light); font-weight:600;">
-              ${isTranslatedView ? activeDict.fullTranslationNote : "On-Demand Fix Translation Ready"}
-            </span>
-          </div>
-          <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <button type="button" class="btn-gold btn-gold-sm" onclick="toggleFixTranslation('${item.id}', '${copyBtnId}')">
-              ${activeDict.translateFixBtn} ${targetLangMeta.name} (${targetLangMeta.flag})
-            </button>
-            <button type="button" class="brand-chip-btn" style="background:rgba(255,255,255,0.12); color:var(--gold-light); border-color:var(--gold);" onclick="toggleFixTranslation('${item.id}', '${copyBtnId}')">
-              ${activeDict.toggleLangBtn} ${targetLangMeta.name}
-            </button>
-          </div>
-        </div>
-
-        ${isTranslatedView ? `
-          <div style="background:var(--gold-pale); border:1px solid var(--gold); border-radius:var(--radius-sm); padding:10px 14px; margin-bottom:14px; font-size:0.85rem; font-weight:700; color:var(--navy-deep);">
-            ${targetLangMeta.flag} Note: "Full translation coming soon - Headings translated" (${activeDict.fullTranslationNote})
-          </div>
-        ` : ""}
-
         ${item.isMedical ? `
           <div class="medical-disclaimer-box">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
@@ -7295,249 +4437,113 @@
           </div>
         ` : ""}
 
-        ${!isVerified ? `
-          <div style="background:var(--pending-orange-bg); border:2px solid var(--pending-orange); border-radius:var(--radius-md); padding:14px 18px; margin-bottom:18px; color:var(--pending-orange); font-weight:700; font-size:0.9rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
-            <span>Verification: Pending Verification — This fix is based on common troubleshooting. Verify with your official manual.</span>
-            <span class="badge-pending">${activeDict.pendingBadge}</span>
-          </div>
-        ` : ""}
-
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px; padding:10px 14px; background:var(--gold-pale); border:1px solid var(--gold); border-radius:var(--radius-sm);">
-          <div style="font-size:0.82rem; font-weight:700; color:var(--navy-deep);">
-            Canonical Page URL: <code style="color:var(--code-red); font-weight:800;">${item.seoUrl || item.slug}</code>
-          </div>
-          <span class="badge-auto-new">Phase 6 Live · Full 10 Per Group · Brand + Model Specific</span>
-        </div>
-
-        <!-- Top Metadata Table (All 9 Required Fields) -->
+        <!-- Top Metadata Table -->
         <div class="table-responsive" style="margin-bottom:22px;">
-          <table class="royal-table tabular-nums">
+          <table class="royal-table">
             <thead>
               <tr>
-                <th>${activeDict.thDept}</th>
-                <th>${activeDict.thGroup}</th>
-                <th>${activeDict.thBrand}</th>
-                <th>${activeDict.thModel}</th>
-                <th>${activeDict.thCode}</th>
-                <th>${activeDict.thMeaning}</th>
-                <th>${activeDict.thVerification}</th>
-                <th>${activeDict.thLastChecked}</th>
-                <th>${activeDict.thOfficialSource}</th>
+                <th>Category</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Error Code</th>
+                <th>Meaning</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>${tDept(item.department)}</td>
-                <td><strong>${item.group}</strong></td>
+                <td>${item.group}</td>
                 <td><strong>${item.brand}</strong></td>
                 <td><code>${item.model}</code></td>
                 <td><span class="error-code-tag">${item.code}</span></td>
-                <td><strong>${trText(item.meaning)}</strong></td>
-                <td>
-                  ${isVerified ? `
-                    <span class="badge-verified">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                      ${activeDict.verifiedBadge}
-                    </span>
-                  ` : `
-                    <span class="badge-pending">${activeDict.pendingBadge}</span>
-                  `}
-                </td>
-                <td>${item.lastChecked}</td>
-                <td>Official Manual / Manufacturer Site</td>
+                <td><strong>${item.meaning}</strong></td>
+                <td>${isVerified ? '<span class="badge-verified">Verified</span>' : '<span class="badge-pending">Pending</span>'}</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <!-- Symptoms & Possible Causes -->
-        <div class="grid-2" style="margin-bottom:22px;">
+        <!-- Symptoms & Causes -->
+        <div class="grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:22px;">
           <div style="background:var(--ivory); border:1px solid rgba(201,162,39,0.35); border-radius:var(--radius-md); padding:16px;">
-            <h4 class="serif-heading" style="color:var(--navy-deep); margin-bottom:8px;">${activeDict.symptomsHeading}</h4>
+            <h4 style="color:var(--navy-deep); margin-bottom:8px;">Symptoms</h4>
             <ul style="padding-left:18px; font-size:0.88rem; display:grid; gap:6px;">
-              ${item.symptoms.map(s => `<li>${trText(s)}</li>`).join("")}
+              ${item.symptoms.map(s => `<li>${s}</li>`).join("")}
             </ul>
           </div>
           <div style="background:var(--ivory); border:1px solid rgba(201,162,39,0.35); border-radius:var(--radius-md); padding:16px;">
-            <h4 class="serif-heading" style="color:var(--navy-deep); margin-bottom:8px;">${activeDict.causesHeading}</h4>
+            <h4 style="color:var(--navy-deep); margin-bottom:8px;">Possible Causes</h4>
             <ul style="padding-left:18px; font-size:0.88rem; display:grid; gap:6px;">
-              ${item.causes.map(c => `<li>${trText(c)}</li>`).join("")}
+              ${item.causes.map(c => `<li>${c}</li>`).join("")}
             </ul>
           </div>
         </div>
 
-        <!-- Step 1, Step 2 (Each Step with Copy Button), Step 3 -->
+        <!-- 3 Steps -->
         <div style="display:grid; gap:16px; margin-bottom:22px;">
           <div style="background:var(--ivory); border:1px solid var(--gold); border-radius:var(--radius-md); padding:16px;">
-            <strong style="color:var(--navy-deep); font-size:0.98rem;">${activeDict.step1Heading}</strong>
-            <p style="font-size:0.92rem; margin-top:6px; color:var(--text-main);">${trText(item.step1Problem)}</p>
+            <strong style="color:var(--navy-deep); font-size:0.98rem;">Step 1: What Is the Problem?</strong>
+            <p style="font-size:0.92rem; margin-top:6px;">${item.step1Problem}</p>
           </div>
 
           <div style="background:var(--navy-deep); color:var(--white); border:1px solid var(--gold); border-radius:var(--radius-md); padding:18px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
-              <strong style="color:var(--gold-light); font-size:1.02rem;">${activeDict.step2Heading}</strong>
-              <button
-                id="${copyBtnId}"
-                type="button"
-                class="btn-gold btn-gold-sm"
-                onclick="copyStepsToClipboard('${copyBtnId}', decodeURIComponent('${encodeURIComponent(stepsTextForCopy)}'))"
-              >${activeDict.btnCopyAll}</button>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+              <strong style="color:var(--gold-light); font-size:1.02rem;">Step 2: Fix in ${item.step2Fix.length} Simple Steps</strong>
+              <button id="${copyBtnId}" type="button" class="btn-gold" style="padding:6px 14px; font-size:0.85rem;" onclick="copyStepsToClipboard('${copyBtnId}', decodeURIComponent('${encodeURIComponent(stepsTextForCopy)}'))">Copy All Steps</button>
             </div>
             <div style="display:grid; gap:10px;">
-              ${stepsList.map((step, sIdx) => {
-                const singleStepBtnId = `${copyBtnId}_s${sIdx + 1}`;
-                const singleStepLabel = `Step 2.${sIdx + 1}: ${step}`;
-                return `
-                  <div class="step-item-row">
-                    <div style="font-size:0.9rem; color:#F1F5F9; line-height:1.5;">
-                      <strong style="color:var(--gold-light);">Step ${sIdx + 1}:</strong> ${step}
-                    </div>
-                    <button
-                      id="${singleStepBtnId}"
-                      type="button"
-                      class="btn-gold btn-gold-sm"
-                      onclick="copyStepsToClipboard('${singleStepBtnId}', decodeURIComponent('${encodeURIComponent(singleStepLabel)}'))"
-                    >${activeDict.btnCopyStep} ${sIdx + 1}</button>
+              ${item.step2Fix.map((step, sIdx) => `
+                <div class="step-item-row">
+                  <div style="font-size:0.9rem; color:#F1F5F9; line-height:1.5;">
+                    <strong style="color:var(--gold-light);">Step ${sIdx + 1}:</strong> ${step}
                   </div>
-                `;
-              }).join("")}
+                  <button type="button" class="btn-gold" style="padding:4px 10px; font-size:0.75rem;" onclick="copyStepsToClipboard('${copyBtnId}_s${sIdx+1}', 'Step ${sIdx+1}: ${step}')">Copy</button>
+                </div>
+              `).join("")}
             </div>
           </div>
 
           <div style="background:var(--verified-green-bg); border:1px solid var(--verified-green); border-radius:var(--radius-md); padding:16px;">
-            <strong style="color:var(--verified-green); font-size:0.98rem;">${activeDict.step3Heading}</strong>
-            <p style="font-size:0.92rem; color:var(--text-main); margin-top:6px;">${trText(item.step3Check)}</p>
+            <strong style="color:var(--verified-green); font-size:0.98rem;">Step 3: Check If Fixed</strong>
+            <p style="font-size:0.92rem; color:var(--text-main); margin-top:6px;">${item.step3Check}</p>
           </div>
         </div>
 
-        <!-- Still Not Fixed & Warnings in Red Box -->
-        <div class="grid-2" style="margin-bottom:22px;">
-          <div style="background:var(--ivory); border:1px solid rgba(201,162,39,0.35); border-radius:var(--radius-md); padding:16px;">
-            <h4 class="serif-heading" style="color:var(--navy-deep); font-size:1.05rem; margin-bottom:8px;">${activeDict.stillNotFixedHeading}</h4>
-            <p style="font-size:0.9rem; color:var(--text-main); line-height:1.6;">${trText(item.stillNotFixed)}</p>
-          </div>
-
-          <div class="warnings-red-box">
-            <h4>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              ${activeDict.warningsHeading}
-            </h4>
-            <ul>
-              ${warningsList.map(w => `<li>${w}</li>`).join("")}
-            </ul>
-          </div>
-        </div>
-
-        <!-- Official Source & Related Errors (Same Brand + Model) -->
-        <div class="grid-2" style="margin-bottom:22px;">
-          <div style="background:var(--ivory); border:1px solid rgba(201,162,39,0.35); border-radius:var(--radius-md); padding:16px;">
-            <h4 class="serif-heading" style="color:var(--navy-deep); font-size:1.02rem; margin-bottom:8px;">${activeDict.officialSourceHeading}</h4>
-            <p style="font-size:0.88rem; color:var(--text-main); margin-bottom:10px;">
-              <strong>Reference:</strong> <span style="text-decoration:underline; color:var(--navy-deep); font-weight:700;">Official Manual - ${item.brand} ${item.model}</span>
-            </p>
-            <div>
-              <strong>Verification Status:</strong>
-              ${isVerified ? `
-                <span class="badge-verified" style="margin-left:6px;">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                  Verified from Official Manual
-                </span>
-              ` : `
-                <span class="badge-pending" style="margin-left:6px;">Pending Verification</span>
-              `}
-            </div>
-          </div>
-
-          <div style="background:var(--ivory); border:1px solid rgba(201,162,39,0.35); border-radius:var(--radius-md); padding:16px;">
-            <h4 class="serif-heading" style="color:var(--navy-deep); font-size:1.02rem; margin-bottom:8px;">${activeDict.relatedErrorsHeading}</h4>
-            <div style="display:flex; flex-wrap:wrap; gap:8px;">
-              ${item.relatedErrors.map(re => {
-                if (typeof re === "string") {
-                  return `<span class="error-code-tag" style="font-size:0.78rem;">${re} (Coming Soon)</span>`;
-                }
-                if (re.targetId && ERROR_FIX_DATABASE[re.targetId]) {
-                  return `
-                    <button type="button" class="btn-gold btn-gold-sm" onclick="openErrorModal('${re.targetId}')">
-                      ${re.code} — View Fix
-                    </button>
-                  `;
-                }
-                return `
-                  <span style="display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border-radius:6px; background:var(--white); border:1px dashed var(--gold); font-size:0.78rem; font-weight:700; color:var(--text-muted);">
-                    <span style="color:var(--code-red); font-family:monospace;">${re.code}</span>
-                    <span class="badge-pending" style="font-size:0.68rem; padding:2px 6px;">Coming Soon</span>
-                  </span>
-                `;
-              }).join("")}
-            </div>
-          </div>
-        </div>
-
-        <!-- FAQ (3 Questions + Answers for this specific error) -->
-        <div style="background:var(--ivory); border:1px solid rgba(201,162,39,0.35); border-radius:var(--radius-md); padding:18px;">
-          <h4 class="serif-heading" style="color:var(--navy-deep); margin-bottom:12px;">${activeDict.faqHeading} — ${item.brand} ${item.model} (${item.code})</h4>
-          <div style="display:grid; gap:10px;">
-            ${item.faqs.map((f, i) => `
-              <div style="padding-bottom:10px; border-bottom:1px solid rgba(201,162,39,0.2);">
-                <div style="font-weight:700; font-size:0.9rem; color:var(--navy-deep);">Q${i + 1}: ${f.q}</div>
-                <div style="font-size:0.86rem; color:var(--text-muted); margin-top:3px;">${f.a}</div>
-              </div>
-            `).join("")}
-          </div>
+        <!-- Warnings -->
+        <div class="warnings-red-box">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Important Safety Warnings
+          </h4>
+          <ul>
+            ${warningsList.map(w => `<li>${w}</li>`).join("")}
+          </ul>
         </div>
       `;
     }
 
-    function renderArchitectureSample(sampleId) {
-      const item = ERROR_FIX_DATABASE[sampleId] || ERROR_FIX_DATABASE["p1-1"];
-      const container = document.getElementById("architectureErrorPageContent");
-      if (container) {
-        container.innerHTML = buildErrorPageHTML(item, "archCopyBtn");
-      }
-    }
-
-    /* Full-Page View Modal for Any Error Page */
-    function openErrorModal(errorId, pushUrlState = true) {
-      currentOpenErrorId = errorId;
+    function openErrorModal(errorId) {
       const item = ERROR_FIX_DATABASE[errorId] || ERROR_FIX_DATABASE["p1-1"];
       const backdrop = document.getElementById("royalModalBackdrop");
-      const modalBox = backdrop.querySelector(".royal-modal");
       const titleEl = document.getElementById("royalModalTitle");
       const bodyEl = document.getElementById("royalModalBody");
 
-      if (pushUrlState && item && (item.seoUrl || item.slug)) {
-        try {
-          const targetPath = item.seoUrl || item.slug;
-          if (window.location.pathname !== targetPath) {
-            window.history.pushState({ errorId: item.id }, "", targetPath + window.location.search);
-          }
-        } catch (_) {}
-      }
-
-      backdrop.classList.add("fullpage-mode");
-      if (modalBox) modalBox.classList.add("fullpage-modal");
-
-      titleEl.innerHTML = `
-        <span style="display:inline-flex; align-items:center; gap:10px; flex-wrap:wrap;">
-          <span class="error-code-tag" style="font-size:0.95rem;">${item.code}</span>
-          <span>${item.brand} ${item.group} (${item.model}) — ${item.meaning}</span>
-        </span>
-      `;
+      titleEl.innerHTML = `<span class="error-code-tag">${item.code}</span> ${item.brand} ${item.model} (${item.group})`;
       bodyEl.innerHTML = `
-        <div style="max-width:1160px; margin:0 auto;">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:18px;">
-            <button type="button" class="btn-gold btn-gold-sm" onclick="closeRoyalModal()">
-              &larr; Back to All 1540 Live Fixes
-            </button>
-            <div style="font-size:0.82rem; color:var(--text-muted); font-weight:600;">
-              One Code + Brand + Model = One Page · Official Manual Verified System
-            </div>
-          </div>
+        <div style="max-width:1000px; margin:0 auto;">
           ${buildErrorPageHTML(item, "modalCopyBtn")}
         </div>
       `;
       backdrop.classList.add("open");
-      backdrop.scrollTop = 0;
+    }
+
+    function closeRoyalModal() {
+      const backdrop = document.getElementById("royalModalBackdrop");
+      backdrop.classList.remove("open");
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target.id === "royalModalBackdrop") closeRoyalModal();
     }
 
     function copyStepsToClipboard(btnId, text) {
@@ -7547,69 +4553,96 @@
       const btn = document.getElementById(btnId);
       if (btn) {
         const orig = btn.textContent;
-        btn.textContent = t("copiedText");
+        btn.textContent = "Copied!";
         setTimeout(() => { btn.textContent = orig; }, 1800);
       }
     }
 
-    /* Footer Info Modals (About, Contact, Privacy Policy) */
+    function copyEmailToClipboard(emailStr, btnEl) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(emailStr);
+      }
+      if (btnEl) {
+        const orig = btnEl.textContent;
+        btnEl.textContent = "Copied Email!";
+        setTimeout(() => { btnEl.textContent = orig; }, 1800);
+      }
+    }
+
+    /* Admin Modal (Hidden Sections for Auto Tracker, Sitemap, etc.) */
+    function openAdminModal() {
+      const backdrop = document.getElementById("royalModalBackdrop");
+      const titleEl = document.getElementById("royalModalTitle");
+      const bodyEl = document.getElementById("royalModalBody");
+
+      titleEl.textContent = "Admin & Auto-Update Engine Dashboard";
+      bodyEl.innerHTML = `
+        <div style="display:grid; gap:16px;">
+          <div style="background:var(--ivory); padding:16px; border-radius:var(--radius-md); border:1px solid var(--gold);">
+            <h4 style="color:var(--navy-deep); margin-bottom:6px;">Phase 5 Auto-Update Engine Status</h4>
+            <p style="font-size:0.9rem; color:var(--text-muted);">1540 Live Fixes Active (154 Groups × 10 Fixes). Brand Auto Tracker and Verification Queues operating normally.</p>
+          </div>
+          <div style="background:var(--ivory); padding:16px; border-radius:var(--radius-md); border:1px solid var(--gold);">
+            <h4 style="color:var(--navy-deep); margin-bottom:6px;">Sitemap &amp; SEO Data</h4>
+            <p style="font-size:0.9rem; color:var(--text-muted);">All 1540 canonical URLs indexed and verified. Zero undefined canonical links.</p>
+          </div>
+        </div>
+      `;
+      backdrop.classList.add("open");
+    }
+
     function openInfoModal(type) {
       const backdrop = document.getElementById("royalModalBackdrop");
-      const modalBox = backdrop.querySelector(".royal-modal");
-      backdrop.classList.remove("fullpage-mode");
-      if (modalBox) modalBox.classList.remove("fullpage-modal");
-
       const titleEl = document.getElementById("royalModalTitle");
       const bodyEl = document.getElementById("royalModalBody");
 
       if (type === "about") {
         titleEl.textContent = "About errorcodefix.org";
-        bodyEl.innerHTML = `
-          <p style="margin-bottom:12px;"><strong>errorcodefix.org</strong> is a Brand + Model Verified Error Code Database covering 16 Departments and 154 Product Groups across appliances, electronics, medical devices, automotive systems, and software.</p>
-          <p style="margin-bottom:12px;">Every error page follows a strict 3-Step Fix standard verified against official manufacturer service manuals. One Error Code + Brand + Model = One Page.</p>
-        `;
-      } else if (type === "contact") {
-        titleEl.textContent = "Contact & Manual Verification Desk";
-        bodyEl.innerHTML = `
-          <p style="margin-bottom:12px;">To submit an official manufacturer service bulletin or request priority model indexing, use the <strong>Request a Fix</strong> form on this page or reach our verification desk at <code>verify@errorcodefix.org</code>.</p>
-        `;
+        bodyEl.innerHTML = `<p style="margin-bottom:12px;"><strong>errorcodefix.org</strong> is a Brand + Model Verified Error Code Database covering 16 Departments and 154 Product Groups. Contact us at <a href="mailto:info@errorcodefix.org" style="color:var(--code-red);">info@errorcodefix.org</a>.</p>`;
       } else {
-        titleEl.textContent = "Privacy Policy & Medical Disclaimer";
-        bodyEl.innerHTML = `
-          <p style="margin-bottom:12px;">We do not sell user data or require account registration to search error fixes. Email addresses submitted in the Request a Fix form are optional and used strictly to notify you when your requested Brand + Model fix is verified.</p>
-          <div class="medical-disclaimer-box" style="margin-top:12px;">
-            <span>Medical Disclaimer: This is a device error fix only. For health concerns, consult a doctor.</span>
-          </div>
-        `;
+        titleEl.textContent = "Privacy Policy";
+        bodyEl.innerHTML = `<p style="margin-bottom:12px;">We do not sell user data. Contact <a href="mailto:info@errorcodefix.org" style="color:var(--code-red);">info@errorcodefix.org</a> for questions.</p>`;
       }
-
       backdrop.classList.add("open");
     }
 
-    function closeRoyalModal(resetUrlState = true) {
-      const backdrop = document.getElementById("royalModalBackdrop");
-      const modalBox = backdrop.querySelector(".royal-modal");
-      backdrop.classList.remove("open", "fullpage-mode");
-      if (modalBox) modalBox.classList.remove("fullpage-modal");
-      currentOpenErrorId = null;
-      if (resetUrlState && window.location.pathname !== "/" && window.location.pathname !== "/index.html") {
-        try {
-          window.history.pushState({}, "", "/" + window.location.search);
-        } catch (_) {}
-      }
+    /* Language Selector */
+    function renderLangDropdownOptions() {
+      const listEl = document.getElementById("langOptionsList");
+      if (!listEl) return;
+      listEl.innerHTML = LANGUAGES_LIST.map(l => `
+        <button type="button" class="lang-option-btn ${l.code === currentLang ? 'active' : ''}" onclick="selectLanguage('${l.code}')">
+          <span>${l.flag} ${l.name}</span>
+          <span style="font-size:0.75rem; opacity:0.8;">${l.country}</span>
+        </button>
+      `).join("");
     }
 
-    function handleBackdropClick(e) {
-      if (e.target.id === "royalModalBackdrop") {
-        closeRoyalModal();
-      }
+    function toggleLangDropdown(e) {
+      if (e) e.stopPropagation();
+      const menu = document.getElementById("langDropdownMenu");
+      if (menu) menu.classList.toggle("open");
     }
 
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeRoyalModal();
+    document.addEventListener("click", () => {
+      const menu = document.getElementById("langDropdownMenu");
+      if (menu) menu.classList.remove("open");
     });
 
-    window.addEventListener("DOMContentLoaded", initApp);
+    function selectLanguage(langCode) {
+      currentLang = langCode;
+      const meta = LANGUAGES_LIST.find(l => l.code === langCode) || LANGUAGES_LIST[0];
+      const flagEl = document.getElementById("currentLangFlag");
+      const labelEl = document.getElementById("currentLangLabel");
+      if (flagEl) flagEl.textContent = meta.flag;
+      if (labelEl) labelEl.textContent = meta.name;
+      renderLangDropdownOptions();
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      renderCategories();
+      renderLangDropdownOptions();
+    });
   </script>
 </body>
 </html>
