@@ -1,0 +1,6 @@
+{
+  "name": "errorcodefix.org — Fix Any Error Code in 3 Steps",
+  "description": "Paste your error code and get Brand + Model specific verified fixes in 3 simple steps across 16 departments and 154 product groups.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
