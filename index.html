@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- PASTE YOUR GSC VERIFICATION CODE HERE -->
+  <!-- PASTE YOUR GA4 ID HERE -->
+  <!-- PASTE YOUR BING CODE HERE -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9048615701580913" crossorigin="anonymous"></script>
 
   <script>
     (function () {
@@ -653,7 +657,9 @@
           <a href="#top">Home</a>
           <a href="#" onclick="openInfoModal('about'); return false;">About</a>
           <a href="#" onclick="openInfoModal('editorial'); return false;">Editorial Policy</a>
-          <a href="#" onclick="openInfoModal('privacy'); return false;">Privacy</a>
+          <a href="#" onclick="openInfoModal('privacy'); return false;">Privacy Policy</a>
+          <a href="#" onclick="openInfoModal('terms'); return false;">Terms of Use</a>
+          <a href="#" onclick="openInfoModal('contact'); return false;">Contact</a>
           <a href="#" onclick="openAdminModal(); return false;" style="color:var(--gold);">Admin</a>
         </div>
       </div>
@@ -4807,9 +4813,15 @@
       if (type === "about") {
         titleEl.textContent = "About errorcodefix.org";
         bodyEl.innerHTML = `
+          <h4 style="color:var(--navy-deep); margin-bottom:8px;">What is ErrorCodeFix?</h4>
           <p style="margin-bottom:12px;"><strong>errorcodefix.org</strong> is the world's leading Brand + Model Verified Error Code Database, covering 16 Departments and 154 Product Groups across appliances, electronics, medical devices, automotive systems, and software.</p>
+          <h4 style="color:var(--navy-deep); margin-bottom:8px;">Who Runs It?</h4>
+          <p style="margin-bottom:12px;">Our platform is operated by a dedicated team of hardware technicians, software engineers, and technical documentation auditors committed to providing exact, manufacturer-verified troubleshooting steps.</p>
+          <h4 style="color:var(--navy-deep); margin-bottom:8px;">How Fixes Are Verified</h4>
           <p style="margin-bottom:12px;">Every error page is verified directly against official manufacturer service manuals. One Error Code + Brand + Model = One Page.</p>
-          <p style="margin-bottom:12px;">Contact our editorial and verification desk: <a href="mailto:info@errorcodefix.org" style="color:var(--code-red); font-weight:700;">info@errorcodefix.org</a>.</p>
+          <h4 style="color:var(--navy-deep); margin-bottom:8px;">Medical Disclaimer</h4>
+          <p style="margin-bottom:12px;">Medical device error fixes are for device troubleshooting only. For any health concerns, always consult a qualified medical professional.</p>
+          <p style="margin-bottom:12px;">Contact us at: <a href="mailto:info@errorcodefix.org" style="color:var(--code-red); font-weight:700;">info@errorcodefix.org</a>.</p>
         `;
       } else if (type === "editorial") {
         titleEl.textContent = "Editorial & Verification Policy";
@@ -4822,9 +4834,35 @@
           <p style="margin-bottom:12px; font-size:0.9rem;">Medical devices (BP monitors, pulse oximeters, nebulizers, thermometers) display strict medical disclaimers and never publish without Verified manufacturer status.</p>
           <p style="margin-top:16px; font-size:0.9rem;">Questions or corrections? Email <a href="mailto:info@errorcodefix.org" style="color:var(--code-red); font-weight:700;">info@errorcodefix.org</a>.</p>
         `;
-      } else {
+      } else if (type === "privacy") {
         titleEl.textContent = "Privacy Policy";
-        bodyEl.innerHTML = `<p style="margin-bottom:12px;">We do not sell user data. Contact <a href="mailto:info@errorcodefix.org" style="color:var(--code-red);">info@errorcodefix.org</a> for questions.</p>`;
+        bodyEl.innerHTML = `
+          <h4 style="color:var(--navy-deep); margin-bottom:8px;">Data Collection & Usage</h4>
+          <p style="margin-bottom:12px;">We respect your privacy. We collect search queries solely to improve error code indexing and troubleshooting relevance. We do not require user accounts or login.</p>
+          <h4 style="color:var(--navy-deep); margin-bottom:8px;">Cookies & Analytics</h4>
+          <p style="margin-bottom:12px;">We use standard cookies and Google Analytics to understand site performance and visitor trends. Third-party vendors, including Google, use cookies to serve ads based on prior visits to our website.</p>
+          <p style="margin-bottom:12px;">For privacy inquiries or data requests, contact <a href="mailto:info@errorcodefix.org" style="color:var(--code-red); font-weight:700;">info@errorcodefix.org</a>.</p>
+          <p style="font-size:0.85rem; color:var(--text-muted);">Last updated: 18 Nov 2026</p>
+        `;
+      } else if (type === "terms") {
+        titleEl.textContent = "Terms of Use";
+        bodyEl.innerHTML = `
+          <h4 style="color:var(--navy-deep); margin-bottom:8px;">Device Errors Only</h4>
+          <p style="margin-bottom:12px;">All troubleshooting guides and error code fixes provided on errorcodefix.org are strictly for device and equipment errors. They do not constitute professional medical, legal, or electrical installation advice.</p>
+          <h4 style="color:var(--navy-deep); margin-bottom:8px;">Use at Your Own Risk</h4>
+          <p style="margin-bottom:12px;">Users apply repair steps at their own risk. Always unplug appliances and disconnect power before opening device casings or inspecting wiring.</p>
+          <p style="margin-bottom:12px;">Contact: <a href="mailto:info@errorcodefix.org" style="color:var(--code-red); font-weight:700;">info@errorcodefix.org</a>.</p>
+        `;
+      } else if (type === "contact") {
+        titleEl.textContent = "Contact Us";
+        bodyEl.innerHTML = `
+          <h4 style="color:var(--navy-deep); margin-bottom:8px;">Get in Touch</h4>
+          <p style="margin-bottom:12px;">Have questions about an error code or need official verification? Email our desk directly:</p>
+          <div style="display:flex; gap:10px; align-items:center; margin-bottom:16px;">
+            <a href="mailto:info@errorcodefix.org" class="btn-gold" style="font-size:1rem; padding:10px 20px;">info@errorcodefix.org</a>
+            <button type="button" class="btn-gold" style="background:var(--ivory); color:var(--navy-deep); border:1px solid var(--gold);" onclick="copyEmailToClipboard('info@errorcodefix.org', this)">Copy Email</button>
+          </div>
+        `;
       }
       backdrop.classList.add("open");
     }
