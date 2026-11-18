@@ -1,0 +1,286 @@
+# MASTER MISSION: TRANSFORM THIS WEBSITE INTO A HIGH-TRAFFIC ORGANIC SEARCH PLATFORM
+
+Act as a world-class SEO architect, Google Search specialist, technical SEO engineer, content strategist, semantic SEO expert, conversion optimization specialist, and senior full-stack developer.
+
+Your mission is to transform this existing website into a powerful, trustworthy, search-engine-friendly platform capable of attracting substantial organic traffic from Google Search worldwide.
+
+IMPORTANT:
+Do not simply provide SEO suggestions or an audit report. Inspect the actual existing codebase, identify problems, and IMPLEMENT improvements wherever technically possible.
+
+Do not destroy existing functionality, design, content, URLs, database structures, or working features.
+
+## PHASE 1: COMPLETE SEO & TRAFFIC AUDIT
+
+Perform a comprehensive audit of:
+
+1. Technical SEO.
+2. On-page SEO.
+3. Off-page SEO readiness.
+4. Google indexing and crawlability.
+5. Core Web Vitals.
+6. Mobile usability.
+7. Page loading speed.
+8. JavaScript rendering and SEO.
+9. Duplicate and thin content.
+10. Keyword cannibalization.
+11. Internal linking.
+12. Structured data and schema.
+13. Sitemap and robots.txt.
+14. Canonical URLs.
+15. Metadata and heading hierarchy.
+16. Image optimization.
+17. International SEO, if applicable.
+
+Identify every issue that could prevent Google from discovering, understanding, indexing, or ranking pages.
+
+## PHASE 2: GOOGLE SEARCH VISIBILITY SYSTEM
+
+Implement and verify:
+
+- SEO-friendly page titles and meta descriptions.
+- Unique canonical URLs.
+- XML sitemap index and appropriate child sitemaps.
+- Correct robots.txt.
+- Breadcrumb navigation.
+- Logical URL structure.
+- Proper H1, H2 and H3 hierarchy.
+- Open Graph and social metadata.
+- Appropriate JSON-LD structured data.
+- Organization, WebSite, Article, BreadcrumbList and other relevant schema types.
+- Correct language and hreflang implementation where applicable.
+- Proper pagination and indexation controls.
+
+Never use misleading schema or fake ratings and reviews.
+
+## PHASE 3: KEYWORD & SEARCH INTENT ENGINE
+
+Develop a search-intent-based keyword strategy.
+
+Identify:
+
+- High-demand informational keywords.
+- Long-tail keywords.
+- Question-based keywords.
+- Comparison keywords.
+- Problem-solving keywords.
+- Transactional keywords where relevant.
+- Trending and seasonal search opportunities.
+- Low-competition opportunities supported by evidence.
+
+Create keyword clusters and map each cluster to the most appropriate existing or new page.
+
+Avoid keyword stuffing and duplicate pages.
+
+Do not invent search volumes, keyword difficulty scores, or traffic estimates. Use Google Search Console, Keyword Planner or other verified data when available.
+
+## PHASE 4: CONTENT AUTHORITY ENGINE
+
+Transform the website into a genuinely useful information resource.
+
+Create a content architecture based on:
+
+- Main pillar pages.
+- Supporting articles.
+- Topic clusters.
+- Detailed guides.
+- Frequently asked questions.
+- Comparisons.
+- Step-by-step tutorials.
+- Practical calculators and tools where relevant.
+- Original research and useful data.
+
+Every page must provide meaningful value beyond what already exists in search results.
+
+No AI-generated filler articles.
+
+No mass publishing of nearly identical pages.
+
+No fabricated facts, statistics, references, or official claims.
+
+For time-sensitive information, display last-updated dates and verify claims against authoritative sources.
+
+## PHASE 5: INTERNAL LINKING INTELLIGENCE
+
+Implement an intelligent internal linking architecture.
+
+- Link supporting articles to pillar pages.
+- Connect related topics contextually.
+- Use descriptive anchor text.
+- Identify orphan pages.
+- Identify broken internal links.
+- Add relevant related-content sections.
+- Improve navigation and breadcrumb pathways.
+
+Every important page should be discoverable through logical internal links.
+
+## PHASE 6: PROGRAMMATIC SEO
+
+Where appropriate, create scalable SEO landing pages based on real user needs and unique information.
+
+Examples:
+- Location-specific pages.
+- Category-specific pages.
+- Comparison pages.
+- Problem-specific pages.
+- Service-specific pages.
+- Tool-specific pages.
+
+IMPORTANT:
+Each programmatic page must have genuinely unique information and utility.
+
+Never generate thousands of empty, repetitive, doorway, or automatically indexed pages.
+
+Only index pages that meet defined quality and usefulness requirements.
+
+## PHASE 7: GOOGLE SEARCH CONSOLE & ANALYTICS
+
+Prepare the website for Google Search Console and Google Analytics 4 integration.
+
+Build a monitoring framework for:
+
+- Total organic clicks.
+- Search impressions.
+- Average CTR.
+- Average search position.
+- Indexed pages.
+- Discovered but not indexed pages.
+- Crawled but not indexed pages.
+- Top-performing keywords.
+- Top-performing landing pages.
+- Organic conversions.
+- Mobile and desktop performance.
+
+Do not claim that these services are connected unless actual integration is verified.
+
+Create an actionable SEO monitoring dashboard if the existing architecture supports it.
+
+## PHASE 8: CORE WEB VITALS & PERFORMANCE
+
+Optimize:
+
+- Largest Contentful Paint (LCP).
+- Interaction to Next Paint (INP).
+- Cumulative Layout Shift (CLS).
+- Image formats and compression.
+- Lazy loading.
+- Font loading.
+- JavaScript bundles.
+- Unnecessary dependencies.
+- Caching.
+- Server response time.
+
+Preserve functionality and accessibility.
+
+## PHASE 9: CONTENT FRESHNESS & AUTOMATION
+
+Build a safe content maintenance system.
+
+- Identify outdated pages.
+- Flag information requiring verification.
+- Detect broken external links.
+- Identify missing metadata.
+- Generate content improvement suggestions.
+- Track last verified dates.
+- Prepare update queues.
+
+Never automatically change factual information without appropriate verification.
+
+## PHASE 10: AUTHORITY & TRUST
+
+Strengthen:
+
+- About Us.
+- Contact Us.
+- Editorial Policy.
+- Privacy Policy.
+- Terms and Conditions.
+- Author information.
+- Editorial review process.
+- Sources and references.
+- Content accuracy disclosures.
+- Transparent ownership and independence statements.
+
+Build genuine expertise and trust rather than artificial SEO signals.
+
+## PHASE 11: COMPETITOR & CONTENT GAP ANALYSIS
+
+Where reliable competitor data is available:
+
+- Identify competing websites.
+- Analyze their topic coverage.
+- Identify missing useful content.
+- Find underserved search intents.
+- Discover opportunities for original tools and resources.
+- Recommend pages where this website can provide a better experience.
+
+Do not copy competitor content.
+
+## PHASE 12: FINAL IMPLEMENTATION & QUALITY ASSURANCE
+
+After implementation:
+
+1. Run the production build.
+2. Run TypeScript checks if applicable.
+3. Test existing functionality.
+4. Validate sitemap XML.
+5. Validate robots.txt.
+6. Check canonical URLs.
+7. Check structured data.
+8. Check internal links.
+9. Check mobile layouts.
+10. Check important page rendering.
+11. Identify indexing blockers.
+12. Generate a prioritized remaining-work report.
+
+## STRICT RULES
+
+- Work with the existing technology stack.
+- Preserve all existing working functionality.
+- Do not fabricate Google ranking factors or results.
+- Do not promise guaranteed rankings or traffic.
+- Do not use black-hat SEO.
+- Do not create spam backlinks.
+- Do not create doorway pages.
+- Do not mass-publish low-quality AI content.
+- Do not expose API keys or credentials.
+- Do not remove existing content without justification.
+- Prefer free tools and services.
+- Implement changes rather than merely describing them.
+
+## FINAL OBJECTIVE
+
+Make this website technically excellent, genuinely useful, discoverable, indexable, authoritative, and competitive in its relevant search categories.
+
+The ultimate goal is sustainable growth in qualified organic search traffic from Google and other search engines.
+
+## MANDATORY FINAL REPORT
+
+At the end, provide:
+
+A. Overall SEO audit score (clearly label it as an internal assessment, not a Google score).
+
+B. Problems discovered.
+
+C. Changes actually implemented.
+
+D. Changes that require external access or manual action.
+
+E. Indexing readiness.
+
+F. Content gaps and keyword opportunities.
+
+G. Top 20 highest-priority traffic growth opportunities.
+
+H. Remaining technical issues.
+
+I. Next recommended implementation steps.
+
+J. Clear project status:
+- Completed
+- Partially completed
+- Not completed
+- Blocked
+
+Do not declare success merely because the code builds. Distinguish verified implementation from recommendations and unverified assumptions.
+
+Your job is to build a sustainable organic traffic growth system, not just an SEO-looking website.
