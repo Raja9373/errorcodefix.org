@@ -6088,6 +6088,37 @@
     }
 
 
+    const FIX_BY_SLUG_MAP = new Map();
+    ALL_770_IDS.forEach(id => {
+      const fx = ERROR_FIX_DATABASE[id];
+      if (fx) {
+        if (fx.seoUrl) FIX_BY_SLUG_MAP.set(fx.seoUrl.toLowerCase(), id);
+        if (fx.slug) FIX_BY_SLUG_MAP.set(fx.slug.toLowerCase(), id);
+      }
+    });
+
+    function handleDirectCanonicalUrlRoute() {
+      try {
+        const path = (window.location.pathname || "/").replace(/\/+$/, "").toLowerCase();
+        if (path && path !== "" && path !== "/" && path !== "/index.html") {
+          const matchedId = FIX_BY_SLUG_MAP.get(path);
+          if (matchedId) {
+            openErrorModal(matchedId, false);
+          }
+        }
+      } catch (_) {}
+    }
+
+    window.addEventListener("popstate", () => {
+      const path = (window.location.pathname || "/").replace(/\/+$/, "").toLowerCase();
+      if (!path || path === "" || path === "/" || path === "/index.html") {
+        closeRoyalModal(false);
+      } else {
+        const matchedId = FIX_BY_SLUG_MAP.get(path);
+        if (matchedId) openErrorModal(matchedId, false);
+      }
+    });
+
     function initApp() {
       renderLangDropdownOptions();
       switchSearchTab("code");
@@ -6104,6 +6135,7 @@
       renderAllGroups();
       renderArchitectureSample("p1-1");
       initLanguageAutoDetector();
+      handleDirectCanonicalUrlRoute();
     }
 
     /* Phase 3: 770 Live Fixes (Top 5 Per Group) Filter & Card/Group Grid */
@@ -7465,13 +7497,22 @@
     }
 
     /* Full-Page View Modal for Any Error Page */
-    function openErrorModal(errorId) {
+    function openErrorModal(errorId, pushUrlState = true) {
       currentOpenErrorId = errorId;
       const item = ERROR_FIX_DATABASE[errorId] || ERROR_FIX_DATABASE["p1-1"];
       const backdrop = document.getElementById("royalModalBackdrop");
       const modalBox = backdrop.querySelector(".royal-modal");
       const titleEl = document.getElementById("royalModalTitle");
       const bodyEl = document.getElementById("royalModalBody");
+
+      if (pushUrlState && item && (item.seoUrl || item.slug)) {
+        try {
+          const targetPath = item.seoUrl || item.slug;
+          if (window.location.pathname !== targetPath) {
+            window.history.pushState({ errorId: item.id }, "", targetPath + window.location.search);
+          }
+        } catch (_) {}
+      }
 
       backdrop.classList.add("fullpage-mode");
       if (modalBox) modalBox.classList.add("fullpage-modal");
@@ -7545,11 +7586,17 @@
       backdrop.classList.add("open");
     }
 
-    function closeRoyalModal() {
+    function closeRoyalModal(resetUrlState = true) {
       const backdrop = document.getElementById("royalModalBackdrop");
       const modalBox = backdrop.querySelector(".royal-modal");
       backdrop.classList.remove("open", "fullpage-mode");
       if (modalBox) modalBox.classList.remove("fullpage-modal");
+      currentOpenErrorId = null;
+      if (resetUrlState && window.location.pathname !== "/" && window.location.pathname !== "/index.html") {
+        try {
+          window.history.pushState({}, "", "/" + window.location.search);
+        } catch (_) {}
+      }
     }
 
     function handleBackdropClick(e) {

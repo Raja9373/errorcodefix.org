@@ -1,0 +1,13 @@
+{
+  "framework": null,
+  "installCommand": "echo 'static site - no install needed'",
+  "buildCommand": "echo 'static site - no build'",
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
