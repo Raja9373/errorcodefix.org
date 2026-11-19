@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /api
 
-Sitemap: https://errorcodefix.org/sitemap.xml
+Sitemap: https://errorcodefix.org/sitemap-index.xml
