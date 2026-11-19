@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="navyBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E1E46"/>
+      <stop offset="100%" stop-color="#070F24"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EAD06B"/>
+      <stop offset="50%" stop-color="#C9A227"/>
+      <stop offset="100%" stop-color="#B0891A"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded Royal Navy Base -->
+  <rect x="0" y="0" width="64" height="64" rx="14" ry="14" fill="url(#navyBg)"/>
+  <!-- Subtle Gold Inner Frame -->
+  <rect x="4.5" y="4.5" width="55" height="55" rx="10" ry="10" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+  <!-- Gold Shield Outline -->
+  <path d="M32 13 L48 19.5 V32.5 C48 42.2 41.2 49.4 32 52.5 C22.8 49.4 16 42.2 16 32.5 V19.5 Z" fill="none" stroke="url(#goldGrad)" stroke-width="3.2" stroke-linejoin="round"/>
+  <!-- Verified Checkmark -->
+  <path d="M23.5 31.5 L29.2 37.2 L42.5 23.5" fill="none" stroke="url(#goldGrad)" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Diagnostic Wrench Accent -->
+  <path d="M35.5 36.2 C37.2 34.4 39.9 34.2 41.6 35.6 L39.2 38 L40.6 39.4 L43 37 C44.4 38.7 44.2 41.4 42.4 43.1 C40.9 44.6 38.7 44.9 37 44 L31.2 49.5 L28.8 47.1 L34.5 41.5 C33.7 39.8 34 37.7 35.5 36.2 Z" fill="url(#goldGrad)"/>
+</svg>
