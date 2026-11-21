@@ -528,6 +528,236 @@
     }
     .faq-answer-body.open { display: block; }
 
+  
+    /* SMART 3-FIELD SEARCH BAR */
+    .smart-search-wrap {
+      position: relative;
+      max-width: 1140px;
+      margin: 0 auto 14px;
+    }
+    .smart-search-bar {
+      background: var(--white);
+      border: 3px solid var(--gold);
+      border-radius: var(--radius-lg);
+      padding: 8px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+      align-items: stretch;
+      gap: 4px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+    .smart-input-with-tag {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .smart-optional-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #9CA3AF;
+      background: #F3F4F6;
+      padding: 2px 7px;
+      border-radius: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      pointer-events: none;
+    }
+    .smart-field {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6px 14px;
+      border-right: 1px solid rgba(10,22,51,0.12);
+      text-align: left;
+      min-width: 0;
+    }
+    .smart-field:last-of-type {
+      border-right: none;
+    }
+    .smart-field-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--navy-deep);
+      opacity: 0.75;
+      margin-bottom: 2px;
+    }
+    .smart-field-input {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-size: 1.05rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      color: var(--navy-deep);
+      background: transparent;
+      padding: 4px 0;
+      min-width: 0;
+    }
+    .smart-field-input::placeholder {
+      color: #6B7280;
+      font-weight: 400;
+    }
+    .smart-search-tip {
+      max-width: 960px;
+      margin: 10px auto 30px;
+      font-size: 0.88rem;
+      color: #CBD5E1;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* TOP SEARCHES RIGHT NOW (3-COLUMN PILL GRID) */
+    .top-searches-section {
+      background: var(--ivory);
+      padding: 48px 0 42px;
+      border-bottom: 1px solid rgba(201,162,39,0.28);
+    }
+    .top-searches-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .top-search-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: #0A1633;
+      color: #FFFFFF;
+      font-size: 0.88rem;
+      font-weight: 600;
+      line-height: 1.3;
+      text-decoration: none;
+      border: 1.5px solid rgba(201,162,39,0.45);
+      box-shadow: 0 4px 12px rgba(10,22,51,0.12);
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease;
+    }
+    .top-search-pill:hover,
+    .top-search-pill:focus-visible {
+      background: #C9A227;
+      color: #0A1633;
+      border-color: #C9A227;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(201,162,39,0.35);
+      outline: none;
+    }
+
+    /* ERROR-ONLY GUIDANCE POPUP */
+    .smart-popup-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,22,51,0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1200;
+    }
+    .smart-popup-backdrop.open {
+      display: flex;
+    }
+    .smart-popup-card {
+      background: #FFFFFF;
+      border: 2.5px solid #C9A227;
+      border-radius: var(--radius-lg);
+      max-width: 520px;
+      width: 100%;
+      padding: 26px 24px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+      text-align: left;
+    }
+    .smart-popup-title {
+      color: #0A1633;
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .smart-popup-msg {
+      color: #1F2937;
+      font-size: 0.98rem;
+      line-height: 1.55;
+      margin-bottom: 18px;
+      background: #FAF8F3;
+      border-left: 4px solid #C9A227;
+      padding: 12px 14px;
+      border-radius: 6px;
+    }
+    .smart-popup-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+    .smart-popup-secondary {
+      background: #FAF8F3;
+      color: #0A1633;
+      border: 1.5px solid #0A1633;
+      border-radius: var(--radius-md);
+      padding: 10px 18px;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+    .smart-popup-secondary:hover {
+      background: #0A1633;
+      color: #FFFFFF;
+    }
+
+    @media (max-width: 900px) {
+      .top-searches-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 1024px) {
+      .smart-search-bar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .smart-field {
+        border-right: none;
+        border-bottom: 1px solid rgba(10,22,51,0.12);
+      }
+      .smart-search-bar .btn-gold {
+        grid-column: 1 / -1;
+        width: 100%;
+      }
+    }
+    @media (max-width: 768px) {
+      .smart-search-bar {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 10px;
+      }
+      .smart-field {
+        border-right: none;
+        border-bottom: 1px solid rgba(10,22,51,0.12);
+        padding: 10px 12px;
+      }
+      .smart-field:last-of-type {
+        border-bottom: none;
+        margin-bottom: 8px;
+      }
+      .smart-search-bar .btn-gold {
+        width: 100%;
+      }
+    }
+    @media (max-width: 600px) {
+      .top-searches-grid {
+        grid-template-columns: 1fr;
+      }
+      .top-search-pill {
+        width: 100%;
+      }
+    }
+
   </style>
 
   <!-- Advanced SEO JSON-LD HowTo & Organization Schema -->
@@ -591,19 +821,116 @@
       <h1 class="hero-title">What Is Broken?</h1>
       <p class="hero-subtext">Type your error code. We will show you the fix.</p>
 
-      <div style="position:relative; max-width:780px; margin:0 auto 36px;"><form class="royal-search-box" style="margin:0;" onsubmit="handleHeroSearchSubmit(event)">
-        <input
-          id="heroSearchInput"
-          type="text"
-          class="royal-search-input"
-          placeholder="Type code here... Example: E1"
-          autocomplete="off"
-          oninput="handleSearchInput(this.value)"
-        />
-        <button type="submit" class="btn-gold">Find Fix</button>
-      </form>
-<div id="searchSuggestDropdown" class="search-suggest-dropdown"></div>
-</div>
+      <div class="smart-search-wrap">
+        <form class="smart-search-bar" onsubmit="handleHeroSearchSubmit(event)">
+          <div class="smart-field">
+            <label for="smartProductInput" class="smart-field-label">What is Broken?</label>
+            <input
+              id="smartProductInput"
+              type="text"
+              list="smartProductList"
+              class="smart-field-input"
+              placeholder="Washing Machine, AC, TV..."
+              autocomplete="off"
+              oninput="handleSmartFieldInput()"
+            />
+            <datalist id="smartProductList">
+              <option value="Washing Machine"></option>
+              <option value="AC"></option>
+              <option value="Refrigerator"></option>
+              <option value="TV"></option>
+              <option value="Laptop"></option>
+              <option value="Printer"></option>
+              <option value="Treadmill"></option>
+              <option value="Microwave"></option>
+              <option value="Dishwasher"></option>
+              <option value="Geyser"></option>
+              <option value="Smartphone"></option>
+              <option value="Water Purifier"></option>
+              <option value="Vacuum Cleaner"></option>
+              <option value="Soundbar"></option>
+              <option value="Projector"></option>
+              <option value="Set-Top Box"></option>
+              <option value="BP Machine"></option>
+              <option value="Glucometer"></option>
+              <option value="Mixer Grinder"></option>
+              <option value="Induction"></option>
+              <option value="Watch"></option>
+              <option value="Car / Bike / EV"></option>
+              <option value="Gaming Console"></option>
+            </datalist>
+          </div>
+          <div class="smart-field">
+            <label for="smartBrandInput" class="smart-field-label">Brand?</label>
+            <input
+              id="smartBrandInput"
+              type="text"
+              list="smartBrandList"
+              class="smart-field-input"
+              placeholder="Samsung, LG, Daikin, HP..."
+              autocomplete="off"
+              oninput="handleSmartFieldInput()"
+            />
+            <datalist id="smartBrandList">
+              <option value="Samsung"></option>
+              <option value="LG"></option>
+              <option value="Daikin"></option>
+              <option value="Whirlpool"></option>
+              <option value="Bosch"></option>
+              <option value="HP"></option>
+              <option value="Canon"></option>
+              <option value="Sony"></option>
+              <option value="Voltas"></option>
+              <option value="Epson"></option>
+              <option value="Dell"></option>
+              <option value="Lenovo"></option>
+              <option value="Apple"></option>
+              <option value="IFB"></option>
+              <option value="AO Smith"></option>
+              <option value="PowerMax"></option>
+              <option value="Omron"></option>
+              <option value="Casio"></option>
+              <option value="Preethi"></option>
+              <option value="Maruti"></option>
+              <option value="Blue Star"></option>
+              <option value="Carrier"></option>
+              <option value="Godrej"></option>
+              <option value="Haier"></option>
+              <option value="Hitachi"></option>
+              <option value="Panasonic"></option>
+              <option value="Philips"></option>
+              <option value="TCL"></option>
+              <option value="Xiaomi"></option>
+              <option value="OnePlus"></option>
+            </datalist>
+          </div>
+          <div class="smart-field">
+            <label for="smartModelInput" class="smart-field-label">MODEL NUMBER? - Optional</label>
+            <input
+              id="smartModelInput"
+              type="text"
+              class="smart-field-input"
+              placeholder="Example: WA70BG4582, FHM1408BDW"
+              autocomplete="off"
+              oninput="handleSmartFieldInput()"
+            />
+          </div>
+          <div class="smart-field">
+            <label for="heroSearchInput" class="smart-field-label">Error Code?</label>
+            <input
+              id="heroSearchInput"
+              type="text"
+              class="smart-field-input"
+              placeholder="Example: E1, OE, CH05, E-01"
+              autocomplete="off"
+              oninput="handleSearchInput(this.value)"
+            />
+          </div>
+          <button type="submit" class="btn-gold">Find Fix</button>
+        </form>
+        <div id="searchSuggestDropdown" class="search-suggest-dropdown"></div>
+      </div>
+      <p class="smart-search-tip">Tip: Model Number product ke peeche wale sticker pe milta hai. Example: Samsung Washing Machine WA70BG4582 E1</p>
 
       <!-- Live Search Results Drawer -->
       <div id="heroSearchResults" class="hero-search-results" aria-live="polite">
@@ -614,6 +941,70 @@
         <div id="searchResultsBody"></div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- 3. CATEGORIES - EASY TO UNDERSTAND -->
+  <section class="section-block">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">What Is Broken? Choose One</h2>
+        <p class="section-subtitle">Select your device category to browse popular models and verified error fixes.</p>
+      </div>
+
+      <div class="categories-grid" id="categoriesGrid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- TOP SEARCHES RIGHT NOW -->
+  <section id="topSearchesSection" class="top-searches-section" aria-labelledby="topSearchesHeading">
+    <div class="container">
+      <div class="section-header" style="margin-bottom:24px;">
+        <h2 id="topSearchesHeading" class="section-title">Top Searches Right Now</h2>
+      </div>
+      <div class="top-searches-grid">
+        <a href="/samsung-washing-machine-e1-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/samsung-washing-machine-e1-error/', 'Washing Machine', 'Samsung', 'E1')">Samsung Washing Machine E1 Error</a>
+        <a href="/lg-washing-machine-oe-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/lg-washing-machine-oe-error/', 'Washing Machine', 'LG', 'OE')">LG Washing Machine OE Error</a>
+        <a href="/samsung-ac-e1-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/samsung-ac-e1-error/', 'AC', 'Samsung', 'E1')">Samsung AC E1 Error</a>
+        <a href="/lg-ac-ch05-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/lg-ac-ch05-error/', 'AC', 'LG', 'CH05')">LG AC CH05 Error</a>
+        <a href="/daikin-ac-u4-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/daikin-ac-u4-error/', 'AC', 'Daikin', 'U4')">Daikin AC U4 Error</a>
+        <a href="/voltas-ac-e1-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/voltas-ac-e1-error/', 'AC', 'Voltas', 'E1')">Voltas AC E1 Error</a>
+        <a href="/whirlpool-washing-machine-e1-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/whirlpool-washing-machine-e1-error/', 'Washing Machine', 'Whirlpool', 'E1')">Whirlpool Washing Machine E1 Error</a>
+        <a href="/bosch-washing-machine-e1-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/bosch-washing-machine-e1-error/', 'Washing Machine', 'Bosch', 'E1')">Bosch Washing Machine E1 Error</a>
+        <a href="/hp-printer-paper-jam/" class="top-search-pill" onclick="openTopSearchLink(event, '/hp-printer-paper-jam/', 'Printer', 'HP', 'Paper Jam')">HP Printer Paper Jam Fix</a>
+        <a href="/canon-printer-e05-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/canon-printer-e05-error/', 'Printer', 'Canon', 'E05')">Canon Printer E05 Error</a>
+        <a href="/epson-printer-e-01-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/epson-printer-e-01-error/', 'Printer', 'Epson', 'E-01')">Epson Printer E-01 Error</a>
+        <a href="/samsung-tv-black-screen/" class="top-search-pill" onclick="openTopSearchLink(event, '/samsung-tv-black-screen/', 'TV', 'Samsung', 'Black Screen')">Samsung TV Black Screen Fix</a>
+        <a href="/lg-tv-no-signal/" class="top-search-pill" onclick="openTopSearchLink(event, '/lg-tv-no-signal/', 'TV', 'LG', 'NO-SIGNAL')">LG TV No Signal Fix</a>
+        <a href="/sony-tv-blinking-red-light/" class="top-search-pill" onclick="openTopSearchLink(event, '/sony-tv-blinking-red-light/', 'TV', 'Sony', 'BLINK-4')">Sony TV Blinking Red Light Fix</a>
+        <a href="/hp-laptop-blue-screen/" class="top-search-pill" onclick="openTopSearchLink(event, '/hp-laptop-blue-screen/', 'Laptop', 'HP', 'BSOD')">HP Laptop Blue Screen Fix</a>
+        <a href="/dell-laptop-battery-not-charging/" class="top-search-pill" onclick="openTopSearchLink(event, '/dell-laptop-battery-not-charging/', 'Laptop', 'Dell', 'Battery')">Dell Laptop Battery Not Charging</a>
+        <a href="/lenovo-laptop-overheating/" class="top-search-pill" onclick="openTopSearchLink(event, '/lenovo-laptop-overheating/', 'Laptop', 'Lenovo', 'Overheating')">Lenovo Laptop Overheating Fix</a>
+        <a href="/treadmill-e1-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/treadmill-e1-error/', 'Treadmill', '', 'E1')">Treadmill E1 Error Fix</a>
+        <a href="/powermax-treadmill-e2-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/powermax-treadmill-e2-error/', 'Treadmill', 'PowerMax', 'E2')">PowerMax Treadmill E2 Error</a>
+        <a href="/casio-watch-reset/" class="top-search-pill" onclick="openTopSearchLink(event, '/casio-watch-reset/', 'Watch', 'Casio', 'Reset')">Casio Watch Reset Fix</a>
+        <a href="/omron-bp-machine-e1-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/omron-bp-machine-e1-error/', 'BP Machine', 'Omron', 'E1')">Omron BP Machine E1 Error</a>
+        <a href="/samsung-refrigerator-e1-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/samsung-refrigerator-e1-error/', 'Refrigerator', 'Samsung', 'E1')">Samsung Refrigerator E1 Error</a>
+        <a href="/lg-refrigerator-er-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/lg-refrigerator-er-error/', 'Refrigerator', 'LG', 'ER')">LG Refrigerator ER Error</a>
+        <a href="/ifb-microwave-e1-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/ifb-microwave-e1-error/', 'Microwave', 'IFB', 'E1')">IFB Microwave E1 Error</a>
+        <a href="/bosch-dishwasher-e15-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/bosch-dishwasher-e15-error/', 'Dishwasher', 'Bosch', 'E15')">Bosch Dishwasher E15 Error</a>
+        <a href="/ao-smith-geyser-e1-error/" class="top-search-pill" onclick="openTopSearchLink(event, '/ao-smith-geyser-e1-error/', 'Geyser', 'AO Smith', 'E1')">AO Smith Geyser E1 Error</a>
+        <a href="/iphone-battery-draining-fast/" class="top-search-pill" onclick="openTopSearchLink(event, '/iphone-battery-draining-fast/', 'Smartphone', 'Apple', 'Battery')">iPhone Battery Draining Fast Fix</a>
+        <a href="/samsung-mobile-overheating/" class="top-search-pill" onclick="openTopSearchLink(event, '/samsung-mobile-overheating/', 'Smartphone', 'Samsung', 'Overheating')">Samsung Mobile Overheating Fix</a>
+        <a href="/maruti-check-engine-light/" class="top-search-pill" onclick="openTopSearchLink(event, '/maruti-check-engine-light/', 'Car', 'Maruti', 'Check Engine')">Maruti Check Engine Light Fix</a>
+        <a href="/preethi-mixer-overload/" class="top-search-pill" onclick="openTopSearchLink(event, '/preethi-mixer-overload/', 'Mixer', 'Preethi', 'Overload')">Preethi Mixer Overload Fix</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. HOW IT WORKS - 3 EASY STEPS -->
+  <section id="stepsSection" style="background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-darker) 100%); padding: 48px 0; border-top: 2px solid rgba(201,162,39,0.35); border-bottom: 2px solid rgba(201,162,39,0.35);">
+    <div class="container">
+      <div class="section-header" style="margin-bottom: 28px;">
+        <h2 class="section-title" style="color: var(--white);">3 Simple Steps to Fix Your Device</h2>
+      </div>
       <!-- 3 Easy Steps -->
       <div class="hero-steps-grid">
         <div class="hero-step-card">
@@ -637,20 +1028,6 @@
             <p>Confirm error clearance on your display panel in under 3 minutes.</p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. CATEGORIES - EASY TO UNDERSTAND -->
-  <section class="section-block">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">What Is Broken? Choose One</h2>
-        <p class="section-subtitle">Select your device category to browse popular models and verified error fixes.</p>
-      </div>
-
-      <div class="categories-grid" id="categoriesGrid">
-        <!-- Populated by JS -->
       </div>
     </div>
   </section>
@@ -683,6 +1060,18 @@
       </div>
     </div>
   </footer>
+
+  <!-- SMART SEARCH ERROR-ONLY GUIDANCE POPUP -->
+  <div id="smartErrorOnlyPopup" class="smart-popup-backdrop" role="dialog" aria-modal="true" aria-labelledby="smartPopupTitle" onclick="if(event.target===this) closeSmartErrorOnlyPopup()">
+    <div class="smart-popup-card">
+      <h3 id="smartPopupTitle" class="smart-popup-title">Select Product &amp; Brand for Exact Fix</h3>
+      <p id="smartPopupMessage" class="smart-popup-msg">E1 alag-alag product me alag hota hai. Please Product + Brand bhi daalo.</p>
+      <div class="smart-popup-actions">
+        <button type="button" class="smart-popup-secondary" onclick="closeSmartErrorOnlyPopup(false)">Show All Matching Products</button>
+        <button type="button" class="btn-gold btn-gold-sm" onclick="closeSmartErrorOnlyPopup(true)">Select Product &amp; Brand</button>
+      </div>
+    </div>
+  </div>
 
   <!-- MODAL -->
   <div id="royalModalBackdrop" class="modal-backdrop" onclick="handleBackdropClick(event)">
@@ -10413,55 +10802,269 @@
     }
 
     // Smart Universal Search with Strict Exact Match Ranking
-    window.runHeroSearch = function(rawQuery) {
+    const TOP_SEARCH_ROUTES = {"/samsung-washing-machine-e1-error":{"label":"Samsung Washing Machine E1 Error","prod":"Washing Machine","brand":"Samsung","code":"E1"},"/lg-washing-machine-oe-error":{"label":"LG Washing Machine OE Error","prod":"Washing Machine","brand":"LG","code":"OE"},"/samsung-ac-e1-error":{"label":"Samsung AC E1 Error","prod":"AC","brand":"Samsung","code":"E1"},"/lg-ac-ch05-error":{"label":"LG AC CH05 Error","prod":"AC","brand":"LG","code":"CH05"},"/daikin-ac-u4-error":{"label":"Daikin AC U4 Error","prod":"AC","brand":"Daikin","code":"U4"},"/voltas-ac-e1-error":{"label":"Voltas AC E1 Error","prod":"AC","brand":"Voltas","code":"E1"},"/whirlpool-washing-machine-e1-error":{"label":"Whirlpool Washing Machine E1 Error","prod":"Washing Machine","brand":"Whirlpool","code":"E1"},"/bosch-washing-machine-e1-error":{"label":"Bosch Washing Machine E1 Error","prod":"Washing Machine","brand":"Bosch","code":"E1"},"/hp-printer-paper-jam":{"label":"HP Printer Paper Jam Fix","prod":"Printer","brand":"HP","code":"Paper Jam"},"/canon-printer-e05-error":{"label":"Canon Printer E05 Error","prod":"Printer","brand":"Canon","code":"E05"},"/epson-printer-e-01-error":{"label":"Epson Printer E-01 Error","prod":"Printer","brand":"Epson","code":"E-01"},"/samsung-tv-black-screen":{"label":"Samsung TV Black Screen Fix","prod":"TV","brand":"Samsung","code":"Black Screen"},"/lg-tv-no-signal":{"label":"LG TV No Signal Fix","prod":"TV","brand":"LG","code":"NO-SIGNAL"},"/sony-tv-blinking-red-light":{"label":"Sony TV Blinking Red Light Fix","prod":"TV","brand":"Sony","code":"BLINK-4"},"/hp-laptop-blue-screen":{"label":"HP Laptop Blue Screen Fix","prod":"Laptop","brand":"HP","code":"BSOD"},"/dell-laptop-battery-not-charging":{"label":"Dell Laptop Battery Not Charging","prod":"Laptop","brand":"Dell","code":"Battery"},"/lenovo-laptop-overheating":{"label":"Lenovo Laptop Overheating Fix","prod":"Laptop","brand":"Lenovo","code":"Overheating"},"/treadmill-e1-error":{"label":"Treadmill E1 Error Fix","prod":"Treadmill","brand":"","code":"E1"},"/powermax-treadmill-e2-error":{"label":"PowerMax Treadmill E2 Error","prod":"Treadmill","brand":"PowerMax","code":"E2"},"/casio-watch-reset":{"label":"Casio Watch Reset Fix","prod":"Watch","brand":"Casio","code":"Reset"},"/omron-bp-machine-e1-error":{"label":"Omron BP Machine E1 Error","prod":"BP Machine","brand":"Omron","code":"E1"},"/samsung-refrigerator-e1-error":{"label":"Samsung Refrigerator E1 Error","prod":"Refrigerator","brand":"Samsung","code":"E1"},"/lg-refrigerator-er-error":{"label":"LG Refrigerator ER Error","prod":"Refrigerator","brand":"LG","code":"ER"},"/ifb-microwave-e1-error":{"label":"IFB Microwave E1 Error","prod":"Microwave","brand":"IFB","code":"E1"},"/bosch-dishwasher-e15-error":{"label":"Bosch Dishwasher E15 Error","prod":"Dishwasher","brand":"Bosch","code":"E15"},"/ao-smith-geyser-e1-error":{"label":"AO Smith Geyser E1 Error","prod":"Geyser","brand":"AO Smith","code":"E1"},"/iphone-battery-draining-fast":{"label":"iPhone Battery Draining Fast Fix","prod":"Smartphone","brand":"Apple","code":"Battery"},"/samsung-mobile-overheating":{"label":"Samsung Mobile Overheating Fix","prod":"Smartphone","brand":"Samsung","code":"Overheating"},"/maruti-check-engine-light":{"label":"Maruti Check Engine Light Fix","prod":"Car","brand":"Maruti","code":"Check Engine"},"/preethi-mixer-overload":{"label":"Preethi Mixer Overload Fix","prod":"Mixer","brand":"Preethi","code":"Overload"}};
+
+    const SMART_PRODUCT_ALIASES = {
+      "ac": ["air conditioner", "split ac", "window ac", "ac", "inverter ac", "hvac"],
+      "air conditioner": ["air conditioner", "split ac", "window ac", "ac"],
+      "tv": ["led / smart tv", "tv & video", "smart tv", "led tv", "oled", "qled", "tv"],
+      "washing machine": ["washing machine", "washer"],
+      "refrigerator": ["refrigerator", "fridge"],
+      "laptop": ["laptop", "notebook", "macbook"],
+      "printer": ["printer", "laserjet", "inkjet", "pixma"],
+      "treadmill": ["treadmill"],
+      "microwave": ["microwave"],
+      "dishwasher": ["dishwasher"],
+      "geyser": ["geyser", "water heater"],
+      "smartphone": ["smartphone", "iphone", "cell phone", "mobile", "phone"],
+      "mobile": ["smartphone", "iphone", "cell phone", "mobile"],
+      "bp machine": ["bp monitor", "blood pressure", "bp"],
+      "watch": ["watch", "smartwatch", "wearables"],
+      "mixer": ["mixer grinder", "mixer"],
+      "car": ["car", "maruti", "automotive", "car bike & ev", "obd"],
+      "car / bike / ev": ["car", "bike", "ev", "car bike & ev"]
+    };
+
+    function matchesSmartProduct(item, prodQuery) {
+      if (!prodQuery) return true;
+      const pq = prodQuery.toLowerCase().trim();
+      const g = (item.group || "").toLowerCase();
+      const d = (item.department || "").toLowerCase();
+      const m = (item.model || "").toLowerCase();
+      const aliases = SMART_PRODUCT_ALIASES[pq] || [pq];
+      for (let i = 0; i < aliases.length; i++) {
+        const a = aliases[i];
+        if (a === "ac") {
+          if (g === "ac" || g.includes("air conditioner") || g.endsWith(" ac")) return true;
+        } else if (a === "tv") {
+          if (d === "tv & video" || g.includes("tv")) return true;
+        } else if (g.includes(a) || d.includes(a) || m.includes(a)) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function matchesSmartBrand(item, brandQuery) {
+      if (!brandQuery) return true;
+      const bq = brandQuery.toLowerCase().trim();
+      const b = (item.brand || "").toLowerCase();
+      const m = (item.model || "").toLowerCase();
+      if (bq === "maruti" || bq === "maruti suzuki") {
+        return b.includes("maruti") || b.includes("suzuki") || m.includes("maruti");
+      }
+      if (bq === "ao smith" || bq === "a.o. smith") {
+        return b.includes("smith");
+      }
+      return b.includes(bq) || m.includes(bq);
+    }
+
+    function matchesSmartCodeExact(item, codeQuery) {
+      if (!codeQuery) return false;
+      const cq = codeQuery.toLowerCase().trim();
+      if (item._codeLower === cq) return true;
+      if (item._codeParts && item._codeParts.includes(cq)) return true;
+      const normalized = cq.replace(/[^a-z0-9]/g, "");
+      if (normalized && normalized.length >= 2 && item._codeLower.replace(/[^a-z0-9]/g, "") === normalized) return true;
+      return false;
+    }
+
+    function normalizeModelStr(s) {
+      return String(s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+    }
+
+    function matchesSmartModel(item, modelQuery) {
+      if (!modelQuery) return true;
+      const mq = modelQuery.toLowerCase().trim();
+      const mqNorm = normalizeModelStr(mq);
+      const m = (item.model || "").toLowerCase();
+      const mNorm = normalizeModelStr(m);
+      const slugNorm = normalizeModelStr(item.slug || "");
+      if (m.includes(mq)) return true;
+      if (mqNorm.length >= 2 && (mNorm.includes(mqNorm) || mqNorm.includes(mNorm) || slugNorm.includes(mqNorm))) return true;
+      // Handle combined inputs like "AR18E1" where user appends code onto model
+      const codeNorm = normalizeModelStr(item.code || "");
+      if (mqNorm.length >= 4 && codeNorm && mqNorm.endsWith(codeNorm)) {
+        const stripped = mqNorm.slice(0, mqNorm.length - codeNorm.length);
+        if (stripped.length >= 3 && (mNorm.includes(stripped) || stripped.includes(mNorm))) return true;
+      }
+      return false;
+    }
+
+    window.showSmartErrorOnlyPopup = function(codeText) {
+      const backdrop = document.getElementById("smartErrorOnlyPopup");
+      const msgEl = document.getElementById("smartPopupMessage");
+      const cleanCode = (codeText || "E1").trim().toUpperCase();
+      if (msgEl) {
+        msgEl.textContent = `${cleanCode} alag-alag product me alag hota hai. Please Product + Brand bhi daalo.`;
+      }
+      if (backdrop) backdrop.classList.add("open");
+    };
+
+    window.closeSmartErrorOnlyPopup = function(focusProduct) {
+      const backdrop = document.getElementById("smartErrorOnlyPopup");
+      if (backdrop) backdrop.classList.remove("open");
+      if (focusProduct) {
+        const prodEl = document.getElementById("smartProductInput");
+        if (prodEl) {
+          prodEl.focus();
+          if (typeof prodEl.scrollIntoView === "function") {
+            prodEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        }
+      } else {
+        const panel = document.getElementById("heroSearchResults");
+        if (panel && typeof panel.scrollIntoView === "function") {
+          panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+      }
+    };
+
+    let __smartDebounceTimer = null;
+    window.handleSmartFieldInput = function() {
+      if (__smartDebounceTimer) clearTimeout(__smartDebounceTimer);
+      __smartDebounceTimer = setTimeout(() => {
+        runSmartSearch({ showPopupOnErrorOnly: false, directOpenOnExactModel: false });
+      }, 180);
+    };
+
+    window.runSmartSearch = function(opts) {
+      const options = opts || {};
       const panel = document.getElementById("heroSearchResults");
       const body = document.getElementById("searchResultsBody");
-      const query = (rawQuery || "").trim().toLowerCase();
+      const prodEl = document.getElementById("smartProductInput");
+      const brandEl = document.getElementById("smartBrandInput");
+      const modelEl = document.getElementById("smartModelInput");
+      const codeEl = document.getElementById("heroSearchInput");
 
-      if (!query) {
+      const prod = (options.product !== undefined ? options.product : (prodEl ? prodEl.value : "")).trim();
+      const brand = (options.brand !== undefined ? options.brand : (brandEl ? brandEl.value : "")).trim();
+      const model = (options.model !== undefined ? options.model : (modelEl ? modelEl.value : "")).trim();
+      const code = (options.code !== undefined ? options.code : (codeEl ? codeEl.value : "")).trim();
+
+      if (!prod && !brand && !model && !code) {
         if (panel) panel.classList.remove("visible");
         return;
       }
 
-      if (panel) panel.classList.add("visible");
-      const allFixes = ALL_770_IDS.map(id => ERROR_FIX_DATABASE[id]);
-      const tokens = query.split(/\s+/).filter(Boolean);
-      const isShortCode = tokens.length === 1 && query.length <= 5 && /^[a-z0-9\-:]+$/i.test(query);
+      const codeLower = code.toLowerCase();
+      const codeTokens = codeLower.split(/\s+/).filter(Boolean);
+      const isErrorOnly = !prod && !brand && !model && code.length > 0;
+      const isQuickSearch = !model && (prod.length > 0 || brand.length > 0);
+      const isExactModelSearch = model.length > 0;
+      const isShortSingleCode = codeTokens.length === 1 && codeLower.length <= 6 && /^[a-z0-9\-:._]+$/i.test(codeLower);
 
-      const exactMatches = allFixes.filter(item =>
-        item._codeLower === query || (item._codeParts && item._codeParts.includes(query))
-      );
+      if (isErrorOnly && options.showPopupOnErrorOnly) {
+        showSmartErrorOnlyPopup(code);
+      }
 
-      const exactIds = new Set(exactMatches.map(x => x.id));
+      const exactMatches = [];
+      const relatedMatches = [];
+      let totalExactFound = 0;
 
-      const relatedMatches = allFixes.filter(item => {
-        if (exactIds.has(item.id)) return false;
-        if (isShortCode) {
-          return item._codeLower.startsWith(query) ||
-            (item._codeParts && item._codeParts.some(p => p.startsWith(query))) ||
-            item.brand.toLowerCase() === query;
+      for (let i = 0; i < ALL_770_IDS.length; i++) {
+        const item = ERROR_FIX_DATABASE[ALL_770_IDS[i]];
+        if (!item) continue;
+        if (prod && !matchesSmartProduct(item, prod)) continue;
+        if (brand && !matchesSmartBrand(item, brand)) continue;
+        if (model && !matchesSmartModel(item, model)) continue;
+
+        if (codeLower) {
+          if (matchesSmartCodeExact(item, codeLower)) {
+            totalExactFound++;
+            if (exactMatches.length < 80) exactMatches.push(item);
+          } else if (relatedMatches.length < 40) {
+            if (isShortSingleCode) {
+              if (item._codeLower.startsWith(codeLower) || (item._codeParts && item._codeParts.some(p => p.startsWith(codeLower)))) {
+                relatedMatches.push(item);
+              }
+            } else if (item._haystack.includes(codeLower) || (codeTokens.length > 1 && codeTokens.every(t => item._haystack.includes(t)))) {
+              relatedMatches.push(item);
+            }
+          }
+        } else {
+          totalExactFound++;
+          if (exactMatches.length < 80) exactMatches.push(item);
         }
-        return item._haystack.includes(query) || (tokens.length > 1 && tokens.every(t => item._haystack.includes(t)));
-      }).slice(0, 35);
 
+        if (exactMatches.length >= 80 && relatedMatches.length >= 40 && totalExactFound > 250) {
+          break;
+        }
+      }
+
+      // WAY 2: Exact Search (Model is FILLED) -> Open DIRECTLY the exact 1 fix page on submit! No list, no confusion.
+      if (isExactModelSearch && options.directOpenOnExactModel) {
+        const directTarget = exactMatches[0] || relatedMatches[0];
+        if (directTarget) {
+          if (panel) panel.classList.remove("visible");
+          try {
+            if (window.history && window.history.pushState && directTarget.slug) {
+              window.history.pushState({ fixId: directTarget.id }, "", "/" + directTarget.slug);
+            }
+          } catch (_) {}
+          openErrorModal(directTarget.id);
+          return;
+        }
+        // Fallback if model string matched brand+product without exact code or vice versa: try model + brand + product match
+        let fallbackModelMatch = null;
+        for (let i = 0; i < ALL_770_IDS.length; i++) {
+          const item = ERROR_FIX_DATABASE[ALL_770_IDS[i]];
+          if (!item) continue;
+          if (prod && !matchesSmartProduct(item, prod)) continue;
+          if (brand && !matchesSmartBrand(item, brand)) continue;
+          if (!matchesSmartModel(item, model)) continue;
+          fallbackModelMatch = item;
+          break;
+        }
+        if (fallbackModelMatch) {
+          if (panel) panel.classList.remove("visible");
+          try {
+            if (window.history && window.history.pushState && fallbackModelMatch.slug) {
+              window.history.pushState({ fixId: fallbackModelMatch.id }, "", "/" + fallbackModelMatch.slug);
+            }
+          } catch (_) {}
+          openErrorModal(fallbackModelMatch.id);
+          return;
+        }
+      }
+
+      if (panel) panel.classList.add("visible");
+
+      const querySummary = [brand, prod, model, code].filter(Boolean).join(" · ");
       if (exactMatches.length === 0 && relatedMatches.length === 0) {
-        if (body) body.innerHTML = `<p style="padding:10px; color:var(--text-muted);">No instant match for "${rawQuery}". Contact <a href="mailto:info@errorcodefix.org" style="color:var(--code-red);">info@errorcodefix.org</a> for help.</p>`;
+        if (body) {
+          body.innerHTML = `<p style="padding:10px; color:var(--text-muted);">No instant match for "${querySummary}". Try leaving Model Number blank to browse all models, or email <a href="mailto:info@errorcodefix.org" style="color:var(--code-red);">info@errorcodefix.org</a>.</p>`;
+        }
         return;
       }
 
-      let html = "";
+      let htmlOut = "";
+      if (isErrorOnly) {
+        htmlOut += `
+          <div style="margin-bottom:14px; padding:12px 14px; background:#FFFBEB; border:1.5px solid #C9A227; border-radius:var(--radius-md); font-size:0.88rem; color:#0A1633;">
+            <strong>${code.toUpperCase()} alag-alag product me alag hota hai.</strong> Please Product + Brand bhi daalo — ya neeche apna exact model select karo.
+          </div>
+        `;
+      } else if (isQuickSearch) {
+        htmlOut += `
+          <div style="margin-bottom:14px; padding:12px 16px; background:#0A1633; border:2px solid #C9A227; border-radius:var(--radius-md); font-size:0.95rem; font-weight:700; color:#FFFFFF; text-align:center;">
+            Apna Model Select Karo for 100% Exact Solution
+          </div>
+        `;
+      }
 
       if (exactMatches.length > 0) {
-        html += `
+        const countLabel = totalExactFound > 250 ? "250+ Found" : `${totalExactFound} Found`;
+        htmlOut += `
           <div style="margin-bottom:16px;">
             <div style="font-size:0.85rem; font-weight:800; color:var(--navy-deep); text-transform:uppercase; margin-bottom:8px; border-bottom:2px solid var(--gold); padding-bottom:4px;">
-              Exact Match — ${rawQuery.toUpperCase()} (${exactMatches.length} Found)
+              Exact Match — ${querySummary.toUpperCase()} (${countLabel})
             </div>
             <div style="display:grid; gap:10px; max-height:360px; overflow-y:auto;">
-              ${exactMatches.slice(0, 80).map(fix => `
+              ${exactMatches.map(fix => `
                 <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding:12px; background:var(--ivory); border:2px solid var(--gold); border-radius:var(--radius-md);">
                   <div>
-                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+                    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
                       <span class="error-code-tag">${fix.code}</span>
                       <strong>${fix.brand} ${fix.model} (${fix.group})</strong>
                       ${fix.verification === "Verified" ? '<span class="badge-verified">Verified</span>' : '<span class="badge-pending">Pending Verification</span>'}
@@ -10477,20 +11080,20 @@
       }
 
       if (relatedMatches.length > 0) {
-        html += `
+        htmlOut += `
           <div>
             <div style="font-size:0.85rem; font-weight:800; color:var(--text-muted); text-transform:uppercase; margin-bottom:8px; border-bottom:1px solid rgba(201,162,39,0.3); padding-bottom:4px;">
               Related — You May Also Need (${relatedMatches.length})
             </div>
-            <div style="display:grid; gap:8px; max-height:320px; overflow-y:auto;">
+            <div style="display:grid; gap:8px; max-height:300px; overflow-y:auto;">
               ${relatedMatches.map(fix => `
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding:10px; background:var(--ivory); border:1px solid rgba(201,162,39,0.3); border-radius:var(--radius-sm);">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding:10px 12px; background:var(--white); border:1px solid rgba(201,162,39,0.35); border-radius:var(--radius-md);">
                   <div>
-                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:2px;">
-                      <span class="error-code-tag">${fix.code}</span>
-                      <strong>${fix.brand} ${fix.model} (${fix.group})</strong>
+                    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:2px;">
+                      <span class="error-code-tag" style="font-size:0.78rem;">${fix.code}</span>
+                      <strong style="font-size:0.92rem;">${fix.brand} ${fix.model} (${fix.group})</strong>
                     </div>
-                    <div style="font-size:0.82rem; color:var(--text-muted);">${fix.meaning}</div>
+                    <div style="font-size:0.83rem; color:var(--text-muted);">${fix.meaning}</div>
                   </div>
                   <button type="button" class="btn-gold btn-gold-sm" onclick="openErrorModal('${fix.id}')">See Fix</button>
                 </div>
@@ -10500,23 +11103,116 @@
         `;
       }
 
-      if (body) {
-        body.innerHTML = html;
+      if (body) body.innerHTML = htmlOut;
+    };
+
+    window.runHeroSearch = function(rawQuery) {
+      const prodEl = document.getElementById("smartProductInput");
+      const brandEl = document.getElementById("smartBrandInput");
+      const modelEl = document.getElementById("smartModelInput");
+      const prod = prodEl ? prodEl.value.trim() : "";
+      const brand = brandEl ? brandEl.value.trim() : "";
+      const model = modelEl ? modelEl.value.trim() : "";
+      const q = (rawQuery || "").trim();
+      if (!q && !prod && !brand && !model) {
+        const panel = document.getElementById("heroSearchResults");
+        if (panel) panel.classList.remove("visible");
+        return;
       }
+      runSmartSearch({ product: prod, brand: brand, model: model, code: q, showPopupOnErrorOnly: false, directOpenOnExactModel: false });
     };
 
     window.closeHeroSearch = function() {
+      const prodEl = document.getElementById("smartProductInput");
+      const brandEl = document.getElementById("smartBrandInput");
+      const modelEl = document.getElementById("smartModelInput");
       const input = document.getElementById("heroSearchInput");
       const panel = document.getElementById("heroSearchResults");
+      const dropdown = document.getElementById("searchSuggestDropdown");
+      if (prodEl) prodEl.value = "";
+      if (brandEl) brandEl.value = "";
+      if (modelEl) modelEl.value = "";
       if (input) input.value = "";
       if (panel) panel.classList.remove("visible");
+      if (dropdown) dropdown.classList.remove("visible");
     };
 
     window.handleHeroSearchSubmit = function(e) {
-      e.preventDefault();
-      const input = document.getElementById("heroSearchInput");
-      if (input) runHeroSearch(input.value);
+      if (e) e.preventDefault();
+      const dropdown = document.getElementById("searchSuggestDropdown");
+      if (dropdown) dropdown.classList.remove("visible");
+      runSmartSearch({ showPopupOnErrorOnly: true, directOpenOnExactModel: true });
     };
+
+    function findBestFixForTopSearch(prod, brand, code) {
+      const codeLower = (code || "").toLowerCase().trim();
+      const codeTokens = codeLower.split(/\s+/).filter(Boolean);
+      let bestItem = null;
+      let bestScore = -1;
+
+      for (let i = 0; i < ALL_770_IDS.length; i++) {
+        const item = ERROR_FIX_DATABASE[ALL_770_IDS[i]];
+        if (!item) continue;
+        if (prod && !matchesSmartProduct(item, prod)) continue;
+        if (brand && !matchesSmartBrand(item, brand)) continue;
+
+        let score = 10;
+        if (codeLower) {
+          if (matchesSmartCodeExact(item, codeLower)) score += 50;
+          else if (item._haystack.includes(codeLower)) score += 30;
+          else if (codeTokens.every(t => item._haystack.includes(t))) score += 20;
+          else if (codeTokens.some(t => item._haystack.includes(t))) score += 8;
+        }
+        if (score > bestScore) {
+          bestScore = score;
+          bestItem = item;
+          if (score >= 60) break;
+        }
+      }
+      return bestItem;
+    }
+
+    window.openTopSearchLink = function(event, href, prod, brand, code) {
+      if (event) event.preventDefault();
+      try {
+        if (window.history && window.history.pushState && href) {
+          window.history.pushState({ topSearch: href }, "", href);
+        }
+      } catch (_) {}
+      const best = findBestFixForTopSearch(prod, brand, code);
+      if (best) {
+        openErrorModal(best.id);
+      } else {
+        const prodEl = document.getElementById("smartProductInput");
+        const brandEl = document.getElementById("smartBrandInput");
+        const codeEl = document.getElementById("heroSearchInput");
+        if (prodEl) prodEl.value = prod || "";
+        if (brandEl) brandEl.value = brand || "";
+        if (codeEl) codeEl.value = code || "";
+        runSmartSearch({ showPopupOnErrorOnly: false });
+      }
+    };
+
+    function resolveInitialUrlRoute() {
+      const rawPath = (window.location.pathname || "/").replace(/\/+$/, "").toLowerCase();
+      if (!rawPath || rawPath === "/" || rawPath === "/index.html") return;
+      if (TOP_SEARCH_ROUTES[rawPath]) {
+        const r = TOP_SEARCH_ROUTES[rawPath];
+        const best = findBestFixForTopSearch(r.prod, r.brand, r.code);
+        if (best) {
+          openErrorModal(best.id);
+          return;
+        }
+      }
+      const slug = rawPath.replace(/^\/+/, "");
+      for (let i = 0; i < ALL_770_IDS.length; i++) {
+        const it = ERROR_FIX_DATABASE[ALL_770_IDS[i]];
+        if (it && it.slug && it.slug.toLowerCase() === slug) {
+          openErrorModal(it.id);
+          return;
+        }
+      }
+    }
 
     /* Build Error Page HTML */
     function buildErrorPageHTML(item, copyBtnId) {
@@ -10899,6 +11595,8 @@
       renderLangDropdownOptions();
       if (isSecretOpsRoute()) {
         openAdminModal();
+      } else {
+        resolveInitialUrlRoute();
       }
     });
   </script>
