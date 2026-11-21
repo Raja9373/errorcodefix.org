@@ -6,31 +6,156 @@
   "cleanUrls": true,
   "headers": [
     {
-      "source": "/(sitemap|sitemap-1|sitemap-2|sitemap-index).xml",
+      "source": "/(sitemap|sitemap-index|sitemap-[0-9]+)\\.xml",
       "headers": [
-        { "key": "Content-Type", "value": "application/xml; charset=utf-8" },
-        { "key": "Cache-Control", "value": "public, max-age=3600" }
+        {
+          "key": "Content-Type",
+          "value": "application/xml; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
       ]
     },
     {
       "source": "/robots.txt",
       "headers": [
-        { "key": "Content-Type", "value": "text/plain; charset=utf-8" }
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
       ]
     }
   ],
   "rewrites": [
-    { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
-    { "source": "/sitemap-1.xml", "destination": "/sitemap-1.xml" },
-    { "source": "/sitemap-2.xml", "destination": "/sitemap-2.xml" },
-    { "source": "/sitemap-index.xml", "destination": "/sitemap-index.xml" },
-    { "source": "/robots.txt", "destination": "/robots.txt" },
-    { "source": "/favicon.ico", "destination": "/favicon.ico" },
-    { "source": "/favicon.svg", "destination": "/favicon.svg" },
-    { "source": "/favicon-32x32.png", "destination": "/favicon-32x32.png" },
-    { "source": "/favicon-48x48.png", "destination": "/favicon-48x48.png" },
-    { "source": "/favicon-192x192.png", "destination": "/favicon-192x192.png" },
-    { "source": "/apple-touch-icon.png", "destination": "/apple-touch-icon.png" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap.xml"
+    },
+    {
+      "source": "/sitemap-index.xml",
+      "destination": "/sitemap-index.xml"
+    },
+    {
+      "source": "/sitemap-1.xml",
+      "destination": "/sitemap-1.xml"
+    },
+    {
+      "source": "/sitemap-2.xml",
+      "destination": "/sitemap-2.xml"
+    },
+    {
+      "source": "/sitemap-3.xml",
+      "destination": "/sitemap-3.xml"
+    },
+    {
+      "source": "/sitemap-4.xml",
+      "destination": "/sitemap-4.xml"
+    },
+    {
+      "source": "/sitemap-5.xml",
+      "destination": "/sitemap-5.xml"
+    },
+    {
+      "source": "/sitemap-6.xml",
+      "destination": "/sitemap-6.xml"
+    },
+    {
+      "source": "/sitemap-7.xml",
+      "destination": "/sitemap-7.xml"
+    },
+    {
+      "source": "/sitemap-8.xml",
+      "destination": "/sitemap-8.xml"
+    },
+    {
+      "source": "/sitemap-9.xml",
+      "destination": "/sitemap-9.xml"
+    },
+    {
+      "source": "/sitemap-10.xml",
+      "destination": "/sitemap-10.xml"
+    },
+    {
+      "source": "/sitemap-11.xml",
+      "destination": "/sitemap-11.xml"
+    },
+    {
+      "source": "/sitemap-12.xml",
+      "destination": "/sitemap-12.xml"
+    },
+    {
+      "source": "/sitemap-13.xml",
+      "destination": "/sitemap-13.xml"
+    },
+    {
+      "source": "/sitemap-14.xml",
+      "destination": "/sitemap-14.xml"
+    },
+    {
+      "source": "/sitemap-15.xml",
+      "destination": "/sitemap-15.xml"
+    },
+    {
+      "source": "/sitemap-16.xml",
+      "destination": "/sitemap-16.xml"
+    },
+    {
+      "source": "/sitemap-17.xml",
+      "destination": "/sitemap-17.xml"
+    },
+    {
+      "source": "/sitemap-18.xml",
+      "destination": "/sitemap-18.xml"
+    },
+    {
+      "source": "/sitemap-19.xml",
+      "destination": "/sitemap-19.xml"
+    },
+    {
+      "source": "/sitemap-20.xml",
+      "destination": "/sitemap-20.xml"
+    },
+    {
+      "source": "/sitemap-21.xml",
+      "destination": "/sitemap-21.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/robots.txt"
+    },
+    {
+      "source": "/favicon.ico",
+      "destination": "/favicon.ico"
+    },
+    {
+      "source": "/favicon.svg",
+      "destination": "/favicon.svg"
+    },
+    {
+      "source": "/favicon-32x32.png",
+      "destination": "/favicon-32x32.png"
+    },
+    {
+      "source": "/favicon-48x48.png",
+      "destination": "/favicon-48x48.png"
+    },
+    {
+      "source": "/favicon-192x192.png",
+      "destination": "/favicon-192x192.png"
+    },
+    {
+      "source": "/apple-touch-icon.png",
+      "destination": "/apple-touch-icon.png"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
