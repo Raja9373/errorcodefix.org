@@ -2,6 +2,7 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import fs from 'fs';
 import path from 'path';
+import zlib from 'zlib';
 import {defineConfig} from 'vite';
 
 const rootDir = import.meta.dirname;
@@ -19,6 +20,8 @@ export default defineConfig(() => {
           server.middlewares.use((req, res, next) => {
             const rawUrl = req.url || '/';
             const urlPath = rawUrl.split('?')[0];
+            const acceptEnc = String(req.headers['accept-encoding'] || '');
+            const supportsGzip = acceptEnc.includes('gzip');
 
             // Let Vite internal endpoints & source assets pass through untouched
             if (
@@ -28,6 +31,38 @@ export default defineConfig(() => {
               urlPath.startsWith('/src/')
             ) {
               return next();
+            }
+
+            // Serve lazy-loaded /assets/* bundles with 7-day cache & gzip compression
+            if (urlPath.startsWith('/assets/')) {
+              const relPath = urlPath.replace(/^\/+/, '');
+              const targetFile = path.join(rootDir, relPath);
+              if (fs.existsSync(targetFile) && fs.statSync(targetFile).isFile()) {
+                const ext = path.extname(targetFile).toLowerCase();
+                const contentType =
+                  ext === '.js'
+                    ? 'application/javascript; charset=utf-8'
+                    : ext === '.css'
+                      ? 'text/css; charset=utf-8'
+                      : 'application/octet-stream';
+                res.statusCode = 200;
+                res.setHeader('Content-Type', contentType);
+                res.setHeader('Cache-Control', 'public, max-age=604800, s-maxage=604800, immutable');
+                res.setHeader('Vary', 'Accept-Encoding');
+                const gzFile = targetFile + '.gz';
+                if (supportsGzip && fs.existsSync(gzFile)) {
+                  res.setHeader('Content-Encoding', 'gzip');
+                  fs.createReadStream(gzFile).pipe(res);
+                  return;
+                }
+                if (supportsGzip) {
+                  res.setHeader('Content-Encoding', 'gzip');
+                  fs.createReadStream(targetFile).pipe(zlib.createGzip()).pipe(res);
+                  return;
+                }
+                fs.createReadStream(targetFile).pipe(res);
+                return;
+              }
             }
 
             // Serve XML sitemaps and robots.txt directly from root with proper headers
@@ -56,11 +91,18 @@ export default defineConfig(() => {
               return next();
             }
 
-            // Stream the standalone 28MB index.html directly so Vite dev pre-warming never OOMs parsing it
+            // Stream the fast minified index.html with 7-day caching + gzip compression
             const indexPath = path.join(rootDir, 'index.html');
             if (fs.existsSync(indexPath)) {
               res.statusCode = 200;
               res.setHeader('Content-Type', 'text/html; charset=utf-8');
+              res.setHeader('Cache-Control', 'public, max-age=604800, s-maxage=604800, stale-while-revalidate=86400');
+              res.setHeader('Vary', 'Accept-Encoding');
+              if (supportsGzip) {
+                res.setHeader('Content-Encoding', 'gzip');
+                fs.createReadStream(indexPath).pipe(zlib.createGzip()).pipe(res);
+                return;
+              }
               fs.createReadStream(indexPath).pipe(res);
               return;
             }
