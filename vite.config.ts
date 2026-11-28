@@ -71,6 +71,7 @@ export default defineConfig(() => {
               if (fs.existsSync(xmlFile)) {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+                res.setHeader('X-Robots-Tag', 'noindex, follow');
                 fs.createReadStream(xmlFile).pipe(res);
                 return;
               }
