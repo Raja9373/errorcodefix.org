@@ -86,8 +86,15 @@ export default defineConfig(() => {
               }
             }
 
-            // Let static files with extensions (favicon, png, ico, svg, css, js, etc.) fall through to Vite static server
-            if (/\.[a-z0-9]+$/i.test(urlPath) && urlPath !== '/index.html') {
+            // Let genuine static files (favicon, png, ico, svg, css, js, etc.) fall through to Vite static server;
+            // never intercept /fix/* routes even if a model number contains dots (e.g. 1.8l, v2.4)
+            if (
+              !urlPath.startsWith('/fix/') &&
+              /\.(js|mjs|css|png|jpe?g|gif|svg|ico|webp|avif|xml|txt|json|woff2?|ttf|eot|map|gz|webmanifest|pdf)$/i.test(
+                urlPath,
+              ) &&
+              urlPath !== '/index.html'
+            ) {
               return next();
             }
 
