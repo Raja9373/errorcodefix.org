@@ -3,7 +3,6 @@
   "installCommand": "echo 'static site - no install needed'",
   "buildCommand": "echo 'static site - no build'",
   "outputDirectory": ".",
-  "cleanUrls": true,
   "headers": [
     {
       "source": "/(sitemap|sitemap-index|sitemap-[0-9]+)\\.xml",
@@ -214,7 +213,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/(.*)",
+      "source": "/(.+)",
       "destination": "/index.html"
     }
   ]
